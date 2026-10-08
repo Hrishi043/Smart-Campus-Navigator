@@ -24,7 +24,7 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
   CampusPlace? _selectedPlace;
   CampusRoute? _activeRoute;
   bool _isNavigating = false;
-  MapStyleMode _styleMode = MapStyleMode.architectural;
+  MapStyleMode _styleMode = MapStyleMode.collegeMap;
   PlaceCategory? _activeCategoryFilter;
 
   @override

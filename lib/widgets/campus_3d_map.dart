@@ -1,10 +1,309 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+
 import '../data/campus_data.dart';
 import '../models/navigation.dart';
 import '../models/place.dart';
 
+class _CollegeMapFeature {
+  final Offset center;
+  final double width;
+  final double length;
+  final double rotationDeg;
+  final String label;
+  final String? placeId;
+  final bool isGround;
+
+  const _CollegeMapFeature({
+    required this.center,
+    required this.width,
+    required this.length,
+    required this.label,
+    this.placeId,
+    this.rotationDeg = 0,
+    this.isGround = false,
+  });
+}
+
+const _collegeMapFeatures = <_CollegeMapFeature>[
+  _CollegeMapFeature(
+    center: Offset(82, 134),
+    width: 24,
+    length: 18,
+    rotationDeg: 18,
+    label: 'Main Gate',
+    placeId: 'main_gate',
+  ),
+  _CollegeMapFeature(
+    center: Offset(648, 328),
+    width: 76,
+    length: 56,
+    rotationDeg: 22,
+    label: 'Ma College of Engineering\nMain Block',
+    placeId: 'main_block',
+  ),
+  _CollegeMapFeature(
+    center: Offset(601, 285),
+    width: 13,
+    length: 13,
+    label: 'Statue',
+    placeId: 'statue',
+  ),
+  _CollegeMapFeature(
+    center: Offset(574, 625),
+    width: 92,
+    length: 48,
+    rotationDeg: 25,
+    label: 'Electronics & Communication\nDepartment Mace',
+    placeId: 'ec_block',
+  ),
+  _CollegeMapFeature(
+    center: Offset(535, 380),
+    width: 42,
+    length: 27,
+    rotationDeg: 25,
+    label: 'Mechanical\nMeasurements Lab',
+    placeId: 'hydraulic_lab',
+  ),
+  _CollegeMapFeature(
+    center: Offset(707, 510),
+    width: 62,
+    length: 35,
+    rotationDeg: 24,
+    label: 'Mechanical Labs',
+    placeId: 'heat_engines_lab',
+  ),
+  _CollegeMapFeature(
+    center: Offset(537, 552),
+    width: 46,
+    length: 27,
+    rotationDeg: 24,
+    label: 'Electrical Lab',
+    placeId: 'pg_block',
+  ),
+  _CollegeMapFeature(
+    center: Offset(391, 471),
+    width: 52,
+    length: 33,
+    rotationDeg: 25,
+    label: 'Ladies Hostel\nMar Athanasius College of Engineering',
+    placeId: 'ladies_hostel',
+  ),
+  _CollegeMapFeature(
+    center: Offset(1094, 476),
+    width: 48,
+    length: 34,
+    label: 'HSII Hostel',
+    placeId: 'mens_hostel',
+  ),
+  _CollegeMapFeature(
+    center: Offset(543, 466),
+    width: 42,
+    length: 29,
+    rotationDeg: 24,
+    label: 'Ootupura Canteen',
+    placeId: 'canteen',
+  ),
+  _CollegeMapFeature(
+    center: Offset(624, 47),
+    width: 70,
+    length: 42,
+    rotationDeg: 12,
+    label: 'Students Centre\nMA College',
+  ),
+  _CollegeMapFeature(
+    center: Offset(712, 128),
+    width: 34,
+    length: 22,
+    rotationDeg: 28,
+    label: 'Chapel',
+  ),
+  _CollegeMapFeature(
+    center: Offset(590, 222),
+    width: 66,
+    length: 48,
+    rotationDeg: 30,
+    label: 'Mace Tennis\nCourt',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(726, 233),
+    width: 56,
+    length: 43,
+    rotationDeg: 20,
+    label: 'Mace Botanical\nGarden',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(766, 277),
+    width: 96,
+    length: 48,
+    rotationDeg: 20,
+    label: 'Mace 4’s\nFootball Ground',
+    isGround: true,
+    placeId: 'cricket_ground',
+  ),
+  _CollegeMapFeature(
+    center: Offset(885, 333),
+    width: 56,
+    length: 34,
+    rotationDeg: -18,
+    label: 'Swimming Pool\nMa College',
+    isGround: true,
+    placeId: 'swimming_pool',
+  ),
+  _CollegeMapFeature(
+    center: Offset(579, 389),
+    width: 38,
+    length: 26,
+    rotationDeg: 24,
+    label: 'Geotech Lab',
+  ),
+  _CollegeMapFeature(
+    center: Offset(694, 390),
+    width: 45,
+    length: 34,
+    rotationDeg: 22,
+    label: 'PTA Seminar\nHall 2',
+  ),
+  _CollegeMapFeature(
+    center: Offset(810, 379),
+    width: 52,
+    length: 28,
+    rotationDeg: 24,
+    label: 'Training and\nPlacement Cell',
+  ),
+  _CollegeMapFeature(
+    center: Offset(633, 436),
+    width: 55,
+    length: 36,
+    rotationDeg: 20,
+    label: 'Open Air Theatre',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(713, 622),
+    width: 42,
+    length: 34,
+    rotationDeg: 22,
+    label: 'MCA Block',
+  ),
+  _CollegeMapFeature(
+    center: Offset(676, 648),
+    width: 34,
+    length: 24,
+    rotationDeg: 20,
+    label: 'MACE Fab Lab',
+  ),
+  _CollegeMapFeature(
+    center: Offset(631, 692),
+    width: 45,
+    length: 29,
+    rotationDeg: 24,
+    label: 'Material\nTesting Lab',
+  ),
+  _CollegeMapFeature(
+    center: Offset(856, 555),
+    width: 205,
+    length: 242,
+    label: 'MH Ground',
+    isGround: true,
+    placeId: 'stadium',
+  ),
+  _CollegeMapFeature(
+    center: Offset(856, 588),
+    width: 185,
+    length: 205,
+    label: 'MAR Athanasius\nCollege Ground',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(982, 570),
+    width: 42,
+    length: 31,
+    label: 'Kennedy Hostel',
+  ),
+  _CollegeMapFeature(
+    center: Offset(1017, 618),
+    width: 38,
+    length: 26,
+    label: 'Hostel Mess',
+  ),
+  _CollegeMapFeature(
+    center: Offset(1086, 644),
+    width: 44,
+    length: 30,
+    label: 'Diamond Jubilee\nDJ Hostel',
+  ),
+  _CollegeMapFeature(
+    center: Offset(940, 679),
+    width: 43,
+    length: 30,
+    label: 'MB Hostel MACE',
+  ),
+  _CollegeMapFeature(
+    center: Offset(166, 626),
+    width: 35,
+    length: 25,
+    label: 'Amrutha\nHomely Food',
+  ),
+  _CollegeMapFeature(
+    center: Offset(309, 636),
+    width: 29,
+    length: 23,
+    label: 'Chillam',
+  ),
+  _CollegeMapFeature(
+    center: Offset(369, 687),
+    width: 36,
+    length: 26,
+    label: 'Thaavalam',
+  ),
+  _CollegeMapFeature(
+    center: Offset(608, 159),
+    width: 43,
+    length: 36,
+    label: 'NSS Park',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(962, 89),
+    width: 112,
+    length: 183,
+    label: 'Mar Athanasius\nInternational School',
+    isGround: true,
+  ),
+  _CollegeMapFeature(
+    center: Offset(1080, 118),
+    width: 150,
+    length: 180,
+    label: 'MA International\nSchool Ground',
+    isGround: true,
+  ),
+];
+
+const _collegeMapNodePositions = <String, Offset>{
+  'node_gate': Offset(82, 134),
+  'node_parking': Offset(517, 164),
+  'node_statue': Offset(601, 285),
+  'node_main_block': Offset(648, 328),
+  'node_pool': Offset(885, 333),
+  'node_campus_road_mid': Offset(567, 399),
+  'node_cricket': Offset(766, 277),
+  'node_canteen': Offset(543, 466),
+  'node_ladies_hostel': Offset(391, 471),
+  'node_hydraulic_lab': Offset(535, 380),
+  'node_heat_engines': Offset(707, 510),
+  'node_ec_block': Offset(574, 625),
+  'node_pg_block': Offset(537, 552),
+  'node_stadium': Offset(827, 554),
+  'node_hostels_road': Offset(984, 520),
+  'node_mens_hostel': Offset(1094, 476),
+};
+
 enum MapStyleMode {
+  collegeMap('College Map', Icons.map_rounded),
   architectural('3D Architecture', Icons.view_in_ar_rounded),
   satellite('Satellite Hybrid', Icons.satellite_alt_rounded),
   blueprint('Blueprint Dark', Icons.dark_mode_rounded);
@@ -29,7 +328,7 @@ class Campus3DMap extends StatefulWidget {
     this.selectedPlace,
     this.activeRoute,
     this.userLocationOffset,
-    this.styleMode = MapStyleMode.architectural,
+    this.styleMode = MapStyleMode.collegeMap,
     required this.onPlaceTapped,
     this.onPlaceLongPressed,
   });
@@ -41,11 +340,13 @@ class Campus3DMap extends StatefulWidget {
 class Campus3DMapState extends State<Campus3DMap>
     with TickerProviderStateMixin {
   // Camera state
-  double _camX = 520.0;
-  double _camY = 480.0;
-  double _zoom = 0.95;
+  double _camX = 589.5;
+  double _camY = 384.0;
+  double _zoom = 0.5;
   double _rotation = 0.0; // Radians
-  double _tilt = 0.52; // ~30 degrees tilt for 3D oblique perspective
+  double _tilt = 0.0;
+  Size _viewportSize = Size.zero;
+  bool _cameraInitialized = false;
 
   // Animation controller for smooth camera moves
   late AnimationController _animController;
@@ -69,6 +370,15 @@ class Campus3DMapState extends State<Campus3DMap>
       vsync: this,
       duration: const Duration(milliseconds: 650),
     );
+    _animController.addListener(() {
+      if (!mounted) return;
+      setState(() {
+        _camX = _animCamX.value;
+        _camY = _animCamY.value;
+        _zoom = _animZoom.value;
+        _rotation = _animRotation.value;
+      });
+    });
 
     _pulseController = AnimationController(
       vsync: this,
@@ -79,7 +389,25 @@ class Campus3DMapState extends State<Campus3DMap>
   @override
   void didUpdateWidget(Campus3DMap oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.selectedPlace != null &&
+    if (widget.styleMode != oldWidget.styleMode) {
+      if (widget.styleMode == MapStyleMode.collegeMap) {
+        _tilt = 0.0;
+        _animateCameraTo(
+          targetX: 589.5,
+          targetY: 384,
+          targetZoom: _overviewZoom,
+          targetRot: 0,
+        );
+      } else {
+        _tilt = 0.52;
+        _animateCameraTo(
+          targetX: 520,
+          targetY: 480,
+          targetZoom: 0.95,
+          targetRot: 0,
+        );
+      }
+    } else if (widget.selectedPlace != null &&
         widget.selectedPlace != oldWidget.selectedPlace) {
       animateToPlace(widget.selectedPlace!);
     } else if (widget.activeRoute != null &&
@@ -95,21 +423,43 @@ class Campus3DMapState extends State<Campus3DMap>
     super.dispose();
   }
 
+  double get _coordinateYScale => 1.0;
+
+  double get _overviewZoom {
+    if (widget.styleMode != MapStyleMode.collegeMap || _viewportSize.isEmpty) {
+      return 0.95;
+    }
+    return math
+            .min(
+              _viewportSize.width / 1179,
+              _viewportSize.height / (768 * math.cos(_tilt)),
+            )
+            .clamp(0.25, 3.5) *
+        0.98;
+  }
+
   /// Reset camera to standard full campus overview
   void resetToCampusOverview() {
+    final isCollegeMap = widget.styleMode == MapStyleMode.collegeMap;
     _animateCameraTo(
-      targetX: 520.0,
-      targetY: 480.0,
-      targetZoom: 0.95,
+      targetX: isCollegeMap ? 589.5 : 520.0,
+      targetY: isCollegeMap ? 384.0 : 480.0,
+      targetZoom: _overviewZoom,
       targetRot: 0.0,
     );
   }
 
   /// Smoothly fly camera to a specific place
   void animateToPlace(CampusPlace place) {
+    final mapPosition = widget.styleMode == MapStyleMode.collegeMap
+        ? _collegeMapFeatures
+              .where((feature) => feature.placeId == place.id)
+              .firstOrNull
+              ?.center
+        : null;
     _animateCameraTo(
-      targetX: place.campusX,
-      targetY: place.campusY,
+      targetX: mapPosition?.dx ?? place.campusX,
+      targetY: mapPosition?.dy ?? place.campusY,
       targetZoom: 1.55,
       targetRot: _rotation,
     );
@@ -118,22 +468,32 @@ class Campus3DMapState extends State<Campus3DMap>
   /// Fit the camera view to show the entire active route
   void fitRoute(CampusRoute route) {
     if (route.pathNodes.isEmpty) return;
+    final points = route.pathNodes
+        .map(
+          (node) => widget.styleMode == MapStyleMode.collegeMap
+              ? _collegeMapNodePositions[node.id] ?? Offset(node.x, node.y)
+              : Offset(node.x, node.y),
+        )
+        .toList();
     double minX = double.infinity;
     double maxX = -double.infinity;
     double minY = double.infinity;
     double maxY = -double.infinity;
 
-    for (final node in route.pathNodes) {
-      if (node.x < minX) minX = node.x;
-      if (node.x > maxX) maxX = node.x;
-      if (node.y < minY) minY = node.y;
-      if (node.y > maxY) maxY = node.y;
+    for (final point in points) {
+      if (point.dx < minX) minX = point.dx;
+      if (point.dx > maxX) maxX = point.dx;
+      if (point.dy < minY) minY = point.dy;
+      if (point.dy > maxY) maxY = point.dy;
     }
 
     final centerX = (minX + maxX) / 2;
     final centerY = (minY + maxY) / 2;
-    final span = math.max(maxX - minX, maxY - minY);
-    final targetZoom = (500.0 / (span + 180.0)).clamp(0.8, 1.8);
+    final span = math.max(maxX - minX, (maxY - minY) * _coordinateYScale);
+    final viewportSpan = _viewportSize.isEmpty
+        ? 500.0
+        : math.min(_viewportSize.width, _viewportSize.height) * 0.8;
+    final targetZoom = (viewportSpan / (span + 120.0)).clamp(0.25, 1.8);
 
     _animateCameraTo(
       targetX: centerX,
@@ -148,7 +508,7 @@ class Campus3DMapState extends State<Campus3DMap>
     _animateCameraTo(
       targetX: _camX,
       targetY: _camY,
-      targetZoom: (_zoom * 1.3).clamp(0.5, 3.5),
+      targetZoom: (_zoom * 1.3).clamp(0.25, 3.5),
       targetRot: _rotation,
     );
   }
@@ -158,7 +518,7 @@ class Campus3DMapState extends State<Campus3DMap>
     _animateCameraTo(
       targetX: _camX,
       targetY: _camY,
-      targetZoom: (_zoom / 1.3).clamp(0.5, 3.5),
+      targetZoom: (_zoom / 1.3).clamp(0.25, 3.5),
       targetRot: _rotation,
     );
   }
@@ -176,7 +536,7 @@ class Campus3DMapState extends State<Campus3DMap>
   /// Toggle 3D tilt between oblique 3D and flatter 2D
   void toggleTilt() {
     setState(() {
-      _tilt = _tilt > 0.2 ? 0.05 : 0.52;
+      _tilt = _tilt > 0.2 ? 0.0 : 0.52;
     });
   }
 
@@ -203,15 +563,6 @@ class Campus3DMapState extends State<Campus3DMap>
       CurvedAnimation(parent: _animController, curve: Curves.easeOutCubic),
     );
 
-    _animController.addListener(() {
-      setState(() {
-        _camX = _animCamX.value;
-        _camY = _animCamY.value;
-        _zoom = _animZoom.value;
-        _rotation = _animRotation.value;
-      });
-    });
-
     _animController.forward(from: 0.0);
   }
 
@@ -237,12 +588,18 @@ class Campus3DMapState extends State<Campus3DMap>
       final unrotatedDy =
           (delta.dx * sinRot + delta.dy * cosRot) / (_zoom * math.cos(_tilt));
 
-      _camX = (_camX - unrotatedDx).clamp(100.0, 900.0);
-      _camY = (_camY - unrotatedDy).clamp(100.0, 900.0);
+      _camX = (_camX - unrotatedDx).clamp(
+        0.0,
+        widget.styleMode == MapStyleMode.collegeMap ? 1179.0 : 1000.0,
+      );
+      _camY = (_camY - unrotatedDy / _coordinateYScale).clamp(
+        0.0,
+        widget.styleMode == MapStyleMode.collegeMap ? 768.0 : 1000.0,
+      );
 
       // Pinch zoom
       if (details.scale != 1.0) {
-        _zoom = (_baseZoom * details.scale).clamp(0.5, 3.5);
+        _zoom = (_baseZoom * details.scale).clamp(0.25, 3.5);
       }
 
       // Two-finger twist rotation
@@ -269,18 +626,31 @@ class Campus3DMapState extends State<Campus3DMap>
     final sinRot = math.sin(-_rotation);
 
     final campusTapX = _camX + (dx * cosRot - unTiltedY * sinRot);
-    final campusTapY = _camY + (dx * sinRot + unTiltedY * cosRot);
+    final campusTapY =
+        _camY + (dx * sinRot + unTiltedY * cosRot) / _coordinateYScale;
 
     // Hit test against campus places
     CampusPlace? hitPlace;
     double minHitDist = double.infinity;
 
     for (final place in widget.places) {
+      final mapBuilding = widget.styleMode == MapStyleMode.collegeMap
+          ? _collegeMapFeatures
+                .where((feature) => feature.placeId == place.id)
+                .firstOrNull
+          : null;
+      final mapPosition = mapBuilding?.center;
+      final placeX = mapPosition?.dx ?? place.campusX;
+      final placeY = mapPosition?.dy ?? place.campusY;
       // Check distance to center
-      final dist = math.sqrt(math.pow(place.campusX - campusTapX, 2) +
-          math.pow(place.campusY - campusTapY, 2));
+      final dist = math.sqrt(
+        math.pow(placeX - campusTapX, 2) +
+            math.pow((placeY - campusTapY) * _coordinateYScale, 2),
+      );
 
-      final radius = math.max(place.width, place.length) * 0.7;
+      final radius = mapBuilding == null
+          ? math.max(place.width, place.length) * 0.7
+          : math.max(mapBuilding.width, mapBuilding.length) * 0.65;
       if (dist <= radius && dist < minHitDist) {
         minHitDist = dist;
         hitPlace = place;
@@ -297,6 +667,15 @@ class Campus3DMapState extends State<Campus3DMap>
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
+        _viewportSize = size;
+        if (!_cameraInitialized && size.width > 0 && size.height > 0) {
+          _cameraInitialized = true;
+          if (widget.styleMode == MapStyleMode.collegeMap) {
+            _camX = 589.5;
+            _camY = 384;
+            _zoom = _overviewZoom;
+          }
+        }
 
         return GestureDetector(
           onScaleStart: _onScaleStart,
@@ -375,8 +754,10 @@ class _Campus3DMapPainter extends CustomPainter {
     // 3. Oblique 3D perspective projection
     // Elevation Z lifts vertically on screen
     final screenX = centerX + rotX * zoom;
+    final buildingTilt = styleMode == MapStyleMode.collegeMap ? 0.48 : tilt;
     final screenY =
-        centerY + (rotY * math.cos(tilt) - z * math.sin(tilt) * 2.2) * zoom;
+        centerY +
+        (rotY * math.cos(tilt) - z * math.sin(buildingTilt) * 2.2) * zoom;
 
     return Offset(screenX, screenY);
   }
@@ -392,31 +773,478 @@ class _Campus3DMapPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 1. Background fill
-    _drawCampusBackground(canvas, size);
+    if (styleMode == MapStyleMode.collegeMap) {
+      _drawCollegeMap(canvas, size);
+      if (activeRoute != null) {
+        _drawNavigationRoute(canvas, size);
+      }
+      if (userLocationOffset != null) {
+        _drawUserLocation(canvas, size);
+      }
+      if (selectedPlace != null) {
+        _drawSelectedPin(canvas, size);
+      }
+    } else {
+      _drawCampusBackground(canvas, size);
+      _drawRoadsAndPaths(canvas, size);
+      _drawGroundLandmarks(canvas, size);
+      if (activeRoute != null) {
+        _drawNavigationRoute(canvas, size);
+      }
+      _draw3DBuildings(canvas, size);
+      if (userLocationOffset != null) {
+        _drawUserLocation(canvas, size);
+      }
+      if (selectedPlace != null) {
+        _drawSelectedPin(canvas, size);
+      }
+    }
+  }
 
-    // 2. Campus roads & pedestrian walkways
-    _drawRoadsAndPaths(canvas, size);
+  void _drawCollegeMap(Canvas canvas, Size size) {
+    canvas.drawColor(const Color(0xFFEAF0E2), BlendMode.src);
+    _drawCollegeGreenspace(canvas, size);
+    _drawCollegeGrounds(canvas, size);
+    _drawCollegeRoads(canvas, size);
+    _drawCollegeBuildings(canvas, size);
+    _drawCollegeMapLabels(canvas, size);
+  }
 
-    // 3. Ground landmarks (Cricket Ground, Stadium, Swimming pool)
-    _drawGroundLandmarks(canvas, size);
+  Path _mapPath(List<Offset> points, Size size, {bool close = false}) {
+    final path = Path();
+    for (var i = 0; i < points.length; i++) {
+      final point = _project(points[i].dx, points[i].dy, 0, size);
+      if (i == 0) {
+        path.moveTo(point.dx, point.dy);
+      } else {
+        path.lineTo(point.dx, point.dy);
+      }
+    }
+    if (close) path.close();
+    return path;
+  }
 
-    // 4. Active navigation route
-    if (activeRoute != null) {
-      _drawNavigationRoute(canvas, size);
+  void _drawCollegeGreenspace(Canvas canvas, Size size) {
+    final parkPaint = Paint()..color = const Color(0xFFDCE8CE);
+    for (final park in const [
+      <Offset>[
+        Offset(440, 160),
+        Offset(560, 160),
+        Offset(558, 230),
+        Offset(470, 250),
+      ],
+      <Offset>[
+        Offset(700, 210),
+        Offset(755, 220),
+        Offset(735, 265),
+        Offset(690, 253),
+      ],
+      <Offset>[
+        Offset(75, 485),
+        Offset(330, 520),
+        Offset(330, 740),
+        Offset(145, 755),
+      ],
+      <Offset>[
+        Offset(830, 40),
+        Offset(930, 30),
+        Offset(950, 245),
+        Offset(830, 225),
+      ],
+    ]) {
+      canvas.drawPath(_mapPath(park, size, close: true), parkPaint);
     }
 
-    // 5. 3D Extruded Building Models & Landmarks (Depth sorted back-to-front)
-    _draw3DBuildings(canvas, size);
+    final treePaint = Paint()..color = const Color(0xFF9DB88C);
+    final treeHighlight = Paint()..color = const Color(0xFFC0D0AD);
+    for (var row = 0; row < 18; row++) {
+      for (var column = 0; column < 26; column++) {
+        final x = 18.0 + column * 46;
+        final y = 14.0 + row * 43;
+        final variation = math.sin(column * 12.989 + row * 78.233);
+        if (variation < -0.22 &&
+            !_isNearMapBuilding(x, y) &&
+            !_isNearRoad(x, y)) {
+          final center = _project(x, y, 0, size);
+          final radius = 5.0 + (variation.abs() * 5);
+          canvas.drawCircle(center, radius * zoom, treePaint);
+          canvas.drawCircle(
+            center.translate(-radius * zoom * 0.2, -radius * zoom * 0.2),
+            radius * zoom * 0.52,
+            treeHighlight,
+          );
+        }
+      }
+    }
+  }
 
-    // 6. User Current Location Pin
-    if (userLocationOffset != null) {
-      _drawUserLocation(canvas, size);
+  bool _isNearMapBuilding(double x, double y) {
+    return _collegeMapFeatures.any(
+      (feature) =>
+          (feature.center.dx - x).abs() < feature.width * 0.62 &&
+          (feature.center.dy - y).abs() < feature.length * 0.62,
+    );
+  }
+
+  bool _isNearRoad(double x, double y) {
+    return (x < 125 && y > 210) ||
+        (y > 48 + x * 0.19 && y < 79 + x * 0.19 && x < 1050) ||
+        (x > 545 && x < 820 && y > 280 && y < 470);
+  }
+
+  void _drawCollegeGrounds(Canvas canvas, Size size) {
+    for (final feature in _collegeMapFeatures.where(
+      (feature) => feature.isGround,
+    )) {
+      if (feature.label.contains('College Ground')) continue;
+      if (feature.label == 'MH Ground') {
+        final center = _project(feature.center.dx, feature.center.dy, 0, size);
+        final track = Rect.fromCenter(
+          center: center,
+          width: feature.width * zoom,
+          height: feature.length * zoom,
+        );
+        canvas.drawOval(track, Paint()..color = const Color(0xFFD8D7C8));
+        canvas.drawOval(
+          track.deflate(9 * zoom),
+          Paint()
+            ..color = const Color(0xFFF7F5ED)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2 * zoom,
+        );
+        final field = track.deflate(22 * zoom);
+        canvas.drawOval(field, Paint()..color = const Color(0xFFC9DEB8));
+        canvas.drawOval(
+          field,
+          Paint()
+            ..color = const Color(0xFFB6C9A8)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 1.2 * zoom,
+        );
+        continue;
+      }
+      final bounds = Rect.fromCenter(
+        center: feature.center,
+        width: feature.width,
+        height: feature.length,
+      );
+      final rect = Rect.fromPoints(
+        _project(bounds.topLeft.dx, bounds.topLeft.dy, 0, size),
+        _project(bounds.bottomRight.dx, bounds.bottomRight.dy, 0, size),
+      );
+      final groundColor =
+          feature.label.contains('Ground') || feature.label.contains('Football')
+          ? const Color(0xFFC9DEB8)
+          : const Color(0xFFD5E3C8);
+      final groundPaint = Paint()..color = groundColor;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(8)),
+        groundPaint,
+      );
+      final outline = Paint()
+        ..color = const Color(0xFFB6C9A8)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.2;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(8)),
+        outline,
+      );
+      if (feature.label.contains('Ground') ||
+          feature.label.contains('Football')) {
+        final field = rect.deflate(math.max(6, rect.width * 0.11));
+        final fieldPaint = Paint()..color = const Color(0xFFB9D3A8);
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(field, const Radius.circular(20)),
+          fieldPaint,
+        );
+      }
+    }
+  }
+
+  void _drawCollegeRoads(Canvas canvas, Size size) {
+    const roads = <({List<Offset> points, double width})>[
+      (
+        points: [
+          Offset(20, -10),
+          Offset(18, 90),
+          Offset(28, 195),
+          Offset(42, 300),
+          Offset(62, 408),
+          Offset(95, 520),
+          Offset(124, 650),
+          Offset(160, 780),
+        ],
+        width: 29,
+      ),
+      (
+        points: [
+          Offset(272, 53),
+          Offset(350, 72),
+          Offset(445, 96),
+          Offset(540, 128),
+          Offset(630, 168),
+          Offset(727, 218),
+          Offset(835, 254),
+          Offset(944, 257),
+          Offset(1065, 236),
+          Offset(1195, 218),
+        ],
+        width: 23,
+      ),
+      (
+        points: [
+          Offset(556, 235),
+          Offset(580, 271),
+          Offset(627, 301),
+          Offset(682, 321),
+          Offset(757, 333),
+          Offset(812, 376),
+          Offset(808, 420),
+          Offset(771, 458),
+          Offset(724, 492),
+          Offset(685, 531),
+          Offset(635, 572),
+          Offset(594, 622),
+          Offset(546, 700),
+          Offset(510, 780),
+        ],
+        width: 15,
+      ),
+      (
+        points: [
+          Offset(815, 396),
+          Offset(870, 415),
+          Offset(932, 433),
+          Offset(991, 474),
+          Offset(1050, 523),
+          Offset(1114, 566),
+          Offset(1195, 607),
+        ],
+        width: 17,
+      ),
+    ];
+
+    for (final road in roads) {
+      final path = _mapPath(road.points, size);
+      final outline = Paint()
+        ..color = const Color(0xFFD1D4CE)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = road.width * zoom
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round;
+      final surface = Paint()
+        ..color = const Color(0xFFFDFCF8)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = (road.width - 3) * zoom
+        ..strokeCap = StrokeCap.round
+        ..strokeJoin = StrokeJoin.round;
+      canvas
+        ..drawPath(path, outline)
+        ..drawPath(path, surface);
     }
 
-    // 7. Highlight pin on selected place
-    if (selectedPlace != null) {
-      _drawSelectedPin(canvas, size);
+    _drawMapRoadLabel(
+      canvas,
+      size,
+      'KOTHAMANGALAM MAIN ROAD',
+      const Offset(43, 227),
+      -math.pi / 2,
+    );
+    _drawMapRoadLabel(
+      canvas,
+      size,
+      'M A COLLEGE ROAD',
+      const Offset(796, 228),
+      math.atan2(70, 150),
+    );
+    _drawMapRoadLabel(
+      canvas,
+      size,
+      'M A COLLEGE ROAD',
+      const Offset(1072, 238),
+      -0.24,
+    );
+
+    final walkways = Paint()
+      ..color = const Color(0xFFF8F7F0)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 6 * zoom
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+    for (final pathPoints in const [
+      <Offset>[
+        Offset(535, 244),
+        Offset(510, 318),
+        Offset(545, 384),
+        Offset(542, 458),
+      ],
+      <Offset>[
+        Offset(650, 337),
+        Offset(603, 384),
+        Offset(635, 436),
+        Offset(705, 510),
+      ],
+      <Offset>[
+        Offset(550, 467),
+        Offset(515, 525),
+        Offset(570, 620),
+        Offset(630, 690),
+      ],
+      <Offset>[Offset(808, 385), Offset(870, 350), Offset(925, 380)],
+      <Offset>[Offset(780, 476), Offset(820, 548), Offset(816, 590)],
+    ]) {
+      canvas.drawPath(_mapPath(pathPoints, size), walkways);
+    }
+  }
+
+  void _drawMapRoadLabel(
+    Canvas canvas,
+    Size size,
+    String label,
+    Offset position,
+    double rotation,
+  ) {
+    final text = TextPainter(
+      text: TextSpan(
+        text: label,
+        style: const TextStyle(
+          color: Color(0xFF59605A),
+          fontSize: 9,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.7,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    final center = _project(position.dx, position.dy, 0, size);
+    canvas
+      ..save()
+      ..translate(center.dx, center.dy)
+      ..rotate(rotation)
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: text.width + 8,
+            height: text.height + 4,
+          ),
+          const Radius.circular(3),
+        ),
+        Paint()..color = const Color(0xFFFDFCF8).withValues(alpha: 0.82),
+      )
+      ..translate(-text.width / 2, -text.height / 2);
+    text.paint(canvas, Offset.zero);
+    canvas.restore();
+  }
+
+  void _drawCollegeBuildings(Canvas canvas, Size size) {
+    final buildings =
+        _collegeMapFeatures.where((feature) => !feature.isGround).toList()
+          ..sort((a, b) => a.center.dy.compareTo(b.center.dy));
+
+    for (final feature in buildings) {
+      _drawCollegeBuilding(canvas, size, feature);
+    }
+  }
+
+  void _drawCollegeBuilding(
+    Canvas canvas,
+    Size size,
+    _CollegeMapFeature feature,
+  ) {
+    final angle = feature.rotationDeg * math.pi / 180;
+    final cosAngle = math.cos(angle);
+    final sinAngle = math.sin(angle);
+    final hw = feature.width / 2;
+    final hl = feature.length / 2;
+    final base =
+        <Offset>[
+          Offset(-hw, -hl),
+          Offset(hw, -hl),
+          Offset(hw, hl),
+          Offset(-hw, hl),
+        ].map((corner) {
+          return Offset(
+            feature.center.dx + corner.dx * cosAngle - corner.dy * sinAngle,
+            feature.center.dy + corner.dx * sinAngle + corner.dy * cosAngle,
+          );
+        }).toList();
+
+    const height = 16.0;
+    final ground = base.map((p) => _project(p.dx, p.dy, 0, size)).toList();
+    final roof = base.map((p) => _project(p.dx, p.dy, height, size)).toList();
+    final shade = Paint()..color = const Color(0xFFD7D0C1);
+    final wall = Paint()..color = const Color(0xFFE7E1D5);
+    for (var i = 0; i < base.length; i++) {
+      final next = (i + 1) % base.length;
+      final face = Path()
+        ..moveTo(ground[i].dx, ground[i].dy)
+        ..lineTo(ground[next].dx, ground[next].dy)
+        ..lineTo(roof[next].dx, roof[next].dy)
+        ..lineTo(roof[i].dx, roof[i].dy)
+        ..close();
+      canvas.drawPath(face, i.isEven ? wall : shade);
+    }
+
+    final top = Path()
+      ..moveTo(roof.first.dx, roof.first.dy)
+      ..lineTo(roof[1].dx, roof[1].dy)
+      ..lineTo(roof[2].dx, roof[2].dy)
+      ..lineTo(roof[3].dx, roof[3].dy)
+      ..close();
+    canvas.drawShadow(top, const Color(0x40000000), 3 * zoom, false);
+    canvas.drawPath(top, Paint()..color = const Color(0xFFF4F0E7));
+    canvas.drawPath(
+      top,
+      Paint()
+        ..color = const Color(0xFFB8B0A2)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.25 * zoom,
+    );
+  }
+
+  void _drawCollegeMapLabels(Canvas canvas, Size size) {
+    for (final feature in _collegeMapFeatures) {
+      final center = _project(feature.center.dx, feature.center.dy, 0, size);
+      final text = TextPainter(
+        text: TextSpan(
+          text: feature.label,
+          style: TextStyle(
+            color: const Color(0xFF27312A),
+            fontSize: 10.5,
+            height: 1.05,
+            fontWeight: feature.placeId == null
+                ? FontWeight.w500
+                : FontWeight.w600,
+          ),
+        ),
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      )..layout(maxWidth: 132);
+
+      final labelCenter = Offset(
+        center.dx,
+        center.dy - feature.length * 0.5 * zoom - text.height * 0.55 - 3,
+      );
+      final labelRect = RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: labelCenter,
+          width: text.width + 6,
+          height: text.height + 3,
+        ),
+        const Radius.circular(3),
+      );
+      canvas.drawRRect(
+        labelRect,
+        Paint()..color = const Color(0xFFF8F8F2).withValues(alpha: 0.88),
+      );
+      text.paint(
+        canvas,
+        Offset(
+          labelCenter.dx - text.width / 2,
+          labelCenter.dy - text.height / 2,
+        ),
+      );
     }
   }
 
@@ -484,8 +1312,12 @@ class _Campus3DMapPainter extends CustomPainter {
     final isDark = styleMode == MapStyleMode.blueprint;
 
     // Campus roads (MACE Campus Rd, MA College Rd)
-    final roadColor = isDark ? const Color(0xFF1E293B) : const Color(0xFF94A3B8);
-    final pathColor = isDark ? const Color(0xFF334155) : const Color(0xFFCBD5E1);
+    final roadColor = isDark
+        ? const Color(0xFF1E293B)
+        : const Color(0xFF94A3B8);
+    final pathColor = isDark
+        ? const Color(0xFF334155)
+        : const Color(0xFFCBD5E1);
 
     final roadPaint = Paint()
       ..color = roadColor
@@ -509,7 +1341,8 @@ class _Campus3DMapPainter extends CustomPainter {
       final p1 = _project(from.x, from.y, 0, size);
       final p2 = _project(to.x, to.y, 0, size);
 
-      final isMajorRoad = edge.pathName.contains('Road') ||
+      final isMajorRoad =
+          edge.pathName.contains('Road') ||
           edge.pathName.contains('Drive') ||
           edge.pathName.contains('Avenue');
 
@@ -518,7 +1351,9 @@ class _Campus3DMapPainter extends CustomPainter {
 
     // Road dash lines for major campus roads
     final centerDashPaint = Paint()
-      ..color = isDark ? const Color(0xFF0284C7) : Colors.white.withValues(alpha: 0.8)
+      ..color = isDark
+          ? const Color(0xFF0284C7)
+          : Colors.white.withValues(alpha: 0.8)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.8 * zoom;
 
@@ -701,7 +1536,15 @@ class _Campus3DMapPainter extends CustomPainter {
 
     final routePath = Path();
     for (int i = 0; i < nodes.length; i++) {
-      final pt = _project(nodes[i].x, nodes[i].y, 1.0, size);
+      final mapPosition = styleMode == MapStyleMode.collegeMap
+          ? _collegeMapNodePositions[nodes[i].id]
+          : null;
+      final pt = _project(
+        mapPosition?.dx ?? nodes[i].x,
+        mapPosition?.dy ?? nodes[i].y,
+        1.0,
+        size,
+      );
       if (i == 0) {
         routePath.moveTo(pt.dx, pt.dy);
       } else {
@@ -711,7 +1554,8 @@ class _Campus3DMapPainter extends CustomPainter {
 
     // Outer glow
     final glowPaint = Paint()
-      ..color = const Color(0xFF38BDF8).withValues(alpha: 0.35 + 0.2 * pulseValue)
+      ..color = const Color(0xFF38BDF8)
+          .withValues(alpha: 0.35 + 0.2 * pulseValue)
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
@@ -730,12 +1574,28 @@ class _Campus3DMapPainter extends CustomPainter {
     // Waypoint dots
     final dotPaint = Paint()..color = Colors.white;
     for (int i = 0; i < nodes.length; i++) {
-      final pt = _project(nodes[i].x, nodes[i].y, 1.2, size);
+      final mapPosition = styleMode == MapStyleMode.collegeMap
+          ? _collegeMapNodePositions[nodes[i].id]
+          : null;
+      final pt = _project(
+        mapPosition?.dx ?? nodes[i].x,
+        mapPosition?.dy ?? nodes[i].y,
+        1.2,
+        size,
+      );
       canvas.drawCircle(pt, 3.5 * zoom, dotPaint);
     }
 
     // Start Pin (Green)
-    final startPt = _project(nodes.first.x, nodes.first.y, 2.0, size);
+    final startPosition = styleMode == MapStyleMode.collegeMap
+        ? _collegeMapNodePositions[nodes.first.id]
+        : null;
+    final startPt = _project(
+      startPosition?.dx ?? nodes.first.x,
+      startPosition?.dy ?? nodes.first.y,
+      2.0,
+      size,
+    );
     _drawMarkerBadge(
       canvas: canvas,
       point: startPt,
@@ -745,7 +1605,15 @@ class _Campus3DMapPainter extends CustomPainter {
     );
 
     // Dest Pin (Crimson)
-    final destPt = _project(nodes.last.x, nodes.last.y, 2.0, size);
+    final destPosition = styleMode == MapStyleMode.collegeMap
+        ? _collegeMapNodePositions[nodes.last.id]
+        : null;
+    final destPt = _project(
+      destPosition?.dx ?? nodes.last.x,
+      destPosition?.dy ?? nodes.last.y,
+      2.0,
+      size,
+    );
     _drawMarkerBadge(
       canvas: canvas,
       point: destPt,
@@ -761,8 +1629,12 @@ class _Campus3DMapPainter extends CustomPainter {
   void _draw3DBuildings(Canvas canvas, Size size) {
     // Depth sort places back-to-front so closer buildings occlude background buildings
     final sortedPlaces = List<CampusPlace>.from(places)
-      ..sort((a, b) => _getDepth(a.campusX, a.campusY)
-          .compareTo(_getDepth(b.campusX, b.campusY)));
+      ..sort(
+        (a, b) => _getDepth(
+          a.campusX,
+          a.campusY,
+        ).compareTo(_getDepth(b.campusX, b.campusY)),
+      );
 
     for (final place in sortedPlaces) {
       if (place.isLandmark &&
@@ -783,17 +1655,26 @@ class _Campus3DMapPainter extends CustomPainter {
   }
 
   /// Render 3D extruded rectangular building block with realistic faces & roof
-  void _drawBuildingBlock3D(Canvas canvas, Size size, CampusPlace place) {
-    final cx = place.campusX;
-    final cy = place.campusY;
-    final hw = place.width / 2;
-    final hl = place.length / 2;
+  void _drawBuildingBlock3D(
+    Canvas canvas,
+    Size size,
+    CampusPlace place, {
+    Offset? center,
+    double? width,
+    double? length,
+    double? rotationDeg,
+    bool drawLabel = true,
+  }) {
+    final cx = center?.dx ?? place.campusX;
+    final cy = center?.dy ?? place.campusY;
+    final hw = (width ?? place.width) / 2;
+    final hl = (length ?? place.length) / 2;
     final h = place.height;
     final isDark = styleMode == MapStyleMode.blueprint;
     final isSelected = selectedPlace?.id == place.id;
 
     // Local building rotation angle
-    final rotRad = place.rotationDeg * (math.pi / 180.0);
+    final rotRad = (rotationDeg ?? place.rotationDeg) * (math.pi / 180.0);
     final cosB = math.cos(rotRad);
     final sinB = math.sin(rotRad);
 
@@ -847,7 +1728,11 @@ class _Campus3DMapPainter extends CustomPainter {
       [c3, c0, g3, g0, r3, r0],
     ];
 
-    final baseWallColor = isDark ? const Color(0xFF1E293B) : place.wallColor;
+    final baseWallColor = isDark
+        ? const Color(0xFF1E293B)
+        : styleMode == MapStyleMode.collegeMap
+        ? const Color(0xFFF1EBDD)
+        : place.wallColor;
 
     for (int i = 0; i < 4; i++) {
       final info = wallCorners[i];
@@ -857,7 +1742,8 @@ class _Campus3DMapPainter extends CustomPainter {
       final ptR_B = info[5];
 
       // Calculate 2D screen cross product to check if face is camera-facing
-      final cross = (ptG_B.dx - ptG_A.dx) * (ptR_A.dy - ptG_A.dy) -
+      final cross =
+          (ptG_B.dx - ptG_A.dx) * (ptR_A.dy - ptG_A.dy) -
           (ptG_B.dy - ptG_A.dy) * (ptR_A.dx - ptG_A.dx);
 
       if (cross > 0) {
@@ -878,7 +1764,9 @@ class _Campus3DMapPainter extends CustomPainter {
 
         // Wall edge stroke
         final wallEdgePaint = Paint()
-          ..color = isDark ? const Color(0xFF38BDF8).withValues(alpha: 0.3) : Colors.black26
+          ..color = isDark
+              ? const Color(0xFF38BDF8).withValues(alpha: 0.3)
+              : Colors.black26
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.0;
         canvas.drawPath(wallPath, wallEdgePaint);
@@ -895,6 +1783,10 @@ class _Campus3DMapPainter extends CustomPainter {
 
     final roofColor = isDark
         ? const Color(0xFF0F766E)
+        : styleMode == MapStyleMode.collegeMap
+        ? (isSelected
+              ? const Color(0xFFE9A83A).withValues(alpha: 0.88)
+              : const Color(0xFFE5DCCB).withValues(alpha: 0.74))
         : (isSelected ? const Color(0xFFF59E0B) : place.roofColor);
 
     final roofPaint = Paint()
@@ -903,13 +1795,19 @@ class _Campus3DMapPainter extends CustomPainter {
     canvas.drawPath(roofPath, roofPaint);
 
     final roofBorderPaint = Paint()
-      ..color = isSelected ? Colors.amberAccent : Colors.white.withValues(alpha: 0.8)
+      ..color = styleMode == MapStyleMode.collegeMap
+          ? const Color(0xFF5E584E).withValues(alpha: 0.75)
+          : isSelected
+          ? Colors.amberAccent
+          : Colors.white.withValues(alpha: 0.8)
       ..style = PaintingStyle.stroke
       ..strokeWidth = (isSelected ? 2.8 : 1.2) * zoom;
     canvas.drawPath(roofPath, roofBorderPaint);
 
     // 4. Rooftop Label Banner
-    _drawBuildingLabel(canvas, size, place, h + 8.0);
+    if (drawLabel) {
+      _drawBuildingLabel(canvas, size, place, h + 8.0);
+    }
   }
 
   /// Render 3D Statue Landmark
@@ -980,11 +1878,7 @@ class _Campus3DMapPainter extends CustomPainter {
     final badgeHeight = textPainter.height + paddingV * 2;
 
     final badgeRect = RRect.fromRectAndRadius(
-      Rect.fromCenter(
-        center: labelPt,
-        width: badgeWidth,
-        height: badgeHeight,
-      ),
+      Rect.fromCenter(center: labelPt, width: badgeWidth, height: badgeHeight),
       const Radius.circular(6.0),
     );
 
@@ -1003,8 +1897,10 @@ class _Campus3DMapPainter extends CustomPainter {
 
     textPainter.paint(
       canvas,
-      Offset(labelPt.dx - textPainter.width / 2,
-          labelPt.dy - textPainter.height / 2),
+      Offset(
+        labelPt.dx - textPainter.width / 2,
+        labelPt.dy - textPainter.height / 2,
+      ),
     );
   }
 
@@ -1012,12 +1908,16 @@ class _Campus3DMapPainter extends CustomPainter {
   // 6. USER LOCATION PIN
   // ---------------------------------------------------------------------------
   void _drawUserLocation(Canvas canvas, Size size) {
-    final pt =
-        _project(userLocationOffset!.dx, userLocationOffset!.dy, 1.5, size);
+    final location = userLocationOffset!;
+    final mapLocation = styleMode == MapStyleMode.collegeMap
+        ? Offset(location.dx * 1.179, location.dy * 0.768)
+        : location;
+    final pt = _project(mapLocation.dx, mapLocation.dy, 1.5, size);
 
     // Outer pulse ring
     final pulsePaint = Paint()
-      ..color = const Color(0xFF38BDF8).withValues(alpha: 0.5 * (1.0 - pulseValue))
+      ..color = const Color(0xFF38BDF8)
+          .withValues(alpha: 0.5 * (1.0 - pulseValue))
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0 * zoom;
     canvas.drawCircle(pt, (12.0 + 16.0 * pulseValue) * zoom, pulsePaint);
@@ -1038,7 +1938,18 @@ class _Campus3DMapPainter extends CustomPainter {
   // ---------------------------------------------------------------------------
   void _drawSelectedPin(Canvas canvas, Size size) {
     final place = selectedPlace!;
-    final pt = _project(place.campusX, place.campusY, place.height + 22.0, size);
+    final mapPosition = styleMode == MapStyleMode.collegeMap
+        ? _collegeMapFeatures
+              .where((feature) => feature.placeId == place.id)
+              .firstOrNull
+              ?.center
+        : null;
+    final pt = _project(
+      mapPosition?.dx ?? place.campusX,
+      mapPosition?.dy ?? place.campusY,
+      place.height + 22.0,
+      size,
+    );
 
     // Floating golden beacon pin
     final beaconPaint = Paint()
