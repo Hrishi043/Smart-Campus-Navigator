@@ -1,8 +1,6 @@
 import 'dart:math' as math;
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../data/campus_data.dart';
 import '../data/campus_map_geometry.dart';
@@ -31,7 +29,7 @@ class _CollegeMapFeature {
 
 const _collegeMapFeatures = <_CollegeMapFeature>[
   _CollegeMapFeature(
-    center: Offset(82, 134),
+    center: Offset(430, 204),
     width: 24,
     length: 18,
     rotationDeg: 18,
@@ -296,8 +294,8 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
 ];
 
 final _collegeMapNodePositions = <String, Offset>{
-  'node_gate': Offset(82, 134),
-  'node_parking': Offset(414, 218),
+  'node_gate': Offset(430, 204),
+  'node_parking': Offset(348, 107),
   'node_statue': Offset(555, 290),
   'node_main_block': Offset(555, 316),
   'node_pool': Offset(885, 333),
@@ -353,9 +351,6 @@ class Campus3DMap extends StatefulWidget {
 
 class Campus3DMapState extends State<Campus3DMap>
     with TickerProviderStateMixin {
-  ui.Image? _campusArtwork;
-  Object? _campusArtworkError;
-
   // Camera state
   double _camX = 589.5;
   double _camY = 384.0;
@@ -383,7 +378,6 @@ class Campus3DMapState extends State<Campus3DMap>
   @override
   void initState() {
     super.initState();
-    _loadCampusArtwork();
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 650),
@@ -402,29 +396,6 @@ class Campus3DMapState extends State<Campus3DMap>
       vsync: this,
       duration: const Duration(milliseconds: 1400),
     )..repeat(reverse: true);
-  }
-
-  Future<void> _loadCampusArtwork() async {
-    ui.Codec? codec;
-    try {
-      final asset = await rootBundle.load('assets/images/soul map.png');
-      codec = await ui.instantiateImageCodec(asset.buffer.asUint8List());
-      final frame = await codec.getNextFrame();
-      if (!mounted) {
-        frame.image.dispose();
-        return;
-      }
-      setState(() {
-        _campusArtwork = frame.image;
-      });
-    } catch (error) {
-      if (!mounted) return;
-      setState(() {
-        _campusArtworkError = error;
-      });
-    } finally {
-      codec?.dispose();
-    }
   }
 
   @override
@@ -461,7 +432,6 @@ class Campus3DMapState extends State<Campus3DMap>
   void dispose() {
     _animController.dispose();
     _pulseController.dispose();
-    _campusArtwork?.dispose();
     super.dispose();
   }
 
@@ -741,45 +711,21 @@ class Campus3DMapState extends State<Campus3DMap>
           child: AnimatedBuilder(
             animation: _pulseController,
             builder: (context, _) {
-              return Stack(
-                fit: StackFit.expand,
-                children: [
-                  CustomPaint(
-                    size: size,
-                    painter: _Campus3DMapPainter(
-                      places: widget.places,
-                      selectedPlace: widget.selectedPlace,
-                      activeRoute: widget.activeRoute,
-                      userLocationOffset: widget.userLocationOffset,
-                      styleMode: widget.styleMode,
-                      camX: _camX,
-                      camY: _camY,
-                      zoom: _zoom,
-                      rotation: _rotation,
-                      tilt: _tilt,
-                      pulseValue: _pulseController.value,
-                      campusArtwork: _campusArtwork,
-                    ),
-                  ),
-                  if (_campusArtworkError != null)
-                    Positioned(
-                      left: 16,
-                      right: 16,
-                      bottom: 16,
-                      child: Material(
-                        color: Colors.red.shade800,
-                        borderRadius: BorderRadius.circular(8),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            'Campus artwork could not be loaded: '
-                            '$_campusArtworkError',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+              return CustomPaint(
+                size: size,
+                painter: _Campus3DMapPainter(
+                  places: widget.places,
+                  selectedPlace: widget.selectedPlace,
+                  activeRoute: widget.activeRoute,
+                  userLocationOffset: widget.userLocationOffset,
+                  styleMode: widget.styleMode,
+                  camX: _camX,
+                  camY: _camY,
+                  zoom: _zoom,
+                  rotation: _rotation,
+                  tilt: _tilt,
+                  pulseValue: _pulseController.value,
+                ),
               );
             },
           ),
@@ -802,7 +748,6 @@ class _Campus3DMapPainter extends CustomPainter {
   final double rotation;
   final double tilt;
   final double pulseValue;
-  final ui.Image? campusArtwork;
 
   _Campus3DMapPainter({
     required this.places,
@@ -816,7 +761,6 @@ class _Campus3DMapPainter extends CustomPainter {
     required this.rotation,
     required this.tilt,
     required this.pulseValue,
-    required this.campusArtwork,
   });
 
   /// Project a 3D campus point (x, y, z) into 2D screen coordinates
@@ -885,30 +829,7 @@ class _Campus3DMapPainter extends CustomPainter {
   }
 
   void _drawCollegeMap(Canvas canvas, Size size) {
-    final artwork = campusArtwork;
-    if (artwork != null) {
-      canvas
-        ..save()
-        ..translate(size.width / 2, size.height / 2)
-        ..scale(zoom, zoom * math.cos(tilt))
-        ..rotate(rotation)
-        ..translate(-camX, -camY)
-        ..drawImageRect(
-          artwork,
-          Rect.fromLTWH(
-            0,
-            0,
-            artwork.width.toDouble(),
-            artwork.height.toDouble(),
-          ),
-          const Rect.fromLTWH(0, 0, 1179, 768),
-          Paint()..filterQuality = FilterQuality.high,
-        )
-        ..restore();
-      return;
-    }
-
-    canvas.drawColor(const Color(0xFF9BC66B), BlendMode.src);
+    canvas.drawColor(const Color(0xFF8DBB5A), BlendMode.src);
     _drawCollegeGreenspace(canvas, size);
     _drawCollegeGrounds(canvas, size);
     _drawCollegeRoads(canvas, size);
@@ -975,51 +896,92 @@ class _Campus3DMapPainter extends CustomPainter {
 
   void _drawCollegeGreenspace(Canvas canvas, Size size) {
     const treeColors = [
-      Color(0xFF4F8A38),
-      Color(0xFF5E993D),
-      Color(0xFF71A747),
-      Color(0xFF3F7D35),
+      Color(0xFF3A7A28),
+      Color(0xFF4A8A35),
+      Color(0xFF5A9940),
+      Color(0xFF336B23),
+      Color(0xFF428030),
     ];
     const highlights = [
+      Color(0xFF72AA4A),
+      Color(0xFF85BB58),
+      Color(0xFF78AF50),
+      Color(0xFF60993E),
       Color(0xFF8BBF55),
-      Color(0xFFA1C968),
-      Color(0xFF91BE5A),
-      Color(0xFF75A94A),
     ];
-    for (var row = 0; row < 29; row++) {
-      for (var column = 0; column < 43; column++) {
+    const shadows = [
+      Color(0xFF2A5C1A),
+      Color(0xFF305220),
+      Color(0xFF264A18),
+      Color(0xFF3A6028),
+      Color(0xFF2E5820),
+    ];
+
+    // Draw a dense grid of tree clusters matching the aerial reference image
+    for (var row = 0; row < 31; row++) {
+      for (var column = 0; column < 46; column++) {
         final seed = math.sin(column * 12.989 + row * 78.233);
-        final x = 8.0 + column * 28 + math.sin(row * 4.3 + column) * 8;
-        final y = 9.0 + row * 27 + math.cos(column * 2.7 + row) * 8;
-        if (seed < 0.28 &&
+        final x = 6.0 + column * 26 + math.sin(row * 4.3 + column) * 7;
+        final y = 7.0 + row * 25 + math.cos(column * 2.7 + row) * 7;
+        if (seed < 0.35 &&
             !_isNearMapBuilding(x, y) &&
             !_isNearRoad(x, y) &&
             !_isInGround(x, y) &&
             !_isNearMapLabel(x, y)) {
           final center = _project(x, y, 0, size);
-          final radius = 4.0 + (math.cos(seed * 18).abs() * 3.5);
+          final radius = 6.5 + (math.cos(seed * 18).abs() * 5.0);
           final colorIndex = ((seed.abs() * treeColors.length).floor())
               .clamp(0, treeColors.length - 1)
               .toInt();
+
+          // Dark shadow beneath the canopy
           canvas.drawCircle(
-            center.translate(1.5 * zoom, 2.5 * zoom),
-            radius * zoom,
-            Paint()..color = const Color(0x403A4B30),
+            center.translate(2.5 * zoom, 3.5 * zoom),
+            radius * 1.15 * zoom,
+            Paint()
+              ..color = const Color(0x552A3E1E)
+              ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 2.5),
           );
+
+          // Main dark base canopy
+          canvas.drawCircle(
+            center.translate(-radius * 0.15 * zoom, radius * 0.1 * zoom),
+            radius * zoom,
+            Paint()..color = shadows[colorIndex],
+          );
+
+          // Mid-tone main foliage
           canvas.drawCircle(
             center,
-            radius * zoom,
+            radius * 0.85 * zoom,
             Paint()..color = treeColors[colorIndex],
           );
+
+          // Secondary foliage blob
           canvas.drawCircle(
-            center.translate(-radius * zoom * 0.2, -radius * zoom * 0.22),
-            radius * zoom * 0.48,
+            center.translate(radius * 0.4 * zoom, -radius * 0.15 * zoom),
+            radius * 0.68 * zoom,
+            Paint()..color = treeColors[(colorIndex + 1) % treeColors.length],
+          );
+
+          // Bright highlight crown
+          canvas.drawCircle(
+            center.translate(-radius * 0.22 * zoom, -radius * 0.32 * zoom),
+            radius * 0.48 * zoom,
             Paint()..color = highlights[colorIndex],
+          );
+
+          // Small bright specular highlight
+          canvas.drawCircle(
+            center.translate(-radius * 0.28 * zoom, -radius * 0.38 * zoom),
+            radius * 0.22 * zoom,
+            Paint()..color = highlights[(colorIndex + 2) % highlights.length].withValues(alpha: 0.7),
           );
         }
       }
     }
   }
+
 
   bool _isNearMapBuilding(double x, double y) {
     final point = Offset(x, y);
@@ -1112,15 +1074,18 @@ class _Campus3DMapPainter extends CustomPainter {
       );
       switch (ground.style) {
         case CampusGroundStyle.athleticsTrack:
-          canvas.drawPath(path, Paint()..color = const Color(0xFFD59670));
+          // Outer running track (terracotta/tan)
+          canvas.drawPath(path, Paint()..color = const Color(0xFFC8956A));
           final innerField = _ellipseMapPath(
             ground.center,
-            ground.width - 24,
-            ground.height - 24,
+            ground.width - 28,
+            ground.height - 28,
             size,
           );
-          canvas.drawPath(innerField, Paint()..color = const Color(0xFF75A94D));
-          for (final inset in [7.0, 15.0]) {
+          // Inner green field
+          canvas.drawPath(innerField, Paint()..color = const Color(0xFF6DA83E));
+          // Track lane lines
+          for (final inset in [9.0, 18.0]) {
             canvas.drawPath(
               _ellipseMapPath(
                 ground.center,
@@ -1129,25 +1094,25 @@ class _Campus3DMapPainter extends CustomPainter {
                 size,
               ),
               Paint()
-                ..color = const Color(0xFFFFE4C7).withValues(alpha: 0.86)
+                ..color = Colors.white.withValues(alpha: 0.55)
                 ..style = PaintingStyle.stroke
-                ..strokeWidth = 1.3 * zoom,
+                ..strokeWidth = 1.2 * zoom,
             );
           }
           canvas.drawPath(
             innerField,
             Paint()
-              ..color = const Color(0xFF4F813C)
+              ..color = const Color(0xFF4D7D2E)
               ..style = PaintingStyle.stroke
-              ..strokeWidth = 1.2 * zoom,
+              ..strokeWidth = 1.4 * zoom,
           );
           break;
         case CampusGroundStyle.cricket:
-          canvas.drawPath(path, Paint()..color = const Color(0xFF86B953));
+          canvas.drawPath(path, Paint()..color = const Color(0xFF78B045));
           canvas.drawPath(
             path,
             Paint()
-              ..color = const Color(0xFFB8D17B)
+              ..color = const Color(0xFFAACC70)
               ..style = PaintingStyle.stroke
               ..strokeWidth = 2 * zoom,
           );
@@ -1161,10 +1126,10 @@ class _Campus3DMapPainter extends CustomPainter {
             size,
             close: true,
           );
-          canvas.drawPath(pitch, Paint()..color = const Color(0xFFC8AD78));
+          canvas.drawPath(pitch, Paint()..color = const Color(0xFFCCB880));
           break;
         case CampusGroundStyle.theatre:
-          canvas.drawPath(path, Paint()..color = const Color(0xFFE2D9BF));
+          canvas.drawPath(path, Paint()..color = const Color(0xFFDDD3B8));
           for (final inset in [9.0, 18.0, 27.0]) {
             canvas.drawPath(
               _ellipseMapPath(
@@ -1174,7 +1139,7 @@ class _Campus3DMapPainter extends CustomPainter {
                 size,
               ),
               Paint()
-                ..color = const Color(0xFFB5A88C)
+                ..color = const Color(0xFFB0A38A)
                 ..style = PaintingStyle.stroke
                 ..strokeWidth = 1.5 * zoom,
             );
@@ -1186,15 +1151,15 @@ class _Campus3DMapPainter extends CustomPainter {
               ground.height * 0.28,
               size,
             ),
-            Paint()..color = const Color(0xFFC9BFA8),
+            Paint()..color = const Color(0xFFC4BAA4),
           );
           break;
         case CampusGroundStyle.lawn:
-          canvas.drawPath(path, Paint()..color = const Color(0xFF9BCC63));
+          canvas.drawPath(path, Paint()..color = const Color(0xFF8DC258));
           canvas.drawPath(
             path,
             Paint()
-              ..color = const Color(0xFFBBD88A)
+              ..color = const Color(0xFFADD478)
               ..style = PaintingStyle.stroke
               ..strokeWidth = 1.2 * zoom,
           );
@@ -1218,13 +1183,13 @@ class _Campus3DMapPainter extends CustomPainter {
     for (final road in CampusMapGeometry.roads) {
       final path = _smoothMapPath(road.points, size);
       final outline = Paint()
-        ..color = const Color(0xFFE8E5DA)
+        ..color = const Color(0xFFD8D0BC)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = (road.width + 5) * zoom
+        ..strokeWidth = (road.width + 6) * zoom
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round;
       final surface = Paint()
-        ..color = const Color(0xFF687174)
+        ..color = const Color(0xFF6E7275)
         ..style = PaintingStyle.stroke
         ..strokeWidth = road.width * zoom
         ..strokeCap = StrokeCap.round
@@ -1290,8 +1255,8 @@ class _Campus3DMapPainter extends CustomPainter {
 
     final hostel = building.hostel;
     final roofColor = hostel
-        ? const Color(0xFFD18B65)
-        : const Color(0xFFCA7650);
+        ? const Color(0xFFCC8050)
+        : const Color(0xFFBF6B3A);
     for (var i = 0; i < building.footprint.length; i++) {
       final next = (i + 1) % building.footprint.length;
       final face = Path()
@@ -1304,9 +1269,45 @@ class _Campus3DMapPainter extends CustomPainter {
         face,
         Paint()
           ..color = hostel
-              ? (i.isEven ? const Color(0xFFE9D5C6) : const Color(0xFFD0B9A6))
-              : (i.isEven ? const Color(0xFFF0E6D5) : const Color(0xFFD4C5AE)),
+              ? (i.isEven ? const Color(0xFFF5EAE0) : const Color(0xFFE0CFBF))
+              : (i.isEven ? const Color(0xFFF8F4EE) : const Color(0xFFE6DDD0)),
       );
+
+      final edgeLength = (ground[next] - ground[i]).distance;
+      final windowCount = (edgeLength / (11 * zoom)).floor().clamp(1, 5);
+      for (var windowIndex = 0; windowIndex < windowCount; windowIndex++) {
+        final along = (windowIndex + 1) / (windowCount + 1);
+        final baseStart = Offset.lerp(ground[i], ground[next], along)!;
+        final roofStart = Offset.lerp(roof[i], roof[next], along)!;
+        final baseEnd = Offset.lerp(
+          ground[i],
+          ground[next],
+          along + 0.18 / (windowCount + 1),
+        )!;
+        final roofEnd = Offset.lerp(
+          roof[i],
+          roof[next],
+          along + 0.18 / (windowCount + 1),
+        )!;
+        final windowTop = Offset.lerp(baseStart, roofStart, 0.62)!;
+        final windowTopEnd = Offset.lerp(baseEnd, roofEnd, 0.62)!;
+        final windowBottom = Offset.lerp(baseStart, roofStart, 0.3)!;
+        final windowBottomEnd = Offset.lerp(baseEnd, roofEnd, 0.3)!;
+        final window = Path()
+          ..moveTo(windowTop.dx, windowTop.dy)
+          ..lineTo(windowTopEnd.dx, windowTopEnd.dy)
+          ..lineTo(windowBottomEnd.dx, windowBottomEnd.dy)
+          ..lineTo(windowBottom.dx, windowBottom.dy)
+          ..close();
+        canvas.drawPath(window, Paint()..color = const Color(0xFF718B8A));
+        canvas.drawPath(
+          window,
+          Paint()
+            ..color = const Color(0xFFD8D0BC)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 0.65 * zoom,
+        );
+      }
     }
 
     final top = Path()..moveTo(roof.first.dx, roof.first.dy);
@@ -1315,24 +1316,110 @@ class _Campus3DMapPainter extends CustomPainter {
     }
     top.close();
     canvas.drawShadow(top, const Color(0x33000000), 3 * zoom, false);
-    canvas.drawPath(top, Paint()..color = roofColor);
-    canvas.drawPath(
-      top,
-      Paint()
-        ..color = const Color(0xFF914F36).withValues(alpha: 0.65)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.25 * zoom,
-    );
-    if (roof.length >= 4) {
-      final ridgeStart = Offset.lerp(roof.first, roof[1], 0.5)!;
-      final ridgeEnd = Offset.lerp(roof[roof.length - 1], roof[2], 0.5)!;
+    final roofCenter =
+        building.footprint.fold(Offset.zero, (sum, point) => sum + point) /
+        building.footprint.length.toDouble();
+    var covarianceX = 0.0;
+    var covarianceY = 0.0;
+    var covarianceXY = 0.0;
+    for (final point in building.footprint) {
+      final dx = point.dx - roofCenter.dx;
+      final dy = point.dy - roofCenter.dy;
+      covarianceX += dx * dx;
+      covarianceY += dy * dy;
+      covarianceXY += dx * dy;
+    }
+    final axisAngle =
+        0.5 * math.atan2(2 * covarianceXY, covarianceX - covarianceY);
+    final ridgeAxis = Offset(math.cos(axisAngle), math.sin(axisAngle));
+    final ridgeAcross = Offset(-ridgeAxis.dy, ridgeAxis.dx);
+    const ridgeHeight = 5.0;
+
+    List<Offset> clipRoofSide(bool positiveSide) {
+      final clipped = <Offset>[];
+      for (var i = 0; i < building.footprint.length; i++) {
+        final start = building.footprint[i];
+        final end = building.footprint[(i + 1) % building.footprint.length];
+        final startSide =
+            (start - roofCenter).dx * ridgeAcross.dx +
+            (start - roofCenter).dy * ridgeAcross.dy;
+        final endSide =
+            (end - roofCenter).dx * ridgeAcross.dx +
+            (end - roofCenter).dy * ridgeAcross.dy;
+        final startInside = positiveSide ? startSide >= 0 : startSide <= 0;
+        final endInside = positiveSide ? endSide >= 0 : endSide <= 0;
+
+        if (startInside) clipped.add(start);
+        if (startInside != endInside) {
+          clipped.add(
+            Offset.lerp(start, end, startSide / (startSide - endSide))!,
+          );
+        }
+      }
+      return clipped;
+    }
+
+    for (final positiveSide in [false, true]) {
+      final clippedFootprint = clipRoofSide(positiveSide);
+      if (clippedFootprint.length < 3) continue;
+      final roofSide = Path();
+      for (var i = 0; i < clippedFootprint.length; i++) {
+        final point = clippedFootprint[i];
+        final across =
+            (point - roofCenter).dx * ridgeAcross.dx +
+            (point - roofCenter).dy * ridgeAcross.dy;
+        final projected = _project(
+          point.dx,
+          point.dy,
+          building.height + (across.abs() < 0.01 ? ridgeHeight : 0),
+          size,
+        );
+        if (i == 0) {
+          roofSide.moveTo(projected.dx, projected.dy);
+        } else {
+          roofSide.lineTo(projected.dx, projected.dy);
+        }
+      }
+      roofSide.close();
       canvas.drawPath(
-        Path()
-          ..moveTo(ridgeStart.dx, ridgeStart.dy)
-          ..lineTo(ridgeEnd.dx, ridgeEnd.dy),
+        roofSide,
+        Paint()..color = _shadeColor(roofColor, positiveSide ? 0.82 : 1.12),
+      );
+      canvas.drawPath(
+        roofSide,
         Paint()
-          ..color = const Color(0xFFFFE3C9).withValues(alpha: 0.45)
-          ..strokeWidth = 1.2 * zoom,
+          ..color = const Color(0xFF7A3C22).withValues(alpha: 0.65)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 0.85 * zoom,
+      );
+    }
+
+    final ridgePoints = clipRoofSide(true).where((point) {
+      final across =
+          (point - roofCenter).dx * ridgeAcross.dx +
+          (point - roofCenter).dy * ridgeAcross.dy;
+      return across.abs() < 0.01;
+    }).toList();
+    if (ridgePoints.length >= 2) {
+      final ridgeStart = _project(
+        ridgePoints.first.dx,
+        ridgePoints.first.dy,
+        building.height + ridgeHeight,
+        size,
+      );
+      final ridgeEnd = _project(
+        ridgePoints.last.dx,
+        ridgePoints.last.dy,
+        building.height + ridgeHeight,
+        size,
+      );
+      canvas.drawLine(
+        ridgeStart,
+        ridgeEnd,
+        Paint()
+          ..color = const Color(0xFFFFDDB5).withValues(alpha: 0.78)
+          ..strokeWidth = 1.5 * zoom
+          ..strokeCap = StrokeCap.round,
       );
     }
   }
@@ -1340,40 +1427,61 @@ class _Campus3DMapPainter extends CustomPainter {
   void _drawCollegeMapLabels(Canvas canvas, Size size) {
     for (final label in CampusMapGeometry.labels) {
       if (!label.keyLabel && zoom < 0.9) continue;
-      final fontSize = math.max(8.0, 10.0 * math.min(zoom, 1.1));
+      final fontSize = math.max(7.5, 9.5 * math.min(zoom, 1.15));
+      final isKey = label.keyLabel;
       final text = TextPainter(
         text: TextSpan(
           text: label.text,
           style: TextStyle(
-            color: const Color(0xFF17221B),
+            color: const Color(0xFF1A1A1A),
             fontSize: fontSize,
-            height: 1.05,
-            fontWeight: FontWeight.w700,
-            shadows: const [
-              Shadow(color: Colors.white, blurRadius: 2, offset: Offset(0, 1)),
-            ],
+            height: 1.1,
+            fontWeight: isKey ? FontWeight.w800 : FontWeight.w600,
+            letterSpacing: 0.1,
           ),
         ),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
-      )..layout(maxWidth: math.max(75.0, 165 * math.min(zoom, 1.0)));
+      )..layout(maxWidth: math.max(70.0, 160 * math.min(zoom, 1.0)));
 
       final center = _project(label.position.dx, label.position.dy, 0, size);
+      final pillW = text.width + 10 * zoom;
+      final pillH = text.height + 6 * zoom;
+
       canvas
         ..save()
         ..translate(center.dx, center.dy)
-        ..rotate(label.rotation)
-        ..drawRRect(
-          RRect.fromRectAndRadius(
-            Rect.fromCenter(
-              center: Offset.zero,
-              width: text.width + 8 * zoom,
-              height: text.height + 5 * zoom,
-            ),
-            Radius.circular(4 * zoom),
+        ..rotate(label.rotation);
+
+      // White semi-transparent pill background
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: pillW,
+            height: pillH,
           ),
-          Paint()..color = const Color(0xFFF7F5E9).withValues(alpha: 0.84),
-        );
+          Radius.circular(5 * zoom),
+        ),
+        Paint()..color = Colors.white.withValues(alpha: 0.88),
+      );
+
+      // Subtle pill border
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: pillW,
+            height: pillH,
+          ),
+          Radius.circular(5 * zoom),
+        ),
+        Paint()
+          ..color = const Color(0xFFBBBBA8).withValues(alpha: 0.6)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 0.8 * zoom,
+      );
+
       text.paint(canvas, Offset(-text.width / 2, -text.height / 2));
       canvas.restore();
     }
@@ -2135,7 +2243,6 @@ class _Campus3DMapPainter extends CustomPainter {
         oldDelegate.selectedPlace != selectedPlace ||
         oldDelegate.activeRoute != activeRoute ||
         oldDelegate.userLocationOffset != userLocationOffset ||
-        oldDelegate.campusArtwork != campusArtwork ||
         oldDelegate.styleMode != styleMode ||
         oldDelegate.pulseValue != pulseValue;
   }

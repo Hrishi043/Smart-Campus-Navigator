@@ -875,317 +875,304 @@ class CampusData {
   ];
 
   // ===========================================================================
-  // CAMPUS WALKWAY NETWORK NODES (Waypoints)
+  // CAMPUS WALKWAY NETWORK NODES
+  // ---------------------------------------------------------------------------
+  // Every node sits ON a road in the reference image (1179×768 canvas space).
+  // Coordinates use the same space as campus_map_geometry.dart roads.
   // ===========================================================================
   static final Map<String, WalkNode> campusWalkNodes = {
-    'node_gate': const WalkNode(
-      id: 'node_gate',
-      x: 420,
-      y: 120,
-      approxLat: 10.05600,
-      approxLng: 76.61835,
-      name: 'Main Gate & Post Office',
-    ),
-    'node_parking': const WalkNode(
-      id: 'node_parking',
-      x: 440,
-      y: 220,
-      approxLat: 10.05530,
-      approxLng: 76.61845,
-      name: 'Vehicle Parking Area',
-    ),
-    'node_statue': const WalkNode(
-      id: 'node_statue',
-      x: 520,
-      y: 200,
-      approxLat: 10.05530,
-      approxLng: 76.61885,
-      name: 'Prof. MP Varghese Statue Circle',
-    ),
-    'node_main_block': const WalkNode(
-      id: 'node_main_block',
-      x: 560,
-      y: 260,
-      approxLat: 10.05490,
-      approxLng: 76.61940,
-      name: 'Main Academic Block Entrance',
-    ),
-    'node_pool': const WalkNode(
-      id: 'node_pool',
-      x: 620,
-      y: 380,
-      approxLat: 10.05470,
-      approxLng: 76.62025,
-      name: 'Swimming Pool Gate',
-    ),
-    'node_campus_road_mid': const WalkNode(
-      id: 'node_campus_road_mid',
-      x: 490,
-      y: 360,
-      approxLat: 10.05450,
-      approxLng: 76.61870,
-      name: 'MACE Campus Road Mid-Junction',
-    ),
-    'node_cricket': const WalkNode(
-      id: 'node_cricket',
-      x: 390,
-      y: 430,
-      approxLat: 10.05430,
-      approxLng: 76.61815,
-      name: 'Cricket Ground Pavilion Path',
-    ),
-    'node_canteen': const WalkNode(
-      id: 'node_canteen',
-      x: 490,
-      y: 490,
-      approxLat: 10.05390,
-      approxLng: 76.61875,
-      name: 'Canteen & Co-operative Plaza',
-    ),
-    'node_ladies_hostel': const WalkNode(
-      id: 'node_ladies_hostel',
-      x: 330,
-      y: 550,
-      approxLat: 10.05350,
-      approxLng: 76.61735,
-      name: 'Ladies Hostel Gate',
-    ),
-    'node_hydraulic_lab': const WalkNode(
-      id: 'node_hydraulic_lab',
-      x: 540,
-      y: 570,
-      approxLat: 10.05320,
-      approxLng: 76.61950,
-      name: 'Hydraulic Machines Lab Front',
-    ),
-    'node_heat_engines': const WalkNode(
-      id: 'node_heat_engines',
-      x: 530,
-      y: 670,
-      approxLat: 10.05250,
-      approxLng: 76.61945,
-      name: 'Heat Engines Lab Entrance',
-    ),
-    'node_ec_block': const WalkNode(
-      id: 'node_ec_block',
-      x: 440,
-      y: 680,
-      approxLat: 10.05260,
-      approxLng: 76.61855,
-      name: 'EC Block Main Portico',
-    ),
-    'node_pg_block': const WalkNode(
-      id: 'node_pg_block',
-      x: 540,
-      y: 800,
-      approxLat: 10.05170,
-      approxLng: 76.61965,
-      name: 'PG Block Entrance Plaza',
-    ),
-    'node_stadium': const WalkNode(
-      id: 'node_stadium',
-      x: 680,
-      y: 650,
-      approxLat: 10.05280,
-      approxLng: 76.62125,
-      name: 'College Stadium Pavilion Entrance',
-    ),
-    'node_hostels_road': const WalkNode(
-      id: 'node_hostels_road',
-      x: 770,
-      y: 540,
-      approxLat: 10.05370,
-      approxLng: 76.62180,
-      name: 'MACE Hostels Road Junction',
-    ),
-    'node_mens_hostel': const WalkNode(
-      id: 'node_mens_hostel',
-      x: 840,
-      y: 540,
-      approxLat: 10.05370,
-      approxLng: 76.62255,
-      name: 'HS-I / HS-II Men\'s Hostel Gate',
-    ),
+    // ── MAIN KOZHIPPILLY ROAD (top diagonal) ──────────────────────────────────
+    'rn_main_r1': const WalkNode(id: 'rn_main_r1', x: 60, y: 30, approxLat: 10.0578, approxLng: 76.6151, name: 'Kozhippilly Rd West'),
+    'rn_main_r2': const WalkNode(id: 'rn_main_r2', x: 250, y: 82, approxLat: 10.0571, approxLng: 76.6167, name: 'Kozhippilly Rd Mid-W'),
+    'rn_main_r3': const WalkNode(id: 'rn_main_r3', x: 435, y: 140, approxLat: 10.0564, approxLng: 76.6183, name: 'Kozhippilly Rd – Gate Junction'),
+    'rn_main_r4': const WalkNode(id: 'rn_main_r4', x: 595, y: 190, approxLat: 10.0560, approxLng: 76.6196, name: 'Kozhippilly Rd Mid-E'),
+    'rn_main_r5': const WalkNode(id: 'rn_main_r5', x: 775, y: 228, approxLat: 10.0558, approxLng: 76.6211, name: 'Kozhippilly Rd – Stadium Connector Jn'),
+    'rn_main_r6': const WalkNode(id: 'rn_main_r6', x: 920, y: 228, approxLat: 10.0558, approxLng: 76.6223, name: 'Kozhippilly Rd – Hostels Connector Jn'),
+    'rn_main_r7': const WalkNode(id: 'rn_main_r7', x: 1070, y: 196, approxLat: 10.0559, approxLng: 76.6236, name: 'Kozhippilly Rd East'),
+
+    // ── MAIN GATE ACCESS ROAD ─────────────────────────────────────────────────
+    'node_gate': const WalkNode(id: 'node_gate', x: 435, y: 140, approxLat: 10.0564, approxLng: 76.6183, name: 'Main Gate'),
+    'rn_gate_1': const WalkNode(id: 'rn_gate_1', x: 430, y: 175, approxLat: 10.0562, approxLng: 76.6183, name: 'Gate Access Rd'),
+    'rn_gate_2': const WalkNode(id: 'rn_gate_2', x: 422, y: 232, approxLat: 10.0559, approxLng: 76.6182, name: 'Gate–Cricket Loop Jn'),
+
+    // ── PARKING ACCESS SPUR ───────────────────────────────────────────────────
+    'node_parking': const WalkNode(id: 'node_parking', x: 386, y: 150, approxLat: 10.0563, approxLng: 76.6180, name: 'Vehicle Parking'),
+
+    // ── CRICKET LOOP ROAD ─────────────────────────────────────────────────────
+    'rn_cr_n':  const WalkNode(id: 'rn_cr_n',  x: 296, y: 156, approxLat: 10.0574, approxLng: 76.6170, name: 'Cricket Loop – North'),
+    'rn_cr_ne': const WalkNode(id: 'rn_cr_ne', x: 388, y: 192, approxLat: 10.0572, approxLng: 76.6179, name: 'Cricket Loop – NE'),
+    'rn_cr_e':  const WalkNode(id: 'rn_cr_e',  x: 418, y: 256, approxLat: 10.0568, approxLng: 76.6182, name: 'Cricket Loop – E (Gate Jn)'),
+    'rn_cr_se': const WalkNode(id: 'rn_cr_se', x: 400, y: 324, approxLat: 10.0563, approxLng: 76.6181, name: 'Cricket Loop – SE'),
+    'rn_cr_s':  const WalkNode(id: 'rn_cr_s',  x: 320, y: 372, approxLat: 10.0559, approxLng: 76.6174, name: 'Cricket Loop – South'),
+    'rn_cr_sw': const WalkNode(id: 'rn_cr_sw', x: 232, y: 342, approxLat: 10.0561, approxLng: 76.6166, name: 'Cricket Loop – SW'),
+    'rn_cr_w':  const WalkNode(id: 'rn_cr_w',  x: 202, y: 256, approxLat: 10.0567, approxLng: 76.6163, name: 'Cricket Loop – West'),
+    'rn_cr_nw': const WalkNode(id: 'rn_cr_nw', x: 254, y: 173, approxLat: 10.0572, approxLng: 76.6167, name: 'Cricket Loop – NW'),
+
+    // ── WEST PERIMETER ROAD ───────────────────────────────────────────────────
+    'rn_wp_1': const WalkNode(id: 'rn_wp_1', x: 196, y: 235, approxLat: 10.0570, approxLng: 76.6162, name: 'West Perimeter Rd 1'),
+    'rn_wp_2': const WalkNode(id: 'rn_wp_2', x: 156, y: 306, approxLat: 10.0566, approxLng: 76.6159, name: 'West Perimeter Rd 2'),
+    'rn_wp_3': const WalkNode(id: 'rn_wp_3', x: 118, y: 408, approxLat: 10.0559, approxLng: 76.6156, name: 'West Perimeter – Hostel Jn'),
+    'rn_wp_4': const WalkNode(id: 'rn_wp_4', x: 78, y: 454, approxLat: 10.0556, approxLng: 76.6152, name: 'West Perimeter Rd 4'),
+
+    // ── LADIES HOSTEL ACCESS ROAD ─────────────────────────────────────────────
+    'rn_lh_1': const WalkNode(id: 'rn_lh_1', x: 172, y: 416, approxLat: 10.0557, approxLng: 76.6160, name: 'Ladies Hostel Access 1'),
+    'rn_lh_2': const WalkNode(id: 'rn_lh_2', x: 228, y: 428, approxLat: 10.0557, approxLng: 76.6165, name: 'Ladies Hostel Access 2'),
+    'rn_lh_3': const WalkNode(id: 'rn_lh_3', x: 272, y: 464, approxLat: 10.0555, approxLng: 76.6168, name: 'Ladies Hostel Access 3'),
+    'node_ladies_hostel': const WalkNode(id: 'node_ladies_hostel', x: 288, y: 484, approxLat: 10.0554, approxLng: 76.6170, name: 'Ladies Hostel Gate'),
+
+    // ── INNER CAMPUS SPINE ────────────────────────────────────────────────────
+    'rn_sp_1': const WalkNode(id: 'rn_sp_1', x: 420, y: 286, approxLat: 10.0566, approxLng: 76.6182, name: 'Campus Spine 1'),
+    'rn_sp_2': const WalkNode(id: 'rn_sp_2', x: 432, y: 352, approxLat: 10.0562, approxLng: 76.6183, name: 'Campus Spine 2'),
+    'rn_sp_3': const WalkNode(id: 'rn_sp_3', x: 456, y: 402, approxLat: 10.0559, approxLng: 76.6185, name: 'Campus Spine 3 – Canteen Jn'),
+    'rn_sp_4': const WalkNode(id: 'rn_sp_4', x: 456, y: 462, approxLat: 10.0556, approxLng: 76.6185, name: 'Campus Spine 4'),
+    'rn_sp_5': const WalkNode(id: 'rn_sp_5', x: 450, y: 490, approxLat: 10.0554, approxLng: 76.6185, name: 'Campus Spine 5 – Lab Road Jn'),
+
+    // ── LAB ACCESS ROAD ───────────────────────────────────────────────────────
+    'rn_lab_1': const WalkNode(id: 'rn_lab_1', x: 434, y: 542, approxLat: 10.0550, approxLng: 76.6184, name: 'Lab Rd 1'),
+    'rn_lab_2': const WalkNode(id: 'rn_lab_2', x: 414, y: 594, approxLat: 10.0547, approxLng: 76.6183, name: 'Lab Rd 2'),
+    'rn_lab_3': const WalkNode(id: 'rn_lab_3', x: 436, y: 648, approxLat: 10.0543, approxLng: 76.6185, name: 'Lab Rd 3 – SW Jn'),
+    'rn_lab_4': const WalkNode(id: 'rn_lab_4', x: 452, y: 670, approxLat: 10.0541, approxLng: 76.6186, name: 'Lab Rd 4'),
+    'rn_lab_5': const WalkNode(id: 'rn_lab_5', x: 466, y: 718, approxLat: 10.0537, approxLng: 76.6187, name: 'Lab Rd 5'),
+    'rn_lab_6': const WalkNode(id: 'rn_lab_6', x: 506, y: 752, approxLat: 10.0534, approxLng: 76.6190, name: 'Lab Rd 6'),
+    'rn_lab_7': const WalkNode(id: 'rn_lab_7', x: 574, y: 752, approxLat: 10.0534, approxLng: 76.6196, name: 'Lab Rd 7'),
+    'rn_lab_8': const WalkNode(id: 'rn_lab_8', x: 648, y: 728, approxLat: 10.0536, approxLng: 76.6202, name: 'Lab Rd 8'),
+    'rn_lab_9': const WalkNode(id: 'rn_lab_9', x: 714, y: 696, approxLat: 10.0539, approxLng: 76.6208, name: 'Lab Rd 9'),
+    'rn_lab_10': const WalkNode(id: 'rn_lab_10', x: 756, y: 674, approxLat: 10.0541, approxLng: 76.6211, name: 'Lab Rd 10 – Stadium Outer Loop Jn'),
+
+    // ── SOUTH-WEST ROAD ───────────────────────────────────────────────────────
+    'rn_sw_1': const WalkNode(id: 'rn_sw_1', x: 306, y: 494, approxLat: 10.0553, approxLng: 76.6172, name: 'SW Rd 1'),
+    'rn_sw_2': const WalkNode(id: 'rn_sw_2', x: 310, y: 562, approxLat: 10.0548, approxLng: 76.6172, name: 'SW Rd 2'),
+    'rn_sw_3': const WalkNode(id: 'rn_sw_3', x: 346, y: 628, approxLat: 10.0544, approxLng: 76.6175, name: 'SW Rd 3'),
+    'rn_sw_4': const WalkNode(id: 'rn_sw_4', x: 418, y: 662, approxLat: 10.0541, approxLng: 76.6181, name: 'SW Rd 4'),
+    'rn_sw_5': const WalkNode(id: 'rn_sw_5', x: 452, y: 670, approxLat: 10.0541, approxLng: 76.6184, name: 'SW Rd 5 – Lab Rd Jn'),
+
+    // ── STADIUM OUTER LOOP ────────────────────────────────────────────────────
+    'rn_sol_n':  const WalkNode(id: 'rn_sol_n',  x: 808, y: 344, approxLat: 10.0562, approxLng: 76.6213, name: 'Stadium Loop – North'),
+    'rn_sol_ne': const WalkNode(id: 'rn_sol_ne', x: 864, y: 350, approxLat: 10.0562, approxLng: 76.6218, name: 'Stadium Loop – NE'),
+    'rn_sol_e1': const WalkNode(id: 'rn_sol_e1', x: 916, y: 374, approxLat: 10.0561, approxLng: 76.6222, name: 'Stadium Loop – E1'),
+    'rn_sol_e2': const WalkNode(id: 'rn_sol_e2', x: 952, y: 414, approxLat: 10.0558, approxLng: 76.6225, name: 'Stadium Loop – E2'),
+    'rn_sol_e3': const WalkNode(id: 'rn_sol_e3', x: 972, y: 460, approxLat: 10.0555, approxLng: 76.6227, name: 'Stadium Loop – E3 (Hostels Rd Jn)'),
+    'rn_sol_e4': const WalkNode(id: 'rn_sol_e4', x: 978, y: 510, approxLat: 10.0551, approxLng: 76.6227, name: 'Stadium Loop – E4'),
+    'rn_sol_se': const WalkNode(id: 'rn_sol_se', x: 966, y: 558, approxLat: 10.0547, approxLng: 76.6226, name: 'Stadium Loop – SE'),
+    'rn_sol_s1': const WalkNode(id: 'rn_sol_s1', x: 944, y: 604, approxLat: 10.0543, approxLng: 76.6225, name: 'Stadium Loop – S1'),
+    'rn_sol_s2': const WalkNode(id: 'rn_sol_s2', x: 912, y: 644, approxLat: 10.0539, approxLng: 76.6222, name: 'Stadium Loop – S2'),
+    'rn_sol_sw': const WalkNode(id: 'rn_sol_sw', x: 868, y: 672, approxLat: 10.0537, approxLng: 76.6218, name: 'Stadium Loop – SW'),
+    'rn_sol_s3': const WalkNode(id: 'rn_sol_s3', x: 816, y: 686, approxLat: 10.0536, approxLng: 76.6213, name: 'Stadium Loop – S3'),
+    'rn_sol_s4': const WalkNode(id: 'rn_sol_s4', x: 756, y: 684, approxLat: 10.0536, approxLng: 76.6208, name: 'Stadium Loop – S4'),
+    'rn_sol_w1': const WalkNode(id: 'rn_sol_w1', x: 714, y: 670, approxLat: 10.0537, approxLng: 76.6204, name: 'Stadium Loop – W1'),
+    'rn_sol_w2': const WalkNode(id: 'rn_sol_w2', x: 674, y: 642, approxLat: 10.0539, approxLng: 76.6201, name: 'Stadium Loop – W2'),
+    'rn_sol_w3': const WalkNode(id: 'rn_sol_w3', x: 648, y: 606, approxLat: 10.0542, approxLng: 76.6199, name: 'Stadium Loop – W3'),
+    'rn_sol_w4': const WalkNode(id: 'rn_sol_w4', x: 638, y: 564, approxLat: 10.0546, approxLng: 76.6198, name: 'Stadium Loop – W4'),
+    'rn_sol_w5': const WalkNode(id: 'rn_sol_w5', x: 650, y: 476, approxLat: 10.0553, approxLng: 76.6199, name: 'Stadium Loop – W5'),
+    'rn_sol_w6': const WalkNode(id: 'rn_sol_w6', x: 674, y: 438, approxLat: 10.0556, approxLng: 76.6201, name: 'Stadium Loop – W6'),
+    'rn_sol_w7': const WalkNode(id: 'rn_sol_w7', x: 710, y: 406, approxLat: 10.0558, approxLng: 76.6204, name: 'Stadium Loop – W7'),
+    'rn_sol_nw': const WalkNode(id: 'rn_sol_nw', x: 754, y: 376, approxLat: 10.0560, approxLng: 76.6208, name: 'Stadium Loop – NW'),
+
+    // ── NORTH STADIUM CONNECTOR ───────────────────────────────────────────────
+    'rn_nsc_1': const WalkNode(id: 'rn_nsc_1', x: 940, y: 258, approxLat: 10.0567, approxLng: 76.6224, name: 'N Stadium Connector 1'),
+    'rn_nsc_2': const WalkNode(id: 'rn_nsc_2', x: 952, y: 336, approxLat: 10.0562, approxLng: 76.6225, name: 'N Stadium Connector 2'),
+    'rn_nsc_3': const WalkNode(id: 'rn_nsc_3', x: 882, y: 298, approxLat: 10.0565, approxLng: 76.6219, name: 'N Stadium Connector 3'),
+    'rn_nsc_4': const WalkNode(id: 'rn_nsc_4', x: 792, y: 288, approxLat: 10.0565, approxLng: 76.6211, name: 'N Stadium Connector 4'),
+    'rn_nsc_5': const WalkNode(id: 'rn_nsc_5', x: 722, y: 318, approxLat: 10.0563, approxLng: 76.6205, name: 'N Stadium Connector 5'),
+    'rn_nsc_6': const WalkNode(id: 'rn_nsc_6', x: 710, y: 370, approxLat: 10.0561, approxLng: 76.6204, name: 'N Stadium Connector 6'),
+
+    // ── MACE HOSTELS ROAD ─────────────────────────────────────────────────────
+    'rn_hr_1': const WalkNode(id: 'rn_hr_1', x: 952, y: 348, approxLat: 10.0562, approxLng: 76.6225, name: 'Hostels Rd 1'),
+    'rn_hr_2': const WalkNode(id: 'rn_hr_2', x: 980, y: 354, approxLat: 10.0562, approxLng: 76.6227, name: 'Hostels Rd 2'),
+    'rn_hr_3': const WalkNode(id: 'rn_hr_3', x: 982, y: 402, approxLat: 10.0558, approxLng: 76.6227, name: 'Hostels Rd 3'),
+    'rn_hr_4': const WalkNode(id: 'rn_hr_4', x: 978, y: 510, approxLat: 10.0551, approxLng: 76.6227, name: 'Hostels Rd 4 – N Spur'),
+    'rn_hr_5': const WalkNode(id: 'rn_hr_5', x: 966, y: 558, approxLat: 10.0547, approxLng: 76.6226, name: 'Hostels Rd 5'),
+    'rn_hr_6': const WalkNode(id: 'rn_hr_6', x: 950, y: 608, approxLat: 10.0543, approxLng: 76.6225, name: 'Hostels Rd 6 – S Spur'),
+    'rn_hr_7': const WalkNode(id: 'rn_hr_7', x: 930, y: 658, approxLat: 10.0539, approxLng: 76.6223, name: 'Hostels Rd 7'),
+    'rn_hr_8': const WalkNode(id: 'rn_hr_8', x: 916, y: 710, approxLat: 10.0535, approxLng: 76.6222, name: 'Hostels Rd 8 – South'),
+
+    // ── HOSTEL ACCESS SPURS ───────────────────────────────────────────────────
+    'node_mens_hostel': const WalkNode(id: 'node_mens_hostel', x: 1010, y: 520, approxLat: 10.0550, approxLng: 76.6231, name: 'Men\'s Hostel Gate'),
+    'rn_hs_s1': const WalkNode(id: 'rn_hs_s1', x: 984, y: 620, approxLat: 10.0542, approxLng: 76.6228, name: 'Hostel South Spur'),
+
+    // ── KEY BUILDING NODES (sit on nearest road) ──────────────────────────────
+    'node_statue':        const WalkNode(id: 'node_statue',        x: 490, y: 200, approxLat: 10.0572, approxLng: 76.6188, name: 'Founder Statue'),
+    'node_main_block':    const WalkNode(id: 'node_main_block',    x: 554, y: 310, approxLat: 10.0565, approxLng: 76.6193, name: 'Main Block Entrance'),
+    'node_canteen':       const WalkNode(id: 'node_canteen',       x: 386, y: 436, approxLat: 10.0557, approxLng: 76.6181, name: 'Canteen'),
+    'node_cricket':       const WalkNode(id: 'node_cricket',       x: 296, y: 156, approxLat: 10.0574, approxLng: 76.6170, name: 'Cricket Ground'),
+    'node_pool':          const WalkNode(id: 'node_pool',          x: 638, y: 520, approxLat: 10.0550, approxLng: 76.6198, name: 'Swimming Pool'),
+    'node_campus_road_mid': const WalkNode(id: 'node_campus_road_mid', x: 432, y: 352, approxLat: 10.0562, approxLng: 76.6183, name: 'Campus Road Mid'),
+    'node_hydraulic_lab': const WalkNode(id: 'node_hydraulic_lab', x: 536, y: 514, approxLat: 10.0551, approxLng: 76.6192, name: 'Hydraulic Lab'),
+    'node_heat_engines':  const WalkNode(id: 'node_heat_engines',  x: 476, y: 598, approxLat: 10.0544, approxLng: 76.6186, name: 'Heat Engines Lab'),
+    'node_ec_block':      const WalkNode(id: 'node_ec_block',      x: 490, y: 670, approxLat: 10.0538, approxLng: 76.6187, name: 'EC Block'),
+    'node_pg_block':      const WalkNode(id: 'node_pg_block',      x: 524, y: 692, approxLat: 10.0536, approxLng: 76.6190, name: 'PG Block'),
+    'node_stadium':       const WalkNode(id: 'node_stadium',       x: 810, y: 516, approxLat: 10.0551, approxLng: 76.6213, name: 'Stadium'),
+    'node_hostels_road':  const WalkNode(id: 'node_hostels_road',  x: 966, y: 558, approxLat: 10.0547, approxLng: 76.6226, name: 'Hostels Road Jn'),
+
     for (final spec in _referencePlaceSpecs)
       'node_ref_${spec.id}': WalkNode(
         id: 'node_ref_${spec.id}',
         x: spec.mapPosition.dx * 1000 / 1179,
         y: spec.mapPosition.dy * 1000 / 768,
-        approxLat: referencePlaces
-            .firstWhere((place) => place.id == spec.id)
-            .approxLat,
-        approxLng: referencePlaces
-            .firstWhere((place) => place.id == spec.id)
-            .approxLng,
+        approxLat: referencePlaces.firstWhere((p) => p.id == spec.id).approxLat,
+        approxLng: referencePlaces.firstWhere((p) => p.id == spec.id).approxLng,
         name: spec.name,
       ),
   };
 
   // ===========================================================================
-  // CAMPUS WALKWAY NETWORK EDGES (Connections & distances in meters)
+  // CAMPUS WALKWAY EDGES — connect ADJACENT nodes only (no cross-grass shortcuts)
   // ===========================================================================
   static final List<WalkEdge> campusWalkEdges = [
-    // Gate to Parking
-    const WalkEdge(
-      fromId: 'node_gate',
-      toId: 'node_parking',
-      distanceMeters: 60,
-      pathName: 'Main Entrance Drive',
-    ),
-    // Gate to Statue
-    const WalkEdge(
-      fromId: 'node_gate',
-      toId: 'node_statue',
-      distanceMeters: 75,
-      pathName: 'Founder Avenue',
-    ),
-    // Parking to Statue
-    const WalkEdge(
-      fromId: 'node_parking',
-      toId: 'node_statue',
-      distanceMeters: 50,
-      pathName: 'Parking Walkway',
-    ),
-    // Parking to Cricket Ground
-    const WalkEdge(
-      fromId: 'node_parking',
-      toId: 'node_cricket',
-      distanceMeters: 110,
-      pathName: 'Cricket Ground North Path',
-    ),
-    // Statue to Main Block
-    const WalkEdge(
-      fromId: 'node_statue',
-      toId: 'node_main_block',
-      distanceMeters: 45,
-      pathName: 'Main Block Portico Walk',
-    ),
-    // Statue to Mid Campus Road
-    const WalkEdge(
-      fromId: 'node_statue',
-      toId: 'node_campus_road_mid',
-      distanceMeters: 90,
-      pathName: 'MACE Campus Road',
-    ),
-    // Main Block to Swimming Pool
-    const WalkEdge(
-      fromId: 'node_main_block',
-      toId: 'node_pool',
-      distanceMeters: 80,
-      pathName: 'East Campus Avenue',
-    ),
-    // Mid Campus Road to Cricket Ground
-    const WalkEdge(
-      fromId: 'node_campus_road_mid',
-      toId: 'node_cricket',
-      distanceMeters: 65,
-      pathName: 'Cricket Perimeter Path',
-    ),
-    // Mid Campus Road to Canteen
-    const WalkEdge(
-      fromId: 'node_campus_road_mid',
-      toId: 'node_canteen',
-      distanceMeters: 75,
-      pathName: 'MACE Campus Road',
-    ),
-    // Swimming Pool to Hostels Road
-    const WalkEdge(
-      fromId: 'node_pool',
-      toId: 'node_hostels_road',
-      distanceMeters: 130,
-      pathName: 'East Perimeter Path',
-    ),
-    // Cricket Ground to Ladies Hostel
-    const WalkEdge(
-      fromId: 'node_cricket',
-      toId: 'node_ladies_hostel',
-      distanceMeters: 105,
-      pathName: 'Ladies Hostel Link Path',
-    ),
-    // Canteen to Ladies Hostel
-    const WalkEdge(
-      fromId: 'node_canteen',
-      toId: 'node_ladies_hostel',
-      distanceMeters: 120,
-      pathName: 'West Campus Walkway',
-    ),
-    // Canteen to Hydraulic Lab
-    const WalkEdge(
-      fromId: 'node_canteen',
-      toId: 'node_hydraulic_lab',
-      distanceMeters: 70,
-      pathName: 'MACE Campus Road',
-    ),
-    // Hydraulic Lab to Heat Engines Lab
-    const WalkEdge(
-      fromId: 'node_hydraulic_lab',
-      toId: 'node_heat_engines',
-      distanceMeters: 60,
-      pathName: 'Lab Complex Lane',
-    ),
-    // Hydraulic Lab to EC Block
-    const WalkEdge(
-      fromId: 'node_hydraulic_lab',
-      toId: 'node_ec_block',
-      distanceMeters: 90,
-      pathName: 'EC Connector Road',
-    ),
-    // Ladies Hostel to EC Block
-    const WalkEdge(
-      fromId: 'node_ladies_hostel',
-      toId: 'node_ec_block',
-      distanceMeters: 120,
-      pathName: 'South-West Walkway',
-    ),
-    // EC Block to Heat Engines Lab
-    const WalkEdge(
-      fromId: 'node_ec_block',
-      toId: 'node_heat_engines',
-      distanceMeters: 55,
-      pathName: 'Electronics-Mech Walkway',
-    ),
-    // Heat Engines to PG Block
-    const WalkEdge(
-      fromId: 'node_heat_engines',
-      toId: 'node_pg_block',
-      distanceMeters: 75,
-      pathName: 'South Campus Avenue',
-    ),
-    // EC Block to PG Block
-    const WalkEdge(
-      fromId: 'node_ec_block',
-      toId: 'node_pg_block',
-      distanceMeters: 110,
-      pathName: 'PG Link Walkway',
-    ),
-    // Hydraulic Lab to Stadium
-    const WalkEdge(
-      fromId: 'node_hydraulic_lab',
-      toId: 'node_stadium',
-      distanceMeters: 115,
-      pathName: 'Stadium West Entrance Road',
-    ),
-    // Heat Engines to Stadium
-    const WalkEdge(
-      fromId: 'node_heat_engines',
-      toId: 'node_stadium',
-      distanceMeters: 95,
-      pathName: 'Sports Complex Road',
-    ),
-    // Stadium to Hostels Road
-    const WalkEdge(
-      fromId: 'node_stadium',
-      toId: 'node_hostels_road',
-      distanceMeters: 90,
-      pathName: 'MACE Hostels Road',
-    ),
-    // Hostels Road to Men\'s Hostel
-    const WalkEdge(
-      fromId: 'node_hostels_road',
-      toId: 'node_mens_hostel',
-      distanceMeters: 65,
-      pathName: 'Men\'s Hostel Drive',
-    ),
+    // ── MAIN KOZHIPPILLY ROAD ─────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_main_r1', toId: 'rn_main_r2', distanceMeters: 115, pathName: 'Kozhippilly – College Junction Road'),
+    const WalkEdge(fromId: 'rn_main_r2', toId: 'rn_main_r3', distanceMeters: 120, pathName: 'Kozhippilly – College Junction Road'),
+    const WalkEdge(fromId: 'rn_main_r3', toId: 'rn_main_r4', distanceMeters: 110, pathName: 'Kozhippilly – College Junction Road'),
+    const WalkEdge(fromId: 'rn_main_r4', toId: 'rn_main_r5', distanceMeters: 130, pathName: 'Kozhippilly – College Junction Road'),
+    const WalkEdge(fromId: 'rn_main_r5', toId: 'rn_main_r6', distanceMeters: 105, pathName: 'Kozhippilly – College Junction Road'),
+    const WalkEdge(fromId: 'rn_main_r6', toId: 'rn_main_r7', distanceMeters: 115, pathName: 'Kozhippilly – College Junction Road'),
+
+    // ── MAIN GATE ACCESS ──────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'node_gate',  toId: 'rn_main_r3', distanceMeters: 5,  pathName: 'Main Entrance'),
+    const WalkEdge(fromId: 'node_gate',  toId: 'rn_gate_1',  distanceMeters: 35, pathName: 'Main Entrance Drive'),
+    const WalkEdge(fromId: 'rn_gate_1', toId: 'rn_gate_2',  distanceMeters: 60, pathName: 'Main Entrance Drive'),
+    const WalkEdge(fromId: 'rn_gate_2', toId: 'rn_cr_e',    distanceMeters: 25, pathName: 'Gate–Cricket Rd'),
+
+    // ── PARKING ───────────────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'node_parking', toId: 'node_gate', distanceMeters: 50, pathName: 'Parking Spur'),
+    const WalkEdge(fromId: 'node_parking', toId: 'rn_cr_nw',  distanceMeters: 90, pathName: 'Parking–Cricket Rd'),
+    const WalkEdge(fromId: 'node_parking', toId: 'node_statue', distanceMeters: 75, pathName: 'Parking–Statue Path'),
+
+    // ── CRICKET LOOP ROAD ─────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_cr_n',  toId: 'rn_cr_nw', distanceMeters: 55,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_nw', toId: 'rn_cr_w',  distanceMeters: 60,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_w',  toId: 'rn_cr_sw', distanceMeters: 70,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_sw', toId: 'rn_cr_s',  distanceMeters: 65,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_s',  toId: 'rn_cr_se', distanceMeters: 70,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_se', toId: 'rn_cr_e',  distanceMeters: 70,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_e',  toId: 'rn_cr_ne', distanceMeters: 60,  pathName: 'Cricket Loop Road'),
+    const WalkEdge(fromId: 'rn_cr_ne', toId: 'rn_cr_n',  distanceMeters: 70,  pathName: 'Cricket Loop Road'),
+    // Cricket ground node is at north entry
+    const WalkEdge(fromId: 'node_cricket', toId: 'rn_cr_n', distanceMeters: 5, pathName: 'Cricket Ground Entry'),
+
+    // ── WEST PERIMETER ROAD ───────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_cr_w',  toId: 'rn_wp_1', distanceMeters: 30, pathName: 'West Perimeter Road'),
+    const WalkEdge(fromId: 'rn_wp_1',  toId: 'rn_cr_nw', distanceMeters: 45, pathName: 'West Perimeter Road'),
+    const WalkEdge(fromId: 'rn_wp_1',  toId: 'rn_wp_2', distanceMeters: 55, pathName: 'West Perimeter Road'),
+    const WalkEdge(fromId: 'rn_wp_2',  toId: 'rn_wp_3', distanceMeters: 75, pathName: 'West Perimeter Road'),
+    const WalkEdge(fromId: 'rn_wp_3',  toId: 'rn_wp_4', distanceMeters: 55, pathName: 'West Perimeter Road'),
+
+    // ── LADIES HOSTEL ACCESS ──────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_wp_3',          toId: 'rn_lh_1',         distanceMeters: 40, pathName: 'Ladies Hostel Access'),
+    const WalkEdge(fromId: 'rn_lh_1',          toId: 'rn_lh_2',         distanceMeters: 45, pathName: 'Ladies Hostel Access'),
+    const WalkEdge(fromId: 'rn_lh_2',          toId: 'rn_lh_3',         distanceMeters: 45, pathName: 'Ladies Hostel Access'),
+    const WalkEdge(fromId: 'rn_lh_3',          toId: 'node_ladies_hostel', distanceMeters: 25, pathName: 'Ladies Hostel Gate'),
+
+    // ── INNER CAMPUS SPINE ────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_gate_2', toId: 'rn_sp_1', distanceMeters: 55, pathName: 'Inner Campus Road'),
+    const WalkEdge(fromId: 'rn_sp_1',   toId: 'rn_sp_2', distanceMeters: 65, pathName: 'Inner Campus Road'),
+    const WalkEdge(fromId: 'rn_sp_2',   toId: 'rn_sp_3', distanceMeters: 50, pathName: 'Inner Campus Road'),
+    const WalkEdge(fromId: 'rn_sp_3',   toId: 'rn_sp_4', distanceMeters: 60, pathName: 'Inner Campus Road'),
+    const WalkEdge(fromId: 'rn_sp_4',   toId: 'rn_sp_5', distanceMeters: 30, pathName: 'Inner Campus Road'),
+    // Cross-connect to campus_road_mid alias
+    const WalkEdge(fromId: 'node_campus_road_mid', toId: 'rn_sp_2', distanceMeters: 5, pathName: 'Campus Road'),
+    // Canteen is reached from spine junction
+    const WalkEdge(fromId: 'rn_sp_3',   toId: 'node_canteen',  distanceMeters: 50, pathName: 'Canteen Walkway'),
+    // Statue linkage (short cut across courtyard)
+    const WalkEdge(fromId: 'rn_sp_1',   toId: 'node_statue',   distanceMeters: 70, pathName: 'Statue Avenue'),
+    const WalkEdge(fromId: 'node_statue', toId: 'node_main_block', distanceMeters: 80, pathName: 'Main Block Avenue'),
+    // SW Rd junction at spine-5
+    const WalkEdge(fromId: 'rn_sp_5',   toId: 'node_ladies_hostel', distanceMeters: 140, pathName: 'West Walkway'),
+    const WalkEdge(fromId: 'rn_sp_5',   toId: 'rn_sw_1',       distanceMeters: 45, pathName: 'SW Campus Road'),
+
+    // ── LAB ACCESS ROAD ───────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_sp_5',   toId: 'rn_lab_1', distanceMeters: 52, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_1',  toId: 'rn_lab_2', distanceMeters: 55, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_2',  toId: 'rn_lab_3', distanceMeters: 60, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_3',  toId: 'rn_lab_4', distanceMeters: 25, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_4',  toId: 'rn_lab_5', distanceMeters: 50, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_5',  toId: 'rn_lab_6', distanceMeters: 45, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_6',  toId: 'rn_lab_7', distanceMeters: 50, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_7',  toId: 'rn_lab_8', distanceMeters: 55, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_8',  toId: 'rn_lab_9', distanceMeters: 45, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_9',  toId: 'rn_lab_10', distanceMeters: 35, pathName: 'Lab Access Road'),
+    const WalkEdge(fromId: 'rn_lab_10', toId: 'rn_sol_s4', distanceMeters: 10, pathName: 'Stadium Loop Jn'),
+    // SW road meets lab road at rn_lab_4
+    const WalkEdge(fromId: 'rn_sw_5',   toId: 'rn_lab_4', distanceMeters: 5, pathName: 'Road Junction'),
+
+    // Building nodes connect to nearest lab road node
+    const WalkEdge(fromId: 'node_hydraulic_lab', toId: 'rn_sp_5',  distanceMeters: 60, pathName: 'Hydraulic Lab Walkway'),
+    const WalkEdge(fromId: 'node_hydraulic_lab', toId: 'rn_lab_1', distanceMeters: 50, pathName: 'Hydraulic Lab Walkway'),
+    const WalkEdge(fromId: 'node_heat_engines',  toId: 'rn_lab_2', distanceMeters: 60, pathName: 'Heat Engines Walkway'),
+    const WalkEdge(fromId: 'node_heat_engines',  toId: 'rn_lab_3', distanceMeters: 55, pathName: 'Heat Engines Walkway'),
+    const WalkEdge(fromId: 'node_ec_block',      toId: 'rn_lab_4', distanceMeters: 40, pathName: 'EC Block Walkway'),
+    const WalkEdge(fromId: 'node_pg_block',      toId: 'rn_lab_4', distanceMeters: 55, pathName: 'PG Block Walkway'),
+    const WalkEdge(fromId: 'node_pg_block',      toId: 'rn_lab_5', distanceMeters: 50, pathName: 'PG Block Walkway'),
+    const WalkEdge(fromId: 'node_pool',          toId: 'rn_sol_w4', distanceMeters: 20, pathName: 'Pool–Stadium Rd'),
+
+    // ── SOUTH-WEST ROAD ───────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'node_ladies_hostel', toId: 'rn_sw_1', distanceMeters: 15, pathName: 'SW Campus Road'),
+    const WalkEdge(fromId: 'rn_sw_1', toId: 'rn_sw_2', distanceMeters: 70, pathName: 'SW Campus Road'),
+    const WalkEdge(fromId: 'rn_sw_2', toId: 'rn_sw_3', distanceMeters: 75, pathName: 'SW Campus Road'),
+    const WalkEdge(fromId: 'rn_sw_3', toId: 'rn_sw_4', distanceMeters: 65, pathName: 'SW Campus Road'),
+    const WalkEdge(fromId: 'rn_sw_4', toId: 'rn_sw_5', distanceMeters: 30, pathName: 'SW Campus Road'),
+
+    // ── STADIUM OUTER LOOP ────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_sol_n',  toId: 'rn_sol_ne', distanceMeters: 45, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_ne', toId: 'rn_sol_e1', distanceMeters: 50, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_e1', toId: 'rn_sol_e2', distanceMeters: 45, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_e2', toId: 'rn_sol_e3', distanceMeters: 50, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_e3', toId: 'rn_sol_e4', distanceMeters: 50, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_e4', toId: 'rn_sol_se', distanceMeters: 50, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_se', toId: 'rn_sol_s1', distanceMeters: 50, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_s1', toId: 'rn_sol_s2', distanceMeters: 52, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_s2', toId: 'rn_sol_sw', distanceMeters: 48, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_sw', toId: 'rn_sol_s3', distanceMeters: 45, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_s3', toId: 'rn_sol_s4', distanceMeters: 48, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_s4', toId: 'rn_sol_w1', distanceMeters: 30, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w1', toId: 'rn_sol_w2', distanceMeters: 38, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w2', toId: 'rn_sol_w3', distanceMeters: 40, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w3', toId: 'rn_sol_w4', distanceMeters: 45, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w4', toId: 'rn_sol_w5', distanceMeters: 95, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w5', toId: 'rn_sol_w6', distanceMeters: 40, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w6', toId: 'rn_sol_w7', distanceMeters: 40, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_w7', toId: 'rn_sol_nw', distanceMeters: 38, pathName: 'Stadium Loop Road'),
+    const WalkEdge(fromId: 'rn_sol_nw', toId: 'rn_sol_n',  distanceMeters: 42, pathName: 'Stadium Loop Road'),
+    // Stadium node is centre of loop
+    const WalkEdge(fromId: 'node_stadium', toId: 'rn_sol_w4', distanceMeters: 15, pathName: 'Stadium Entry'),
+    const WalkEdge(fromId: 'node_stadium', toId: 'rn_sol_w5', distanceMeters: 20, pathName: 'Stadium Entry'),
+
+    // ── NORTH STADIUM CONNECTOR ───────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_main_r6', toId: 'rn_nsc_1', distanceMeters: 20, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_1',   toId: 'rn_nsc_2', distanceMeters: 80, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_2',   toId: 'rn_hr_1',  distanceMeters: 10, pathName: 'Hostels Rd Junction'),
+    const WalkEdge(fromId: 'rn_nsc_2',   toId: 'rn_nsc_3', distanceMeters: 40, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_3',   toId: 'rn_nsc_4', distanceMeters: 65, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_4',   toId: 'rn_nsc_5', distanceMeters: 55, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_5',   toId: 'rn_nsc_6', distanceMeters: 45, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_nsc_6',   toId: 'rn_sol_w7', distanceMeters: 25, pathName: 'Stadium Entry Rd'),
+    const WalkEdge(fromId: 'rn_main_r5', toId: 'rn_nsc_4', distanceMeters: 40, pathName: 'N Stadium Connector'),
+    const WalkEdge(fromId: 'rn_sol_n',   toId: 'rn_nsc_4', distanceMeters: 45, pathName: 'N Stadium Connector'),
+
+    // ── MACE HOSTELS ROAD ─────────────────────────────────────────────────────
+    const WalkEdge(fromId: 'rn_hr_1', toId: 'rn_hr_2', distanceMeters: 20, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_2', toId: 'rn_hr_3', distanceMeters: 48, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_3', toId: 'rn_hr_4', distanceMeters: 108, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_4', toId: 'rn_hr_5', distanceMeters: 50, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_5', toId: 'rn_hr_6', distanceMeters: 50, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_6', toId: 'rn_hr_7', distanceMeters: 52, pathName: 'MACE Hostels Road'),
+    const WalkEdge(fromId: 'rn_hr_7', toId: 'rn_hr_8', distanceMeters: 55, pathName: 'MACE Hostels Road'),
+    // Hostels road shares nodes with stadium loop at e3/e4/se
+    const WalkEdge(fromId: 'rn_hr_4',  toId: 'rn_sol_e4', distanceMeters: 5,  pathName: 'Hostels–Stadium Jn'),
+    const WalkEdge(fromId: 'rn_hr_5',  toId: 'rn_sol_se', distanceMeters: 5,  pathName: 'Hostels–Stadium Jn'),
+    const WalkEdge(fromId: 'rn_hr_6',  toId: 'rn_sol_s1', distanceMeters: 5,  pathName: 'Hostels–Stadium Jn'),
+    // Hostels road aliases
+    const WalkEdge(fromId: 'node_hostels_road', toId: 'rn_hr_5', distanceMeters: 5, pathName: 'Hostels Road Jn'),
+    // Hostel spurs
+    const WalkEdge(fromId: 'rn_hr_4',        toId: 'node_mens_hostel', distanceMeters: 32, pathName: 'Hostel N Spur'),
+    const WalkEdge(fromId: 'rn_hr_6',        toId: 'rn_hs_s1',         distanceMeters: 30, pathName: 'Hostel S Spur'),
+    const WalkEdge(fromId: 'node_mens_hostel', toId: 'rn_hs_s1',       distanceMeters: 105, pathName: 'Hostels Internal'),
+
+    // ── MAIN BLOCK / STATUE SHORT CONNECTIONS ─────────────────────────────────
+    const WalkEdge(fromId: 'node_main_block', toId: 'rn_nsc_5', distanceMeters: 80, pathName: 'East Campus Ave'),
+    const WalkEdge(fromId: 'node_main_block', toId: 'rn_sp_1',  distanceMeters: 90, pathName: 'Main Block Ave'),
+    const WalkEdge(fromId: 'node_main_block', toId: 'rn_sp_3',  distanceMeters: 80, pathName: 'Main Block South'),
+
     for (final spec in _referencePlaceSpecs)
       WalkEdge(
         fromId: 'node_ref_${spec.id}',

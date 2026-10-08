@@ -4,6 +4,40 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_campus_navigator/data/campus_map_geometry.dart';
 
 void main() {
+  test('traced road branches meet at their shared junctions', () {
+    final roads = {for (final road in CampusMapGeometry.roads) road.id: road};
+
+    expect(
+      roads['main_gate_access_road']!.points,
+      contains(const Offset(410, 91)),
+    );
+    expect(
+      roads['parking_access_road']!.points,
+      contains(const Offset(410, 91)),
+    );
+    expect(
+      roads['main_gate_access_road']!.points,
+      contains(const Offset(411, 247)),
+    );
+    expect(
+      roads['cricket_loop_road']!.points,
+      contains(const Offset(411, 247)),
+    );
+    expect(roads['lab_access_road']!.points, contains(const Offset(748, 681)));
+    expect(
+      roads['stadium_outer_loop']!.points,
+      contains(const Offset(748, 681)),
+    );
+    expect(
+      roads['mace_hostels_road']!.points,
+      contains(const Offset(975, 481)),
+    );
+    expect(
+      roads['stadium_outer_loop']!.points,
+      contains(const Offset(975, 481)),
+    );
+  });
+
   test('campus roads do not cross either sports ground', () {
     final grounds = CampusMapGeometry.grounds.where(
       (ground) =>
