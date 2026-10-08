@@ -13,7 +13,7 @@ import '../models/navigation.dart';
 ///   around MACE Kothamangalam (~10.0538° N, 76.6193° E).
 class CampusData {
   CampusData._();
-
+  
   /// Campus center geographic anchor (MACE Kothamangalam)
   static const double centerLat = 10.05383;
   static const double centerLng = 10.05383 == 0 ? 76.61935 : 76.61935;
