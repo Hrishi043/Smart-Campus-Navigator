@@ -364,429 +364,473 @@ class CampusMapGeometry {
   // GROUNDS — elliptical areas (cricket, athletics track, OAT, north lawn)
   // ---------------------------------------------------------------------------
   static const List<CampusMapGround> grounds = [
+    // Cricket Ground — oval, left-center of campus
     CampusMapGround(
       id: 'cricket_ground',
       label: 'Cricket Ground',
-      center: Offset(308, 268),
-      width: 164,
-      height: 178,
+      center: Offset(278, 268),
+      width: 178,
+      height: 190,
       style: CampusGroundStyle.cricket,
     ),
+    // Open Air Theatre — semi-circular, center campus
     CampusMapGround(
       id: 'open_air_theatre',
       label: 'Open Air Theatre',
-      center: Offset(520, 432),
-      width: 72,
-      height: 66,
+      center: Offset(466, 418),
+      width: 74,
+      height: 62,
       style: CampusGroundStyle.theatre,
     ),
+    // Athletics / Sports Ground — large oval on right
     CampusMapGround(
       id: 'large_sports_ground',
       label: 'Sports Ground',
-      center: Offset(810, 516),
-      width: 228,
-      height: 272,
+      center: Offset(738, 492),
+      width: 240,
+      height: 256,
       style: CampusGroundStyle.athleticsTrack,
     ),
+    // North courtyard / lawn between Main Block wings
     CampusMapGround(
       id: 'north_lawn',
       label: '',
-      center: Offset(572, 200),
-      width: 168,
-      height: 86,
+      center: Offset(582, 210),
+      width: 120,
+      height: 74,
       style: CampusGroundStyle.lawn,
     ),
   ];
 
   // ---------------------------------------------------------------------------
-  // BUILDINGS — precise footprints traced from the reference image
+  // BUILDINGS — precise footprints traced from the reference aerial image
+  // Canvas: 1179 x 768.  Reference image displayed at ~1030 x 770.
   // ---------------------------------------------------------------------------
   static const List<CampusMapBuilding> buildings = [
-    // ── MAIN ACADEMIC BLOCK (MA College of Engineering) ──
-    // West wing
+
+    // MAIN ACADEMIC BLOCK — large H-shaped complex, center of campus
     CampusMapBuilding(
-      id: 'main_block_west_wing',
-      placeId: 'main_block',
-      height: 20,
-      footprint: [
-        Offset(444, 268),
-        Offset(476, 248),
-        Offset(528, 268),
-        Offset(520, 290),
-        Offset(488, 308),
-        Offset(462, 296),
-      ],
-    ),
-    // Central wing (taller)
-    CampusMapBuilding(
-      id: 'main_block_central_wing',
+      id: 'main_block_west',
       placeId: 'main_block',
       height: 22,
       footprint: [
-        Offset(496, 292),
-        Offset(532, 270),
-        Offset(582, 290),
-        Offset(574, 318),
-        Offset(546, 336),
-        Offset(512, 322),
+        Offset(448, 242),
+        Offset(500, 220),
+        Offset(544, 238),
+        Offset(536, 270),
+        Offset(490, 288),
+        Offset(452, 270),
       ],
     ),
-    // East wing
     CampusMapBuilding(
-      id: 'main_block_east_wing',
+      id: 'main_block_central',
       placeId: 'main_block',
-      height: 20,
+      height: 26,
       footprint: [
-        Offset(568, 316),
-        Offset(596, 292),
-        Offset(642, 308),
-        Offset(658, 336),
-        Offset(630, 356),
-        Offset(596, 346),
+        Offset(494, 268),
+        Offset(550, 244),
+        Offset(598, 264),
+        Offset(592, 304),
+        Offset(546, 322),
+        Offset(504, 304),
       ],
     ),
-    // South connector
+    CampusMapBuilding(
+      id: 'main_block_east',
+      placeId: 'main_block',
+      height: 22,
+      footprint: [
+        Offset(582, 300),
+        Offset(624, 278),
+        Offset(672, 296),
+        Offset(678, 330),
+        Offset(640, 350),
+        Offset(598, 334),
+      ],
+    ),
     CampusMapBuilding(
       id: 'main_block_south',
       placeId: 'main_block',
       height: 18,
       footprint: [
-        Offset(524, 336),
-        Offset(560, 322),
-        Offset(608, 342),
-        Offset(600, 370),
-        Offset(566, 384),
-        Offset(530, 370),
+        Offset(516, 318),
+        Offset(562, 302),
+        Offset(598, 318),
+        Offset(592, 350),
+        Offset(552, 366),
+        Offset(520, 350),
       ],
     ),
 
-    // ── NORTH EAST BUILDINGS (top right area near school) ──
+    // SEMINAR HALL — right of Main Block
     CampusMapBuilding(
-      id: 'ne_building_west',
-      height: 16,
+      id: 'seminar_hall',
+      placeId: 'seminar_hall',
+      height: 18,
       footprint: [
-        Offset(752, 14),
-        Offset(790, 8),
-        Offset(796, 118),
-        Offset(762, 124),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'ne_building_east',
-      height: 16,
-      footprint: [
-        Offset(872, 56),
-        Offset(912, 62),
-        Offset(910, 208),
-        Offset(880, 214),
+        Offset(668, 286),
+        Offset(718, 266),
+        Offset(754, 282),
+        Offset(748, 316),
+        Offset(704, 332),
+        Offset(670, 318),
       ],
     ),
 
-    // ── SMALL BUILDINGS AROUND MAIN BLOCK ──
+    // LIBRARY — east of Seminar Hall
     CampusMapBuilding(
-      id: 'campus_building_01',
-      height: 13,
+      id: 'library',
+      placeId: 'library',
+      height: 18,
       footprint: [
-        Offset(456, 338),
-        Offset(486, 320),
-        Offset(516, 334),
-        Offset(508, 356),
-        Offset(476, 366),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_02',
-      height: 13,
-      footprint: [
-        Offset(626, 258),
-        Offset(652, 242),
-        Offset(682, 256),
-        Offset(672, 280),
-        Offset(644, 286),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_03',
-      height: 13,
-      footprint: [
-        Offset(688, 304),
-        Offset(712, 284),
-        Offset(744, 300),
-        Offset(736, 326),
-        Offset(710, 332),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_04',
-      height: 13,
-      footprint: [
-        Offset(656, 350),
-        Offset(682, 334),
-        Offset(710, 348),
-        Offset(702, 372),
-        Offset(674, 378),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_05',
-      height: 12,
-      footprint: [
-        Offset(572, 412),
-        Offset(602, 396),
-        Offset(630, 412),
-        Offset(620, 436),
-        Offset(588, 442),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_06',
-      height: 12,
-      footprint: [
-        Offset(604, 446),
-        Offset(632, 430),
-        Offset(658, 444),
-        Offset(650, 470),
-        Offset(622, 476),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'campus_building_07',
-      height: 12,
-      footprint: [
-        Offset(540, 456),
-        Offset(568, 442),
-        Offset(594, 456),
-        Offset(586, 480),
-        Offset(558, 486),
+        Offset(754, 272),
+        Offset(806, 254),
+        Offset(836, 268),
+        Offset(832, 302),
+        Offset(790, 316),
+        Offset(758, 304),
       ],
     ),
 
-    // ── LADIES HOSTEL ──
+    // NORTH-EAST large buildings (top-right, near school boundary)
     CampusMapBuilding(
-      id: 'ladies_hostel',
+      id: 'ne_block_west',
+      height: 18,
+      footprint: [
+        Offset(812, 16),
+        Offset(850, 6),
+        Offset(858, 136),
+        Offset(820, 144),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'ne_block_east',
+      height: 18,
+      footprint: [
+        Offset(920, 52),
+        Offset(958, 58),
+        Offset(960, 194),
+        Offset(924, 200),
+      ],
+    ),
+
+    // UNNAMED CAMPUS BLOCKS around main block / inner spine
+    CampusMapBuilding(
+      id: 'campus_bldg_01',
+      height: 14,
+      footprint: [
+        Offset(460, 346),
+        Offset(500, 330),
+        Offset(526, 344),
+        Offset(520, 368),
+        Offset(484, 380),
+        Offset(462, 368),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'campus_bldg_02',
+      height: 14,
+      footprint: [
+        Offset(644, 244),
+        Offset(678, 232),
+        Offset(706, 244),
+        Offset(698, 270),
+        Offset(668, 278),
+        Offset(646, 266),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'campus_bldg_03',
+      height: 14,
+      footprint: [
+        Offset(714, 282),
+        Offset(750, 268),
+        Offset(774, 280),
+        Offset(768, 306),
+        Offset(736, 318),
+        Offset(716, 308),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'campus_bldg_04',
+      height: 12,
+      footprint: [
+        Offset(576, 390),
+        Offset(614, 376),
+        Offset(638, 388),
+        Offset(632, 412),
+        Offset(598, 422),
+        Offset(578, 412),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'campus_bldg_05',
+      height: 12,
+      footprint: [
+        Offset(538, 448),
+        Offset(574, 436),
+        Offset(600, 448),
+        Offset(594, 472),
+        Offset(560, 480),
+        Offset(540, 470),
+      ],
+    ),
+    CampusMapBuilding(
+      id: 'campus_bldg_06',
+      height: 12,
+      footprint: [
+        Offset(608, 432),
+        Offset(642, 420),
+        Offset(664, 432),
+        Offset(658, 456),
+        Offset(626, 466),
+        Offset(610, 454),
+      ],
+    ),
+
+    // LADIES HOSTEL — far-left complex
+    CampusMapBuilding(
+      id: 'ladies_hostel_a',
       placeId: 'ladies_hostel',
       height: 18,
       hostel: true,
       footprint: [
-        Offset(114, 446),
-        Offset(160, 422),
-        Offset(232, 444),
-        Offset(252, 470),
-        Offset(224, 492),
-        Offset(158, 478),
+        Offset(98,  416),
+        Offset(152, 392),
+        Offset(218, 412),
+        Offset(226, 440),
+        Offset(194, 460),
+        Offset(130, 446),
       ],
     ),
     CampusMapBuilding(
-      id: 'ladies_hostel_annex',
-      height: 12,
+      id: 'ladies_hostel_b',
+      height: 14,
       hostel: true,
       footprint: [
-        Offset(176, 490),
-        Offset(218, 484),
-        Offset(270, 504),
-        Offset(262, 528),
-        Offset(218, 524),
+        Offset(136, 454),
+        Offset(192, 444),
+        Offset(244, 462),
+        Offset(238, 490),
+        Offset(188, 502),
+        Offset(138, 484),
       ],
     ),
 
-    // ── CANTEEN ──
+    // CANTEEN — left of Open Air Theatre
     CampusMapBuilding(
       id: 'canteen',
       placeId: 'canteen',
-      height: 13,
+      height: 14,
       footprint: [
-        Offset(352, 424),
-        Offset(386, 406),
-        Offset(426, 422),
-        Offset(418, 452),
-        Offset(380, 464),
-        Offset(348, 448),
+        Offset(326, 398),
+        Offset(368, 380),
+        Offset(412, 396),
+        Offset(406, 428),
+        Offset(366, 444),
+        Offset(328, 428),
       ],
     ),
 
-    // ── HYDRAULIC MACHINES LAB ──
+    // HYDRAULIC MACHINES LAB — below Open Air Theatre
     CampusMapBuilding(
       id: 'hydraulic_lab',
       placeId: 'hydraulic_lab',
-      height: 17,
+      height: 18,
       footprint: [
-        Offset(492, 498),
-        Offset(534, 480),
-        Offset(582, 496),
-        Offset(574, 530),
-        Offset(536, 548),
-        Offset(498, 532),
+        Offset(470, 468),
+        Offset(518, 448),
+        Offset(566, 466),
+        Offset(558, 502),
+        Offset(514, 520),
+        Offset(472, 502),
       ],
     ),
 
-    // ── HEAT ENGINES LAB ──
+    // HEAT ENGINES LAB — below Hydraulic Lab
     CampusMapBuilding(
       id: 'heat_engines_lab',
       placeId: 'heat_engines_lab',
-      height: 17,
+      height: 18,
       footprint: [
-        Offset(430, 578),
-        Offset(470, 556),
-        Offset(530, 578),
-        Offset(520, 618),
-        Offset(476, 636),
-        Offset(436, 616),
+        Offset(432, 546),
+        Offset(476, 526),
+        Offset(530, 546),
+        Offset(522, 580),
+        Offset(476, 598),
+        Offset(434, 580),
       ],
     ),
 
-    // ── PG BLOCK ──
+    // PG BLOCK — bottom center
     CampusMapBuilding(
       id: 'pg_block',
       placeId: 'pg_block',
-      height: 17,
+      height: 18,
       footprint: [
-        Offset(484, 672),
-        Offset(514, 652),
-        Offset(556, 668),
-        Offset(564, 696),
-        Offset(532, 718),
-        Offset(492, 706),
+        Offset(400, 636),
+        Offset(440, 616),
+        Offset(498, 636),
+        Offset(494, 668),
+        Offset(456, 688),
+        Offset(404, 670),
       ],
     ),
 
-    // ── MEN'S HOSTELS (right side) ──
+    // MEN'S HOSTELS — right-side cluster
     CampusMapBuilding(
-      id: 'hostel_west',
+      id: 'hostel_block_a',
       placeId: 'mens_hostel',
-      height: 17,
+      height: 18,
       hostel: true,
       footprint: [
-        Offset(1002, 494),
-        Offset(1038, 480),
-        Offset(1054, 562),
-        Offset(1022, 580),
+        Offset(988, 464),
+        Offset(1026, 456),
+        Offset(1044, 528),
+        Offset(1010, 540),
       ],
     ),
     CampusMapBuilding(
-      id: 'hostel_central',
-      height: 17,
+      id: 'hostel_block_b',
+      height: 16,
       hostel: true,
       footprint: [
-        Offset(1062, 508),
-        Offset(1104, 514),
-        Offset(1092, 578),
-        Offset(1052, 572),
+        Offset(1044, 482),
+        Offset(1082, 488),
+        Offset(1076, 558),
+        Offset(1040, 552),
       ],
     ),
     CampusMapBuilding(
-      id: 'hostel_east',
+      id: 'hostel_block_c',
       height: 14,
       hostel: true,
       footprint: [
-        Offset(1114, 548),
-        Offset(1154, 554),
-        Offset(1170, 580),
-        Offset(1124, 590),
+        Offset(1062, 542),
+        Offset(1104, 548),
+        Offset(1098, 604),
+        Offset(1058, 598),
       ],
     ),
     CampusMapBuilding(
-      id: 'hostel_south',
+      id: 'hostel_block_south',
       height: 14,
       hostel: true,
       footprint: [
-        Offset(1000, 618),
-        Offset(1038, 606),
-        Offset(1064, 630),
-        Offset(1052, 668),
-        Offset(1012, 658),
-      ],
-    ),
-    CampusMapBuilding(
-      id: 'hostel_south_east',
-      height: 14,
-      hostel: true,
-      footprint: [
-        Offset(1082, 614),
-        Offset(1114, 606),
-        Offset(1142, 626),
-        Offset(1126, 658),
-        Offset(1090, 650),
+        Offset(978, 572),
+        Offset(1018, 560),
+        Offset(1044, 580),
+        Offset(1034, 624),
+        Offset(992, 618),
       ],
     ),
   ];
 
   // ---------------------------------------------------------------------------
-  // LABELS — positioned to match the reference image exactly
+  // LABELS — positions matched precisely to reference image
   // ---------------------------------------------------------------------------
   static const List<CampusMapLabel> labels = [
+    // Road labels
     CampusMapLabel(
-      id: 'road_kozhippilly',
+      id: 'road_kozhippilly_west',
       text: 'Kozhippilly – College Junction Road',
-      position: Offset(546, 160),
-      rotation: 0.33,
+      position: Offset(464, 112),
+      rotation: 0.30,
     ),
     CampusMapLabel(
       id: 'road_kozhippilly_east',
       text: 'Kozhippilly – College Junction Road',
-      position: Offset(1006, 222),
-      rotation: -0.15,
+      position: Offset(984, 208),
+      rotation: -0.14,
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'road_hostels',
+      id: 'road_mace_hostels',
       text: 'MACE Hostels Road',
-      position: Offset(962, 544),
-      rotation: -1.34,
+      position: Offset(940, 500),
+      rotation: -1.35,
+    ),
+
+    // Campus landmark labels
+    CampusMapLabel(
+      id: 'lbl_parking_lot',
+      text: 'Parking Lot',
+      position: Offset(330, 148),
+      keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'cricket_ground',
+      id: 'lbl_main_gate',
+      text: 'Main Gate',
+      position: Offset(432, 188),
+      keyLabel: false,
+    ),
+    CampusMapLabel(
+      id: 'lbl_cricket_ground',
       text: 'Cricket\nGround',
-      position: Offset(308, 268),
+      position: Offset(278, 264),
     ),
     CampusMapLabel(
-      id: 'main_block',
-      text: 'MA College\nof Engineering',
-      position: Offset(554, 310),
+      id: 'lbl_main_block',
+      text: 'Main Block',
+      position: Offset(534, 268),
     ),
     CampusMapLabel(
-      id: 'ladies_hostel',
+      id: 'lbl_seminar_hall',
+      text: 'Seminar Hall',
+      position: Offset(694, 296),
+      keyLabel: false,
+    ),
+    CampusMapLabel(
+      id: 'lbl_library',
+      text: 'Library',
+      position: Offset(782, 284),
+      keyLabel: false,
+    ),
+    CampusMapLabel(
+      id: 'lbl_ladies_hostel',
       text: 'Ladies Hostel',
-      position: Offset(184, 458),
+      position: Offset(172, 418),
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'canteen',
+      id: 'lbl_canteen',
       text: 'Canteen',
-      position: Offset(386, 436),
+      position: Offset(336, 380),
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'open_air_theatre',
+      id: 'lbl_open_air_theatre',
       text: 'Open Air\nTheatre',
-      position: Offset(520, 432),
+      position: Offset(432, 402),
     ),
     CampusMapLabel(
-      id: 'hydraulic_lab',
+      id: 'lbl_parking_lot_east',
+      text: 'Parking Lot',
+      position: Offset(596, 440),
+      keyLabel: false,
+    ),
+    CampusMapLabel(
+      id: 'lbl_hydraulic_lab',
       text: 'Hydraulic\nMachines Lab',
-      position: Offset(540, 514),
+      position: Offset(490, 454),
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'heat_engines_lab',
+      id: 'lbl_heat_engines_lab',
       text: 'Heat Engines Lab',
-      position: Offset(480, 598),
+      position: Offset(462, 526),
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'pg_block',
+      id: 'lbl_pg_block',
       text: 'PG Block',
-      position: Offset(524, 692),
+      position: Offset(440, 622),
       keyLabel: false,
     ),
     CampusMapLabel(
-      id: 'sports_ground',
-      text: 'Sports Ground',
-      position: Offset(810, 516),
-    ),
-    CampusMapLabel(
-      id: 'hostels',
+      id: 'lbl_hostels',
       text: 'Hostels',
-      position: Offset(1094, 596),
+      position: Offset(1010, 492),
       keyLabel: false,
     ),
   ];
