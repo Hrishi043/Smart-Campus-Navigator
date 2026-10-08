@@ -1,8 +1,11 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../data/campus_data.dart';
+import '../data/campus_map_geometry.dart';
 import '../models/navigation.dart';
 import '../models/place.dart';
 
@@ -36,22 +39,21 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
     placeId: 'main_gate',
   ),
   _CollegeMapFeature(
-    center: Offset(648, 328),
-    width: 76,
-    length: 56,
-    rotationDeg: 22,
-    label: 'Ma College of Engineering\nMain Block',
+    center: Offset(555, 316),
+    width: 140,
+    length: 118,
+    label: 'MA College of Engineering',
     placeId: 'main_block',
   ),
   _CollegeMapFeature(
-    center: Offset(601, 285),
+    center: Offset(555, 290),
     width: 13,
     length: 13,
     label: 'Statue',
     placeId: 'statue',
   ),
   _CollegeMapFeature(
-    center: Offset(574, 625),
+    center: Offset(565, 664),
     width: 92,
     length: 48,
     rotationDeg: 25,
@@ -59,50 +61,50 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
     placeId: 'ec_block',
   ),
   _CollegeMapFeature(
-    center: Offset(535, 380),
-    width: 42,
-    length: 27,
+    center: Offset(540, 516),
+    width: 88,
+    length: 69,
     rotationDeg: 25,
-    label: 'Mechanical\nMeasurements Lab',
+    label: 'Hydraulic Machines Lab',
     placeId: 'hydraulic_lab',
   ),
   _CollegeMapFeature(
-    center: Offset(707, 510),
-    width: 62,
-    length: 35,
+    center: Offset(481, 599),
+    width: 97,
+    length: 79,
     rotationDeg: 24,
-    label: 'Mechanical Labs',
+    label: 'Heat Engines Lab',
     placeId: 'heat_engines_lab',
   ),
   _CollegeMapFeature(
-    center: Offset(537, 552),
-    width: 46,
-    length: 27,
+    center: Offset(523, 692),
+    width: 78,
+    length: 67,
     rotationDeg: 24,
-    label: 'Electrical Lab',
+    label: 'PG Block',
     placeId: 'pg_block',
   ),
   _CollegeMapFeature(
-    center: Offset(391, 471),
-    width: 52,
-    length: 33,
+    center: Offset(184, 458),
+    width: 135,
+    length: 78,
     rotationDeg: 25,
-    label: 'Ladies Hostel\nMar Athanasius College of Engineering',
+    label: 'Ladies Hostel',
     placeId: 'ladies_hostel',
   ),
   _CollegeMapFeature(
-    center: Offset(1094, 476),
+    center: Offset(1028, 535),
     width: 48,
     length: 34,
     label: 'HSII Hostel',
     placeId: 'mens_hostel',
   ),
   _CollegeMapFeature(
-    center: Offset(543, 466),
-    width: 42,
-    length: 29,
+    center: Offset(386, 437),
+    width: 76,
+    length: 58,
     rotationDeg: 24,
-    label: 'Ootupura Canteen',
+    label: 'Canteen',
     placeId: 'canteen',
   ),
   _CollegeMapFeature(
@@ -140,22 +142,20 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
     placeId: 'botanical_garden',
   ),
   _CollegeMapFeature(
-    center: Offset(766, 277),
-    width: 96,
-    length: 48,
-    rotationDeg: 20,
-    label: 'Mace 4’s\nFootball Ground',
+    center: Offset(296, 267),
+    width: 154,
+    length: 170,
+    label: 'Cricket Ground',
     isGround: true,
     placeId: 'cricket_ground',
   ),
   _CollegeMapFeature(
-    center: Offset(885, 333),
-    width: 56,
-    length: 34,
-    rotationDeg: -18,
-    label: 'Swimming Pool\nMa College',
+    center: Offset(807, 520),
+    width: 222,
+    length: 265,
+    label: 'Sports Ground',
     isGround: true,
-    placeId: 'swimming_pool',
+    placeId: 'stadium',
   ),
   _CollegeMapFeature(
     center: Offset(579, 389),
@@ -182,7 +182,7 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
     placeId: 'placement_cell',
   ),
   _CollegeMapFeature(
-    center: Offset(633, 436),
+    center: Offset(521, 432),
     width: 55,
     length: 36,
     rotationDeg: 20,
@@ -215,19 +215,12 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
     placeId: 'material_testing_lab',
   ),
   _CollegeMapFeature(
-    center: Offset(856, 555),
-    width: 205,
-    length: 242,
-    label: 'MH Ground',
+    center: Offset(885, 333),
+    width: 52,
+    length: 34,
+    label: 'Swimming Pool',
     isGround: true,
-    placeId: 'stadium',
-  ),
-  _CollegeMapFeature(
-    center: Offset(856, 588),
-    width: 185,
-    length: 205,
-    label: 'MAR Athanasius\nCollege Ground',
-    isGround: true,
+    placeId: 'swimming_pool',
   ),
   _CollegeMapFeature(
     center: Offset(982, 570),
@@ -302,172 +295,23 @@ const _collegeMapFeatures = <_CollegeMapFeature>[
   ),
 ];
 
-const _unlabeledCollegeBuildings = <_CollegeMapFeature>[
-  _CollegeMapFeature(
-    center: Offset(130, 115),
-    width: 30,
-    length: 18,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(216, 142),
-    width: 38,
-    length: 20,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(300, 172),
-    width: 29,
-    length: 18,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(380, 190),
-    width: 43,
-    length: 20,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(463, 230),
-    width: 34,
-    length: 22,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(126, 300),
-    width: 36,
-    length: 22,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(188, 340),
-    width: 43,
-    length: 28,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(260, 370),
-    width: 55,
-    length: 31,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(344, 330),
-    width: 42,
-    length: 29,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(410, 390),
-    width: 45,
-    length: 28,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(149, 424),
-    width: 40,
-    length: 27,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(232, 462),
-    width: 48,
-    length: 31,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(312, 425),
-    width: 36,
-    length: 23,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(368, 505),
-    width: 42,
-    length: 25,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(136, 550),
-    width: 42,
-    length: 26,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(220, 583),
-    width: 36,
-    length: 23,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(282, 557),
-    width: 39,
-    length: 25,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(348, 599),
-    width: 48,
-    length: 29,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(414, 645),
-    width: 39,
-    length: 25,
-    label: '',
-  ),
-  _CollegeMapFeature(center: Offset(502, 80), width: 46, length: 23, label: ''),
-  _CollegeMapFeature(center: Offset(550, 44), width: 58, length: 27, label: ''),
-  _CollegeMapFeature(
-    center: Offset(833, 82),
-    width: 34,
-    length: 122,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(906, 116),
-    width: 37,
-    length: 125,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(1090, 505),
-    width: 42,
-    length: 30,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(1060, 596),
-    width: 37,
-    length: 29,
-    label: '',
-  ),
-  _CollegeMapFeature(
-    center: Offset(1032, 670),
-    width: 43,
-    length: 28,
-    label: '',
-  ),
-];
-
 final _collegeMapNodePositions = <String, Offset>{
   'node_gate': Offset(82, 134),
-  'node_parking': Offset(517, 164),
-  'node_statue': Offset(601, 285),
-  'node_main_block': Offset(648, 328),
+  'node_parking': Offset(414, 218),
+  'node_statue': Offset(555, 290),
+  'node_main_block': Offset(555, 316),
   'node_pool': Offset(885, 333),
-  'node_campus_road_mid': Offset(567, 399),
-  'node_cricket': Offset(766, 277),
-  'node_canteen': Offset(543, 466),
-  'node_ladies_hostel': Offset(391, 471),
-  'node_hydraulic_lab': Offset(535, 380),
-  'node_heat_engines': Offset(707, 510),
-  'node_ec_block': Offset(574, 625),
-  'node_pg_block': Offset(537, 552),
-  'node_stadium': Offset(827, 554),
-  'node_hostels_road': Offset(984, 520),
-  'node_mens_hostel': Offset(1094, 476),
+  'node_campus_road_mid': Offset(460, 385),
+  'node_cricket': Offset(411, 267),
+  'node_canteen': Offset(418, 440),
+  'node_ladies_hostel': Offset(244, 480),
+  'node_hydraulic_lab': Offset(582, 515),
+  'node_heat_engines': Offset(530, 600),
+  'node_ec_block': Offset(570, 670),
+  'node_pg_block': Offset(558, 707),
+  'node_stadium': Offset(653, 520),
+  'node_hostels_road': Offset(977, 481),
+  'node_mens_hostel': Offset(998, 491),
   for (final place in CampusData.referencePlaces)
     place.walkwayNodeId: Offset(place.campusX * 1.179, place.campusY * 0.768),
 };
@@ -509,6 +353,9 @@ class Campus3DMap extends StatefulWidget {
 
 class Campus3DMapState extends State<Campus3DMap>
     with TickerProviderStateMixin {
+  ui.Image? _campusArtwork;
+  Object? _campusArtworkError;
+
   // Camera state
   double _camX = 589.5;
   double _camY = 384.0;
@@ -536,6 +383,7 @@ class Campus3DMapState extends State<Campus3DMap>
   @override
   void initState() {
     super.initState();
+    _loadCampusArtwork();
     _animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 650),
@@ -554,6 +402,29 @@ class Campus3DMapState extends State<Campus3DMap>
       vsync: this,
       duration: const Duration(milliseconds: 1400),
     )..repeat(reverse: true);
+  }
+
+  Future<void> _loadCampusArtwork() async {
+    ui.Codec? codec;
+    try {
+      final asset = await rootBundle.load('assets/images/soul map.png');
+      codec = await ui.instantiateImageCodec(asset.buffer.asUint8List());
+      final frame = await codec.getNextFrame();
+      if (!mounted) {
+        frame.image.dispose();
+        return;
+      }
+      setState(() {
+        _campusArtwork = frame.image;
+      });
+    } catch (error) {
+      if (!mounted) return;
+      setState(() {
+        _campusArtworkError = error;
+      });
+    } finally {
+      codec?.dispose();
+    }
   }
 
   @override
@@ -590,6 +461,7 @@ class Campus3DMapState extends State<Campus3DMap>
   void dispose() {
     _animController.dispose();
     _pulseController.dispose();
+    _campusArtwork?.dispose();
     super.dispose();
   }
 
@@ -869,21 +741,45 @@ class Campus3DMapState extends State<Campus3DMap>
           child: AnimatedBuilder(
             animation: _pulseController,
             builder: (context, _) {
-              return CustomPaint(
-                size: size,
-                painter: _Campus3DMapPainter(
-                  places: widget.places,
-                  selectedPlace: widget.selectedPlace,
-                  activeRoute: widget.activeRoute,
-                  userLocationOffset: widget.userLocationOffset,
-                  styleMode: widget.styleMode,
-                  camX: _camX,
-                  camY: _camY,
-                  zoom: _zoom,
-                  rotation: _rotation,
-                  tilt: _tilt,
-                  pulseValue: _pulseController.value,
-                ),
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  CustomPaint(
+                    size: size,
+                    painter: _Campus3DMapPainter(
+                      places: widget.places,
+                      selectedPlace: widget.selectedPlace,
+                      activeRoute: widget.activeRoute,
+                      userLocationOffset: widget.userLocationOffset,
+                      styleMode: widget.styleMode,
+                      camX: _camX,
+                      camY: _camY,
+                      zoom: _zoom,
+                      rotation: _rotation,
+                      tilt: _tilt,
+                      pulseValue: _pulseController.value,
+                      campusArtwork: _campusArtwork,
+                    ),
+                  ),
+                  if (_campusArtworkError != null)
+                    Positioned(
+                      left: 16,
+                      right: 16,
+                      bottom: 16,
+                      child: Material(
+                        color: Colors.red.shade800,
+                        borderRadius: BorderRadius.circular(8),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            'Campus artwork could not be loaded: '
+                            '$_campusArtworkError',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
               );
             },
           ),
@@ -906,6 +802,7 @@ class _Campus3DMapPainter extends CustomPainter {
   final double rotation;
   final double tilt;
   final double pulseValue;
+  final ui.Image? campusArtwork;
 
   _Campus3DMapPainter({
     required this.places,
@@ -919,6 +816,7 @@ class _Campus3DMapPainter extends CustomPainter {
     required this.rotation,
     required this.tilt,
     required this.pulseValue,
+    required this.campusArtwork,
   });
 
   /// Project a 3D campus point (x, y, z) into 2D screen coordinates
@@ -987,6 +885,29 @@ class _Campus3DMapPainter extends CustomPainter {
   }
 
   void _drawCollegeMap(Canvas canvas, Size size) {
+    final artwork = campusArtwork;
+    if (artwork != null) {
+      canvas
+        ..save()
+        ..translate(size.width / 2, size.height / 2)
+        ..scale(zoom, zoom * math.cos(tilt))
+        ..rotate(rotation)
+        ..translate(-camX, -camY)
+        ..drawImageRect(
+          artwork,
+          Rect.fromLTWH(
+            0,
+            0,
+            artwork.width.toDouble(),
+            artwork.height.toDouble(),
+          ),
+          const Rect.fromLTWH(0, 0, 1179, 768),
+          Paint()..filterQuality = FilterQuality.high,
+        )
+        ..restore();
+      return;
+    }
+
     canvas.drawColor(const Color(0xFF9BC66B), BlendMode.src);
     _drawCollegeGreenspace(canvas, size);
     _drawCollegeGrounds(canvas, size);
@@ -1011,9 +932,33 @@ class _Campus3DMapPainter extends CustomPainter {
 
   Path _smoothMapPath(List<Offset> points, Size size, {double z = 0}) {
     if (points.length < 3) return _mapPath(points, size);
-    final projected = points
+    final closes =
+        points.length > 3 && (points.first - points.last).distance < 0.01;
+    final projected = (closes ? points.sublist(0, points.length - 1) : points)
         .map((point) => _project(point.dx, point.dy, z, size))
         .toList(growable: false);
+    if (closes) {
+      final firstMidpoint = Offset(
+        (projected.last.dx + projected.first.dx) / 2,
+        (projected.last.dy + projected.first.dy) / 2,
+      );
+      final path = Path()..moveTo(firstMidpoint.dx, firstMidpoint.dy);
+      for (var i = 0; i < projected.length; i++) {
+        final current = projected[i];
+        final next = projected[(i + 1) % projected.length];
+        final midpoint = Offset(
+          (current.dx + next.dx) / 2,
+          (current.dy + next.dy) / 2,
+        );
+        path.quadraticBezierTo(
+          current.dx,
+          current.dy,
+          midpoint.dx,
+          midpoint.dy,
+        );
+      }
+      return path..close();
+    }
     final path = Path()..moveTo(projected.first.dx, projected.first.dy);
     for (var i = 1; i < projected.length - 1; i++) {
       final current = projected[i];
@@ -1029,36 +974,6 @@ class _Campus3DMapPainter extends CustomPainter {
   }
 
   void _drawCollegeGreenspace(Canvas canvas, Size size) {
-    final parkPaint = Paint()..color = const Color(0xFFDCE8CE);
-    for (final park in const [
-      <Offset>[
-        Offset(440, 160),
-        Offset(560, 160),
-        Offset(558, 230),
-        Offset(470, 250),
-      ],
-      <Offset>[
-        Offset(700, 210),
-        Offset(755, 220),
-        Offset(735, 265),
-        Offset(690, 253),
-      ],
-      <Offset>[
-        Offset(75, 485),
-        Offset(330, 520),
-        Offset(330, 740),
-        Offset(145, 755),
-      ],
-      <Offset>[
-        Offset(830, 40),
-        Offset(930, 30),
-        Offset(950, 245),
-        Offset(830, 225),
-      ],
-    ]) {
-      canvas.drawPath(_mapPath(park, size, close: true), parkPaint);
-    }
-
     const treeColors = [
       Color(0xFF4F8A38),
       Color(0xFF5E993D),
@@ -1076,9 +991,13 @@ class _Campus3DMapPainter extends CustomPainter {
         final seed = math.sin(column * 12.989 + row * 78.233);
         final x = 8.0 + column * 28 + math.sin(row * 4.3 + column) * 8;
         final y = 9.0 + row * 27 + math.cos(column * 2.7 + row) * 8;
-        if (seed < 0.52 && !_isNearMapBuilding(x, y) && !_isNearRoad(x, y)) {
+        if (seed < 0.28 &&
+            !_isNearMapBuilding(x, y) &&
+            !_isNearRoad(x, y) &&
+            !_isInGround(x, y) &&
+            !_isNearMapLabel(x, y)) {
           final center = _project(x, y, 0, size);
-          final radius = 5.0 + (math.cos(seed * 18).abs() * 4.5);
+          final radius = 4.0 + (math.cos(seed * 18).abs() * 3.5);
           final colorIndex = ((seed.abs() * treeColors.length).floor())
               .clamp(0, treeColors.length - 1)
               .toInt();
@@ -1103,237 +1022,211 @@ class _Campus3DMapPainter extends CustomPainter {
   }
 
   bool _isNearMapBuilding(double x, double y) {
-    return [..._collegeMapFeatures, ..._unlabeledCollegeBuildings].any(
-      (feature) =>
-          (feature.center.dx - x).abs() < feature.width * 0.62 &&
-          (feature.center.dy - y).abs() < feature.length * 0.62,
+    final point = Offset(x, y);
+    return CampusMapGeometry.buildings.any(
+      (building) =>
+          _isPointInPolygon(point, building.footprint) ||
+          _distanceToPolygon(point, building.footprint) < 12,
     );
   }
 
   bool _isNearRoad(double x, double y) {
-    final westRoadX = 30 + 0.00013 * y * y + 0.01 * y;
-    final upperAccessY = 38 + x * 0.34;
-    final collegeRoadY = -143 + x * 0.4;
-    final hostelRoadY = 100 + x * 0.48;
-    return (x - westRoadX).abs() < 21 ||
-        (x > 70 && x < 560 && (y - upperAccessY).abs() < 12) ||
-        (x > 300 && x < 970 && (y - collegeRoadY).abs() < 13) ||
-        (x > 510 && x < 825 && y > 245 && y < 470) ||
-        (x > 770 && x < 1195 && (y - hostelRoadY).abs() < 15);
+    final point = Offset(x, y);
+    return CampusMapGeometry.roads.any((road) {
+      for (var i = 0; i < road.points.length - 1; i++) {
+        if (_distanceToSegment(point, road.points[i], road.points[i + 1]) <
+            road.width / 2 + 10) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+
+  bool _isInGround(double x, double y) {
+    return CampusMapGeometry.grounds.any((ground) {
+      final dx = (x - ground.center.dx) / (ground.width / 2);
+      final dy = (y - ground.center.dy) / (ground.height / 2);
+      return dx * dx + dy * dy <= 1;
+    });
+  }
+
+  bool _isNearMapLabel(double x, double y) {
+    return CampusMapGeometry.labels.any(
+      (label) =>
+          (x - label.position.dx).abs() < 54 &&
+          (y - label.position.dy).abs() < 17,
+    );
+  }
+
+  bool _isPointInPolygon(Offset point, List<Offset> polygon) {
+    var inside = false;
+    for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+      final current = polygon[i];
+      final previous = polygon[j];
+      final crosses =
+          (current.dy > point.dy) != (previous.dy > point.dy) &&
+          point.dx <
+              (previous.dx - current.dx) *
+                      (point.dy - current.dy) /
+                      (previous.dy - current.dy) +
+                  current.dx;
+      if (crosses) inside = !inside;
+    }
+    return inside;
+  }
+
+  double _distanceToSegment(Offset point, Offset start, Offset end) {
+    final segment = end - start;
+    final lengthSquared = segment.distanceSquared;
+    if (lengthSquared == 0) return (point - start).distance;
+    final projection =
+        ((point - start).dx * segment.dx + (point - start).dy * segment.dy) /
+        lengthSquared;
+    final t = projection.clamp(0.0, 1.0);
+    return (point - (start + segment * t)).distance;
+  }
+
+  double _distanceToPolygon(Offset point, List<Offset> polygon) {
+    var distance = double.infinity;
+    for (var i = 0; i < polygon.length; i++) {
+      distance = math.min(
+        distance,
+        _distanceToSegment(
+          point,
+          polygon[i],
+          polygon[(i + 1) % polygon.length],
+        ),
+      );
+    }
+    return distance;
   }
 
   void _drawCollegeGrounds(Canvas canvas, Size size) {
-    for (final feature in _collegeMapFeatures.where(
-      (feature) => feature.isGround,
-    )) {
-      if (feature.label.contains('College Ground')) continue;
-      if (feature.label == 'MH Ground') {
-        final center = _project(feature.center.dx, feature.center.dy, 0, size);
-        final track = Rect.fromCenter(
-          center: center,
-          width: feature.width * zoom,
-          height: feature.length * zoom,
-        );
-        canvas.drawOval(track, Paint()..color = const Color(0xFFD8D7C8));
-        canvas.drawOval(
-          track.deflate(9 * zoom),
-          Paint()
-            ..color = const Color(0xFFF7F5ED)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 2 * zoom,
-        );
-        final field = track.deflate(22 * zoom);
-        canvas.drawOval(field, Paint()..color = const Color(0xFFC9DEB8));
-        canvas.drawOval(
-          field,
-          Paint()
-            ..color = const Color(0xFFB6C9A8)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 1.2 * zoom,
-        );
-        continue;
-      }
-      if (feature.label.contains('Swimming Pool')) {
-        final center = _project(feature.center.dx, feature.center.dy, 0, size);
-        final poolBounds = Rect.fromCenter(
-          center: center,
-          width: feature.width * zoom,
-          height: feature.length * zoom,
-        );
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(poolBounds, const Radius.circular(5 * 1.0)),
-          Paint()..color = const Color(0xFFE5E6D8),
-        );
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(
-            poolBounds.deflate(4 * zoom),
-            const Radius.circular(3),
-          ),
-          Paint()..color = const Color(0xFF42B9EB),
-        );
-        final waterline = Paint()
-          ..color = const Color(0xFFB7EDFC).withValues(alpha: 0.72)
-          ..strokeWidth = zoom
-          ..style = PaintingStyle.stroke;
-        for (var lane = 1; lane <= 4; lane++) {
-          final x = poolBounds.left + poolBounds.width * lane / 5;
-          canvas.drawLine(
-            Offset(x, poolBounds.top + 5 * zoom),
-            Offset(x, poolBounds.bottom - 5 * zoom),
-            waterline,
+    for (final ground in CampusMapGeometry.grounds) {
+      final path = _ellipseMapPath(
+        ground.center,
+        ground.width,
+        ground.height,
+        size,
+      );
+      switch (ground.style) {
+        case CampusGroundStyle.athleticsTrack:
+          canvas.drawPath(path, Paint()..color = const Color(0xFFD59670));
+          final innerField = _ellipseMapPath(
+            ground.center,
+            ground.width - 24,
+            ground.height - 24,
+            size,
           );
-        }
-        continue;
-      }
-      final bounds = Rect.fromCenter(
-        center: feature.center,
-        width: feature.width,
-        height: feature.length,
-      );
-      final rect = Rect.fromPoints(
-        _project(bounds.topLeft.dx, bounds.topLeft.dy, 0, size),
-        _project(bounds.bottomRight.dx, bounds.bottomRight.dy, 0, size),
-      );
-      final groundColor =
-          feature.label.contains('Ground') || feature.label.contains('Football')
-          ? const Color(0xFFA8D66F)
-          : feature.label.contains('Tennis')
-          ? const Color(0xFF67A948)
-          : feature.label.contains('Botanical')
-          ? const Color(0xFF9CCF67)
-          : const Color(0xFFB6D97C);
-      final groundPaint = Paint()..color = groundColor;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, const Radius.circular(8)),
-        groundPaint,
-      );
-      final outline = Paint()
-        ..color = const Color(0xFFB6C9A8)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.2;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(rect, const Radius.circular(8)),
-        outline,
-      );
-      if (feature.label.contains('Ground') ||
-          feature.label.contains('Football')) {
-        final field = rect.deflate(math.max(6, rect.width * 0.11));
-        final fieldPaint = Paint()..color = const Color(0xFF8DC75B);
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(field, const Radius.circular(20)),
-          fieldPaint,
-        );
-      } else if (feature.label.contains('Tennis')) {
-        final court = rect.deflate(6 * zoom);
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(court, const Radius.circular(2)),
-          Paint()..color = const Color(0xFF448A4A),
-        );
-        canvas.drawRRect(
-          RRect.fromRectAndRadius(court.deflate(4 * zoom), Radius.zero),
-          Paint()
-            ..color = const Color(0xFFE7F1D6)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 1.2 * zoom,
-        );
+          canvas.drawPath(innerField, Paint()..color = const Color(0xFF75A94D));
+          for (final inset in [7.0, 15.0]) {
+            canvas.drawPath(
+              _ellipseMapPath(
+                ground.center,
+                ground.width - inset * 2,
+                ground.height - inset * 2,
+                size,
+              ),
+              Paint()
+                ..color = const Color(0xFFFFE4C7).withValues(alpha: 0.86)
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 1.3 * zoom,
+            );
+          }
+          canvas.drawPath(
+            innerField,
+            Paint()
+              ..color = const Color(0xFF4F813C)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 1.2 * zoom,
+          );
+          break;
+        case CampusGroundStyle.cricket:
+          canvas.drawPath(path, Paint()..color = const Color(0xFF86B953));
+          canvas.drawPath(
+            path,
+            Paint()
+              ..color = const Color(0xFFB8D17B)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 2 * zoom,
+          );
+          final pitch = _mapPath(
+            const [
+              Offset(290, 247),
+              Offset(302, 247),
+              Offset(302, 286),
+              Offset(290, 286),
+            ],
+            size,
+            close: true,
+          );
+          canvas.drawPath(pitch, Paint()..color = const Color(0xFFC8AD78));
+          break;
+        case CampusGroundStyle.theatre:
+          canvas.drawPath(path, Paint()..color = const Color(0xFFE2D9BF));
+          for (final inset in [9.0, 18.0, 27.0]) {
+            canvas.drawPath(
+              _ellipseMapPath(
+                ground.center,
+                ground.width - inset * 2,
+                ground.height - inset * 2,
+                size,
+              ),
+              Paint()
+                ..color = const Color(0xFFB5A88C)
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 1.5 * zoom,
+            );
+          }
+          canvas.drawPath(
+            _ellipseMapPath(
+              ground.center,
+              ground.width * 0.28,
+              ground.height * 0.28,
+              size,
+            ),
+            Paint()..color = const Color(0xFFC9BFA8),
+          );
+          break;
+        case CampusGroundStyle.lawn:
+          canvas.drawPath(path, Paint()..color = const Color(0xFF9BCC63));
+          canvas.drawPath(
+            path,
+            Paint()
+              ..color = const Color(0xFFBBD88A)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 1.2 * zoom,
+          );
+          break;
       }
     }
   }
 
-  void _drawCollegeRoads(Canvas canvas, Size size) {
-    const roads = <({List<Offset> points, double width})>[
-      (
-        points: [
-          Offset(28, -10),
-          Offset(38, 80),
-          Offset(32, 180),
-          Offset(28, 280),
-          Offset(40, 380),
-          Offset(64, 485),
-          Offset(94, 590),
-          Offset(136, 780),
-        ],
-        width: 34,
-      ),
-      (
-        points: [
-          Offset(308, -20),
-          Offset(360, 12),
-          Offset(421, 43),
-          Offset(489, 72),
-          Offset(558, 104),
-          Offset(631, 140),
-          Offset(703, 174),
-          Offset(776, 211),
-          Offset(846, 246),
-          Offset(913, 275),
-          Offset(967, 294),
-          Offset(1024, 274),
-          Offset(1100, 245),
-          Offset(1195, 220),
-        ],
-        width: 24,
-      ),
-      (
-        points: [
-          Offset(565, 228),
-          Offset(542, 266),
-          Offset(555, 300),
-          Offset(605, 320),
-          Offset(652, 341),
-          Offset(698, 375),
-          Offset(733, 414),
-          Offset(736, 456),
-          Offset(704, 493),
-          Offset(663, 531),
-          Offset(625, 573),
-          Offset(586, 624),
-          Offset(545, 700),
-          Offset(510, 780),
-        ],
-        width: 17,
-      ),
-      (
-        points: [
-          Offset(748, 430),
-          Offset(798, 451),
-          Offset(840, 482),
-          Offset(886, 514),
-          Offset(936, 548),
-          Offset(989, 578),
-          Offset(1046, 607),
-          Offset(1110, 646),
-          Offset(1195, 690),
-        ],
-        width: 17,
-      ),
-      (
-        points: [
-          Offset(81, 67),
-          Offset(154, 85),
-          Offset(238, 102),
-          Offset(323, 120),
-          Offset(403, 139),
-          Offset(470, 166),
-          Offset(520, 204),
-          Offset(556, 230),
-        ],
-        width: 12,
-      ),
-    ];
+  Path _ellipseMapPath(Offset center, double width, double height, Size size) {
+    final points = List<Offset>.generate(40, (index) {
+      final angle = index * math.pi * 2 / 40;
+      return Offset(
+        center.dx + math.cos(angle) * width / 2,
+        center.dy + math.sin(angle) * height / 2,
+      );
+    });
+    return _mapPath(points, size, close: true);
+  }
 
-    for (final road in roads) {
+  void _drawCollegeRoads(Canvas canvas, Size size) {
+    for (final road in CampusMapGeometry.roads) {
       final path = _smoothMapPath(road.points, size);
       final outline = Paint()
-        ..color = const Color(0xFFD1D4CE)
+        ..color = const Color(0xFFE8E5DA)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = road.width * zoom
+        ..strokeWidth = (road.width + 5) * zoom
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round;
       final surface = Paint()
-        ..color = const Color(0xFFFDFCF8)
+        ..color = const Color(0xFF687174)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = (road.width - 3) * zoom
+        ..strokeWidth = road.width * zoom
         ..strokeCap = StrokeCap.round
         ..strokeJoin = StrokeJoin.round;
       canvas
@@ -1341,236 +1234,148 @@ class _Campus3DMapPainter extends CustomPainter {
         ..drawPath(path, surface);
     }
 
-    _drawMapRoadLabel(
-      canvas,
-      size,
-      'KOTHAMANGALAM MAIN ROAD',
-      const Offset(43, 227),
-      -math.pi / 2,
-    );
-    _drawMapRoadLabel(
-      canvas,
-      size,
-      'M A COLLEGE ROAD',
-      const Offset(796, 228),
-      math.atan2(70, 150),
-    );
-    _drawMapRoadLabel(
-      canvas,
-      size,
-      'M A COLLEGE ROAD',
-      const Offset(1072, 238),
-      -0.24,
-    );
-
     final walkways = Paint()
-      ..color = const Color(0xFFF8F7F0)
+      ..color = const Color(0xFFE7D8B8)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 6 * zoom
+      ..strokeWidth = 5 * zoom
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
     for (final pathPoints in const [
-      <Offset>[Offset(560, 285), Offset(610, 327), Offset(650, 341)],
-      <Offset>[Offset(548, 368), Offset(570, 398), Offset(633, 436)],
-      <Offset>[Offset(543, 468), Offset(514, 524), Offset(574, 625)],
-      <Offset>[Offset(736, 365), Offset(810, 379), Offset(885, 333)],
-      <Offset>[Offset(735, 454), Offset(790, 490), Offset(856, 555)],
-      <Offset>[Offset(856, 555), Offset(984, 520), Offset(1094, 476)],
-      <Offset>[Offset(574, 625), Offset(631, 692)],
+      <Offset>[Offset(411, 267), Offset(438, 290), Offset(460, 321)],
+      <Offset>[Offset(430, 447), Offset(451, 430), Offset(470, 420)],
+      <Offset>[Offset(274, 472), Offset(299, 484), Offset(344, 510)],
+      <Offset>[Offset(594, 556), Offset(622, 555), Offset(656, 552)],
+      <Offset>[Offset(977, 481), Offset(986, 486), Offset(995, 491)],
+      <Offset>[Offset(558, 721), Offset(590, 731)],
     ]) {
       canvas.drawPath(_smoothMapPath(pathPoints, size), walkways);
     }
   }
 
-  void _drawMapRoadLabel(
-    Canvas canvas,
-    Size size,
-    String label,
-    Offset position,
-    double rotation,
-  ) {
-    final text = TextPainter(
-      text: TextSpan(
-        text: label,
-        style: const TextStyle(
-          color: Color(0xFF59605A),
-          fontSize: 9,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.7,
-        ),
-      ),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    final center = _project(position.dx, position.dy, 0, size);
-    canvas
-      ..save()
-      ..translate(center.dx, center.dy)
-      ..rotate(rotation)
-      ..drawRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromCenter(
-            center: Offset.zero,
-            width: text.width + 8,
-            height: text.height + 4,
-          ),
-          const Radius.circular(3),
-        ),
-        Paint()..color = const Color(0xFFFDFCF8).withValues(alpha: 0.82),
-      )
-      ..translate(-text.width / 2, -text.height / 2);
-    text.paint(canvas, Offset.zero);
-    canvas.restore();
-  }
-
   void _drawCollegeBuildings(Canvas canvas, Size size) {
-    final buildings =
-        [
-            ..._collegeMapFeatures,
-            ..._unlabeledCollegeBuildings,
-          ].where((feature) => !feature.isGround).toList()
-          ..sort((a, b) => a.center.dy.compareTo(b.center.dy));
-
-    for (final feature in buildings) {
-      _drawCollegeBuilding(canvas, size, feature);
+    final buildings = List<CampusMapBuilding>.from(CampusMapGeometry.buildings)
+      ..sort((a, b) => a.center.dy.compareTo(b.center.dy));
+    for (final building in buildings) {
+      _drawCollegeBuilding(canvas, size, building);
     }
   }
 
   void _drawCollegeBuilding(
     Canvas canvas,
     Size size,
-    _CollegeMapFeature feature,
+    CampusMapBuilding building,
   ) {
-    final angle = feature.rotationDeg * math.pi / 180;
-    final cosAngle = math.cos(angle);
-    final sinAngle = math.sin(angle);
-    final hw = feature.width / 2;
-    final hl = feature.length / 2;
-    final base =
-        <Offset>[
-          Offset(-hw, -hl),
-          Offset(hw, -hl),
-          Offset(hw, hl),
-          Offset(-hw, hl),
-        ].map((corner) {
-          return Offset(
-            feature.center.dx + corner.dx * cosAngle - corner.dy * sinAngle,
-            feature.center.dy + corner.dx * sinAngle + corner.dy * cosAngle,
-          );
-        }).toList();
+    final ground = building.footprint
+        .map((point) => _project(point.dx, point.dy, 0, size))
+        .toList(growable: false);
+    final roof = building.footprint
+        .map((point) => _project(point.dx, point.dy, building.height, size))
+        .toList(growable: false);
+    final shadowOffset = Offset(4 * zoom, 5 * zoom);
+    final shadow = Path()
+      ..moveTo(
+        ground.first.dx + shadowOffset.dx,
+        ground.first.dy + shadowOffset.dy,
+      );
+    for (final point in ground.skip(1)) {
+      shadow.lineTo(point.dx + shadowOffset.dx, point.dy + shadowOffset.dy);
+    }
+    shadow.close();
+    canvas.drawPath(
+      shadow,
+      Paint()
+        ..color = const Color(0x3D34402C)
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3),
+    );
 
-    const height = 16.0;
-    final ground = base.map((p) => _project(p.dx, p.dy, 0, size)).toList();
-    final roof = base.map((p) => _project(p.dx, p.dy, height, size)).toList();
-    final isHostel =
-        feature.label.toLowerCase().contains('hostel') ||
-        (feature.label.isEmpty &&
-            feature.center.dx > 900 &&
-            feature.center.dy > 500);
-    final roofColor = isHostel
-        ? const Color(0xFFBFA3D2)
-        : feature.label.contains('School')
-        ? const Color(0xFFE7A271)
-        : const Color(0xFFEBA879);
-    final shade = Paint()
-      ..color = isHostel ? const Color(0xFFA88ABC) : const Color(0xFFD88B5C);
-    final wall = Paint()..color = const Color(0xFFF4C49B);
-    for (var i = 0; i < base.length; i++) {
-      final next = (i + 1) % base.length;
+    final hostel = building.hostel;
+    final roofColor = hostel
+        ? const Color(0xFFD18B65)
+        : const Color(0xFFCA7650);
+    for (var i = 0; i < building.footprint.length; i++) {
+      final next = (i + 1) % building.footprint.length;
       final face = Path()
         ..moveTo(ground[i].dx, ground[i].dy)
         ..lineTo(ground[next].dx, ground[next].dy)
         ..lineTo(roof[next].dx, roof[next].dy)
         ..lineTo(roof[i].dx, roof[i].dy)
         ..close();
-      canvas.drawPath(face, i.isEven ? wall : shade);
+      canvas.drawPath(
+        face,
+        Paint()
+          ..color = hostel
+              ? (i.isEven ? const Color(0xFFE9D5C6) : const Color(0xFFD0B9A6))
+              : (i.isEven ? const Color(0xFFF0E6D5) : const Color(0xFFD4C5AE)),
+      );
     }
 
-    final top = Path()
-      ..moveTo(roof.first.dx, roof.first.dy)
-      ..lineTo(roof[1].dx, roof[1].dy)
-      ..lineTo(roof[2].dx, roof[2].dy)
-      ..lineTo(roof[3].dx, roof[3].dy)
-      ..close();
-    canvas.drawShadow(top, const Color(0x40000000), 3 * zoom, false);
+    final top = Path()..moveTo(roof.first.dx, roof.first.dy);
+    for (final point in roof.skip(1)) {
+      top.lineTo(point.dx, point.dy);
+    }
+    top.close();
+    canvas.drawShadow(top, const Color(0x33000000), 3 * zoom, false);
     canvas.drawPath(top, Paint()..color = roofColor);
     canvas.drawPath(
       top,
       Paint()
-        ..color = isHostel ? const Color(0xFF8B739D) : const Color(0xFFB96E46)
+        ..color = const Color(0xFF914F36).withValues(alpha: 0.65)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.25 * zoom,
     );
-    if (feature.width > 38) {
-      final roofInset = Path()
-        ..moveTo(
-          roof[0].dx * 0.82 + roof[1].dx * 0.18,
-          roof[0].dy * 0.82 + roof[1].dy * 0.18,
-        )
-        ..lineTo(
-          roof[1].dx * 0.82 + roof[2].dx * 0.18,
-          roof[1].dy * 0.82 + roof[2].dy * 0.18,
-        )
-        ..lineTo(
-          roof[2].dx * 0.82 + roof[3].dx * 0.18,
-          roof[2].dy * 0.82 + roof[3].dy * 0.18,
-        )
-        ..lineTo(
-          roof[3].dx * 0.82 + roof[0].dx * 0.18,
-          roof[3].dy * 0.82 + roof[0].dy * 0.18,
-        )
-        ..close();
+    if (roof.length >= 4) {
+      final ridgeStart = Offset.lerp(roof.first, roof[1], 0.5)!;
+      final ridgeEnd = Offset.lerp(roof[roof.length - 1], roof[2], 0.5)!;
       canvas.drawPath(
-        roofInset,
-        Paint()..color = Colors.white.withValues(alpha: 0.18),
+        Path()
+          ..moveTo(ridgeStart.dx, ridgeStart.dy)
+          ..lineTo(ridgeEnd.dx, ridgeEnd.dy),
+        Paint()
+          ..color = const Color(0xFFFFE3C9).withValues(alpha: 0.45)
+          ..strokeWidth = 1.2 * zoom,
       );
     }
   }
 
   void _drawCollegeMapLabels(Canvas canvas, Size size) {
-    for (final feature in _collegeMapFeatures) {
-      if (feature.label.isEmpty) continue;
-      final center = _project(feature.center.dx, feature.center.dy, 0, size);
+    for (final label in CampusMapGeometry.labels) {
+      if (!label.keyLabel && zoom < 0.9) continue;
+      final fontSize = math.max(8.0, 10.0 * math.min(zoom, 1.1));
       final text = TextPainter(
         text: TextSpan(
-          text: feature.label,
+          text: label.text,
           style: TextStyle(
-            color: const Color(0xFF27312A),
-            fontSize: math.max(7.0, 10.5 * math.min(zoom, 1.1)),
+            color: const Color(0xFF17221B),
+            fontSize: fontSize,
             height: 1.05,
-            fontWeight: feature.placeId == null
-                ? FontWeight.w500
-                : FontWeight.w600,
+            fontWeight: FontWeight.w700,
+            shadows: const [
+              Shadow(color: Colors.white, blurRadius: 2, offset: Offset(0, 1)),
+            ],
           ),
         ),
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
-      )..layout(maxWidth: math.max(54.0, 132 * math.min(zoom, 1.0)));
+      )..layout(maxWidth: math.max(75.0, 165 * math.min(zoom, 1.0)));
 
-      final labelCenter = feature.isGround
-          ? center
-          : Offset(
-              center.dx,
-              center.dy - feature.length * 0.5 * zoom - text.height * 0.55 - 3,
-            );
-      final labelRect = RRect.fromRectAndRadius(
-        Rect.fromCenter(
-          center: labelCenter,
-          width: text.width + 6,
-          height: text.height + 3,
-        ),
-        const Radius.circular(3),
-      );
-      canvas.drawRRect(
-        labelRect,
-        Paint()..color = const Color(0xFFF8F8F2).withValues(alpha: 0.88),
-      );
-      text.paint(
-        canvas,
-        Offset(
-          labelCenter.dx - text.width / 2,
-          labelCenter.dy - text.height / 2,
-        ),
-      );
+      final center = _project(label.position.dx, label.position.dy, 0, size);
+      canvas
+        ..save()
+        ..translate(center.dx, center.dy)
+        ..rotate(label.rotation)
+        ..drawRRect(
+          RRect.fromRectAndRadius(
+            Rect.fromCenter(
+              center: Offset.zero,
+              width: text.width + 8 * zoom,
+              height: text.height + 5 * zoom,
+            ),
+            Radius.circular(4 * zoom),
+          ),
+          Paint()..color = const Color(0xFFF7F5E9).withValues(alpha: 0.84),
+        );
+      text.paint(canvas, Offset(-text.width / 2, -text.height / 2));
+      canvas.restore();
     }
   }
 
@@ -2330,6 +2135,7 @@ class _Campus3DMapPainter extends CustomPainter {
         oldDelegate.selectedPlace != selectedPlace ||
         oldDelegate.activeRoute != activeRoute ||
         oldDelegate.userLocationOffset != userLocationOffset ||
+        oldDelegate.campusArtwork != campusArtwork ||
         oldDelegate.styleMode != styleMode ||
         oldDelegate.pulseValue != pulseValue;
   }
