@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/place.dart';
 import '../models/navigation.dart';
 
@@ -55,8 +56,7 @@ class CampusData {
       name: 'Main Academic & Admin Block',
       shortCode: 'MB',
       category: PlaceCategory.academic,
-      description:
-          'Historic main college building housing Principal & Dean offices, Central Administration, Civil & Mechanical departments, and College Auditorium.',
+      description: 'Historic main college building housing Principal & Dean offices, Central Administration, Civil & Mechanical departments, and College Auditorium.',
       approxLat: 10.05490,
       approxLng: 10.05490 == 0 ? 76.61935 : 76.61940,
       campusX: 580,
@@ -80,7 +80,13 @@ class CampusData {
         'exam cell',
         'seminar hall',
       ],
-      facilities: ['Wi-Fi', 'Restrooms', 'RO Water', 'Ramp Access', 'Notice Boards'],
+      facilities: [
+        'Wi-Fi',
+        'Restrooms',
+        'RO Water',
+        'Ramp Access',
+        'Notice Boards',
+      ],
       floors: [
         FloorInfo(
           level: 0,
@@ -125,8 +131,7 @@ class CampusData {
       name: 'Electronics & Communication (EC) Block',
       shortCode: 'EC',
       category: PlaceCategory.academic,
-      description:
-          'Dedicated block for the Department of Electronics and Communication Engineering with advanced hardware labs and smart seminar rooms.',
+      description: 'Dedicated block for the Department of Electronics and Communication Engineering with advanced hardware labs and smart seminar rooms.',
       approxLat: 10.05260,
       approxLng: 10.05260 == 0 ? 76.61860 : 76.61855,
       campusX: 430,
@@ -192,8 +197,7 @@ class CampusData {
       name: 'Hydraulic Machines Lab',
       shortCode: 'HL',
       category: PlaceCategory.lab,
-      description:
-          'Mechanical Engineering fluid dynamics testing laboratory with heavy-duty Francis and Pelton turbines, pumps, and flumes.',
+      description: 'Mechanical Engineering fluid dynamics testing laboratory with heavy-duty Francis and Pelton turbines, pumps, and flumes.',
       approxLat: 10.05320,
       approxLng: 10.05320 == 0 ? 76.61945 : 76.61950,
       campusX: 560,
@@ -237,8 +241,7 @@ class CampusData {
       name: 'Heat Engines & Thermal Lab',
       shortCode: 'HE',
       category: PlaceCategory.lab,
-      description:
-          'Advanced internal combustion engine test rigs, emissions analyzer, refrigeration test benches, and heat transfer labs.',
+      description: 'Advanced internal combustion engine test rigs, emissions analyzer, refrigeration test benches, and heat transfer labs.',
       approxLat: 10.05250,
       approxLng: 10.05250 == 0 ? 76.61940 : 76.61945,
       campusX: 550,
@@ -281,8 +284,7 @@ class CampusData {
       name: 'PG Block & Research Center',
       shortCode: 'PG',
       category: PlaceCategory.academic,
-      description:
-          'Multi-story modern complex hosting postgraduate M.Tech courses, doctoral research labs, and college digital repository.',
+      description: 'Multi-story modern complex hosting postgraduate M.Tech courses, doctoral research labs, and college digital repository.',
       approxLat: 10.05170,
       approxLng: 10.05170 == 0 ? 76.61960 : 76.61965,
       campusX: 550,
@@ -304,7 +306,12 @@ class CampusData {
         'data science',
         'ai lab',
       ],
-      facilities: ['High-speed Wi-Fi', 'Air-conditioned Labs', 'Elevator', 'Restrooms'],
+      facilities: [
+        'High-speed Wi-Fi',
+        'Air-conditioned Labs',
+        'Elevator',
+        'Restrooms',
+      ],
       floors: [
         FloorInfo(
           level: 0,
@@ -344,8 +351,7 @@ class CampusData {
       name: 'Ladies Hostel Campus',
       shortCode: 'LH',
       category: PlaceCategory.hostel,
-      description:
-          'Secured on-campus residential facility for female students with dining mess, study halls, and 24/7 security.',
+      description: 'Secured on-campus residential facility for female students with dining mess, study halls, and 24/7 security.',
       approxLat: 10.05350,
       approxLng: 10.05350 == 0 ? 76.61740 : 76.61735,
       campusX: 320,
@@ -363,7 +369,12 @@ class CampusData {
         FloorInfo(
           level: 0,
           floorName: 'Ground Floor',
-          rooms: ['Warden Office', 'Central Dining Mess', 'Visitors Lounge', 'Recreation Room'],
+          rooms: [
+            'Warden Office',
+            'Central Dining Mess',
+            'Visitors Lounge',
+            'Recreation Room',
+          ],
         ),
         FloorInfo(
           level: 1,
@@ -381,8 +392,7 @@ class CampusData {
       name: 'Men\'s Hostels (HS-I & HS-II)',
       shortCode: 'MH',
       category: PlaceCategory.hostel,
-      description:
-          'Multi-wing residence halls for male students located along MACE Hostels Road, featuring badminton courts and cafeteria.',
+      description: 'Multi-wing residence halls for male students located along MACE Hostels Road, featuring badminton courts and cafeteria.',
       approxLat: 10.05370,
       approxLng: 10.05370 == 0 ? 76.62250 : 76.62255,
       campusX: 850,
@@ -400,7 +410,11 @@ class CampusData {
         FloorInfo(
           level: 0,
           floorName: 'Ground Floor',
-          rooms: ['HS-I & HS-II Mess Halls', 'Warden Cabin', 'Common Room & TV Lounge'],
+          rooms: [
+            'HS-I & HS-II Mess Halls',
+            'Warden Cabin',
+            'Common Room & TV Lounge',
+          ],
         ),
         FloorInfo(
           level: 1,
@@ -418,8 +432,7 @@ class CampusData {
       name: 'Campus Canteen & Cafeteria',
       shortCode: 'CN',
       category: PlaceCategory.amenity,
-      description:
-          'Popular student hub offering South Indian meals, snacks, fresh juices, and stationery/co-operative store.',
+      description: 'Popular student hub offering South Indian meals, snacks, fresh juices, and stationery/co-operative store.',
       approxLat: 10.05390,
       approxLng: 10.05390 == 0 ? 76.61870 : 76.61875,
       campusX: 490,
@@ -431,13 +444,32 @@ class CampusData {
       roofColor: Color(0xFFEA580C),
       wallColor: Color(0xFFFFF7ED),
       walkwayNodeId: 'node_canteen',
-      searchKeywords: ['canteen', 'food', 'cafeteria', 'coffee', 'tea', 'snacks', 'stationery', 'store'],
-      facilities: ['Indoor Dining', 'Takeaway Counter', 'Drinking Water', 'Restrooms'],
+      searchKeywords: [
+        'canteen',
+        'food',
+        'cafeteria',
+        'coffee',
+        'tea',
+        'snacks',
+        'stationery',
+        'store',
+      ],
+      facilities: [
+        'Indoor Dining',
+        'Takeaway Counter',
+        'Drinking Water',
+        'Restrooms',
+      ],
       floors: [
         FloorInfo(
           level: 0,
           floorName: 'Ground Floor',
-          rooms: ['Student Dining Hall', 'Staff Dining Section', 'Snack Counter', 'Co-operative Stationery'],
+          rooms: [
+            'Student Dining Hall',
+            'Staff Dining Section',
+            'Snack Counter',
+            'Co-operative Stationery',
+          ],
         ),
       ],
     ),
@@ -451,8 +483,7 @@ class CampusData {
       shortCode: 'MPV',
       category: PlaceCategory.landmark,
       isLandmark: true,
-      description:
-          'Iconic statue honoring the visionary founder of Mar Athanasius College Association, located at the heart of the main entrance avenue.',
+      description: 'Iconic statue honoring the visionary founder of Mar Athanasius College Association, located at the heart of the main entrance avenue.',
       approxLat: 10.05530,
       approxLng: 10.05530 == 0 ? 76.61890 : 76.61885,
       campusX: 520,
@@ -463,7 +494,14 @@ class CampusData {
       roofColor: Color(0xFFDC2626),
       wallColor: Color(0xFFFEF2F2),
       walkwayNodeId: 'node_statue',
-      searchKeywords: ['statue', 'founder', 'mp varghese', 'landmark', 'monument', 'circle'],
+      searchKeywords: [
+        'statue',
+        'founder',
+        'mp varghese',
+        'landmark',
+        'monument',
+        'circle',
+      ],
       facilities: ['Garden Benches', 'Lighting', 'Photo Point'],
     ),
 
@@ -476,8 +514,7 @@ class CampusData {
       shortCode: 'CG',
       category: PlaceCategory.sports,
       isLandmark: true,
-      description:
-          'Expansive natural turf cricket ground surrounded by scenic greenery, equipped with a central turf pitch and spectator pavilions.',
+      description: 'Expansive natural turf cricket ground surrounded by scenic greenery, equipped with a central turf pitch and spectator pavilions.',
       approxLat: 10.05430,
       approxLng: 10.05430 == 0 ? 76.61810 : 76.61815,
       campusX: 420,
@@ -488,7 +525,14 @@ class CampusData {
       roofColor: Color(0xFF15803D),
       wallColor: Color(0xFFDCFCE7),
       walkwayNodeId: 'node_cricket',
-      searchKeywords: ['cricket', 'ground', 'pitch', 'sports', 'pavilion', 'matches'],
+      searchKeywords: [
+        'cricket',
+        'ground',
+        'pitch',
+        'sports',
+        'pavilion',
+        'matches',
+      ],
       facilities: ['Turf Pitch', 'Practice Nets', 'Pavilion Seating'],
     ),
 
@@ -501,8 +545,7 @@ class CampusData {
       shortCode: 'STD',
       category: PlaceCategory.sports,
       isLandmark: true,
-      description:
-          'Full-scale college athletic stadium with a 400m synthetic running track, standard football arena, and elevated spectator gallery.',
+      description: 'Full-scale college athletic stadium with a 400m synthetic running track, standard football arena, and elevated spectator gallery.',
       approxLat: 10.05280,
       approxLng: 10.05280 == 0 ? 76.62120 : 76.62125,
       campusX: 720,
@@ -513,8 +556,21 @@ class CampusData {
       roofColor: Color(0xFF991B1B), // Terracotta clay track
       wallColor: Color(0xFFFEE2E2),
       walkwayNodeId: 'node_stadium',
-      searchKeywords: ['stadium', 'track', 'athletics', 'football', 'running', 'sports', 'gallery'],
-      facilities: ['400m Track', 'Football Field', 'Floodlights', 'Spectator Gallery'],
+      searchKeywords: [
+        'stadium',
+        'track',
+        'athletics',
+        'football',
+        'running',
+        'sports',
+        'gallery',
+      ],
+      facilities: [
+        '400m Track',
+        'Football Field',
+        'Floodlights',
+        'Spectator Gallery',
+      ],
     ),
 
     // -------------------------------------------------------------------------
@@ -526,8 +582,7 @@ class CampusData {
       shortCode: 'SP',
       category: PlaceCategory.sports,
       isLandmark: true,
-      description:
-          'Semi-Olympic competition swimming pool complex with modern filtration, diving blocks, and coaching facilities.',
+      description: 'Semi-Olympic competition swimming pool complex with modern filtration, diving blocks, and coaching facilities.',
       approxLat: 10.05470,
       approxLng: 10.05470 == 0 ? 76.62020 : 76.62025,
       campusX: 640,
@@ -538,8 +593,20 @@ class CampusData {
       roofColor: Color(0xFF0284C7), // Blue pool basin
       wallColor: Color(0xFFE0F2FE),
       walkwayNodeId: 'node_pool',
-      searchKeywords: ['pool', 'swimming', 'water', 'dive', 'sports', 'aquatics'],
-      facilities: ['Diving Blocks', 'Shower Rooms', 'Changing Rooms', 'Lifebuoys'],
+      searchKeywords: [
+        'pool',
+        'swimming',
+        'water',
+        'dive',
+        'sports',
+        'aquatics',
+      ],
+      facilities: [
+        'Diving Blocks',
+        'Shower Rooms',
+        'Changing Rooms',
+        'Lifebuoys',
+      ],
     ),
 
     // -------------------------------------------------------------------------
@@ -551,8 +618,7 @@ class CampusData {
       shortCode: 'MG',
       category: PlaceCategory.admin,
       isLandmark: true,
-      description:
-          'Northern gateway to MACE on MA College Road, featuring the grand entrance arch, security cabin, and Kothamangalam College Post Office.',
+      description: 'Northern gateway to MACE on MA College Road, featuring the grand entrance arch, security cabin, and Kothamangalam College Post Office.',
       approxLat: 10.05600,
       approxLng: 10.05600 == 0 ? 76.61830 : 76.61835,
       campusX: 420,
@@ -563,9 +629,249 @@ class CampusData {
       roofColor: Color(0xFF475569),
       wallColor: Color(0xFFF8FAFC),
       walkwayNodeId: 'node_gate',
-      searchKeywords: ['gate', 'entrance', 'post office', 'arch', 'security', 'entry', 'ma college road'],
-      facilities: ['Security Cabin', 'Postal Services', 'Speed Post', 'Bus Waiting Shed'],
+      searchKeywords: [
+        'gate',
+        'entrance',
+        'post office',
+        'arch',
+        'security',
+        'entry',
+        'ma college road',
+      ],
+      facilities: [
+        'Security Cabin',
+        'Postal Services',
+        'Speed Post',
+        'Bus Waiting Shed',
+      ],
     ),
+  ];
+
+  static const _referencePlaceSpecs =
+      <
+        ({
+          String id,
+          String name,
+          String shortCode,
+          PlaceCategory category,
+          Offset mapPosition,
+          String anchorNodeId,
+          double connectorDistanceMeters,
+        })
+      >[
+        (
+          id: 'students_centre',
+          name: 'Students Centre',
+          shortCode: 'SC',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(624, 47),
+          anchorNodeId: 'node_parking',
+          connectorDistanceMeters: 95,
+        ),
+        (
+          id: 'chapel',
+          name: 'Chapel',
+          shortCode: 'CH',
+          category: PlaceCategory.landmark,
+          mapPosition: Offset(712, 128),
+          anchorNodeId: 'node_parking',
+          connectorDistanceMeters: 90,
+        ),
+        (
+          id: 'tennis_court',
+          name: 'MACE Tennis Court',
+          shortCode: 'TC',
+          category: PlaceCategory.sports,
+          mapPosition: Offset(590, 222),
+          anchorNodeId: 'node_statue',
+          connectorDistanceMeters: 35,
+        ),
+        (
+          id: 'botanical_garden',
+          name: 'MACE Botanical Garden',
+          shortCode: 'BG',
+          category: PlaceCategory.landmark,
+          mapPosition: Offset(726, 233),
+          anchorNodeId: 'node_cricket',
+          connectorDistanceMeters: 35,
+        ),
+        (
+          id: 'geotech_lab',
+          name: 'Geotech Lab',
+          shortCode: 'GT',
+          category: PlaceCategory.lab,
+          mapPosition: Offset(579, 389),
+          anchorNodeId: 'node_hydraulic_lab',
+          connectorDistanceMeters: 25,
+        ),
+        (
+          id: 'pta_seminar_hall',
+          name: 'PTA Seminar Hall 2',
+          shortCode: 'PTA',
+          category: PlaceCategory.academic,
+          mapPosition: Offset(694, 390),
+          anchorNodeId: 'node_main_block',
+          connectorDistanceMeters: 45,
+        ),
+        (
+          id: 'placement_cell',
+          name: 'Training and Placement Cell',
+          shortCode: 'TPC',
+          category: PlaceCategory.admin,
+          mapPosition: Offset(810, 379),
+          anchorNodeId: 'node_pool',
+          connectorDistanceMeters: 45,
+        ),
+        (
+          id: 'open_air_theatre',
+          name: 'Open Air Theatre',
+          shortCode: 'OAT',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(633, 436),
+          anchorNodeId: 'node_canteen',
+          connectorDistanceMeters: 40,
+        ),
+        (
+          id: 'mca_block',
+          name: 'MCA Block',
+          shortCode: 'MCA',
+          category: PlaceCategory.academic,
+          mapPosition: Offset(713, 622),
+          anchorNodeId: 'node_stadium',
+          connectorDistanceMeters: 65,
+        ),
+        (
+          id: 'fab_lab',
+          name: 'MACE Fab Lab',
+          shortCode: 'FAB',
+          category: PlaceCategory.lab,
+          mapPosition: Offset(676, 648),
+          anchorNodeId: 'node_stadium',
+          connectorDistanceMeters: 75,
+        ),
+        (
+          id: 'material_testing_lab',
+          name: 'Material Testing Lab',
+          shortCode: 'MTL',
+          category: PlaceCategory.lab,
+          mapPosition: Offset(631, 692),
+          anchorNodeId: 'node_ec_block',
+          connectorDistanceMeters: 45,
+        ),
+        (
+          id: 'kennedy_hostel',
+          name: 'Kennedy Hostel',
+          shortCode: 'KH',
+          category: PlaceCategory.hostel,
+          mapPosition: Offset(982, 570),
+          anchorNodeId: 'node_hostels_road',
+          connectorDistanceMeters: 25,
+        ),
+        (
+          id: 'hostel_mess',
+          name: 'Hostel Mess',
+          shortCode: 'HM',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(1017, 618),
+          anchorNodeId: 'node_hostels_road',
+          connectorDistanceMeters: 45,
+        ),
+        (
+          id: 'diamond_jubilee_hostel',
+          name: 'Diamond Jubilee Hostel',
+          shortCode: 'DJH',
+          category: PlaceCategory.hostel,
+          mapPosition: Offset(1086, 644),
+          anchorNodeId: 'node_mens_hostel',
+          connectorDistanceMeters: 65,
+        ),
+        (
+          id: 'mb_hostel',
+          name: 'MB Hostel MACE',
+          shortCode: 'MBH',
+          category: PlaceCategory.hostel,
+          mapPosition: Offset(940, 679),
+          anchorNodeId: 'node_stadium',
+          connectorDistanceMeters: 60,
+        ),
+        (
+          id: 'amrutha_homely_food',
+          name: 'Amrutha Homely Food',
+          shortCode: 'AHF',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(166, 626),
+          anchorNodeId: 'node_ladies_hostel',
+          connectorDistanceMeters: 85,
+        ),
+        (
+          id: 'chillam',
+          name: 'Chillam',
+          shortCode: 'CHL',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(309, 636),
+          anchorNodeId: 'node_ladies_hostel',
+          connectorDistanceMeters: 65,
+        ),
+        (
+          id: 'thaavalam',
+          name: 'Thaavalam',
+          shortCode: 'THA',
+          category: PlaceCategory.amenity,
+          mapPosition: Offset(369, 687),
+          anchorNodeId: 'node_ec_block',
+          connectorDistanceMeters: 75,
+        ),
+        (
+          id: 'nss_park',
+          name: 'NSS Park',
+          shortCode: 'NSS',
+          category: PlaceCategory.landmark,
+          mapPosition: Offset(608, 159),
+          anchorNodeId: 'node_parking',
+          connectorDistanceMeters: 45,
+        ),
+        (
+          id: 'international_school',
+          name: 'Mar Athanasius International School',
+          shortCode: 'MAIS',
+          category: PlaceCategory.academic,
+          mapPosition: Offset(962, 89),
+          anchorNodeId: 'node_pool',
+          connectorDistanceMeters: 95,
+        ),
+      ];
+
+  static final List<CampusPlace> referencePlaces = _referencePlaceSpecs
+      .map((spec) {
+        final campusX = spec.mapPosition.dx * 1000 / 1179;
+        final campusY = spec.mapPosition.dy * 1000 / 768;
+        final (latitude, longitude) = canvasToGps(campusX, campusY);
+        return CampusPlace(
+          id: spec.id,
+          name: spec.name,
+          shortCode: spec.shortCode,
+          category: spec.category,
+          description: '${spec.name} on the MACE campus.',
+          approxLat: latitude,
+          approxLng: longitude,
+          campusX: campusX,
+          campusY: campusY,
+          width: 34,
+          length: 26,
+          height: 12,
+          roofColor: spec.category == PlaceCategory.hostel
+              ? const Color(0xFF9333EA)
+              : const Color(0xFFE99462),
+          wallColor: const Color(0xFFFDE7D7),
+          isLandmark: spec.category == PlaceCategory.landmark,
+          walkwayNodeId: 'node_ref_${spec.id}',
+        );
+      })
+      .toList(growable: false);
+
+  static List<CampusPlace> get allPlaces => [
+    ...campusPlaces,
+    ...referencePlaces,
   ];
 
   // ===========================================================================
@@ -700,6 +1006,19 @@ class CampusData {
       approxLng: 76.62255,
       name: 'HS-I / HS-II Men\'s Hostel Gate',
     ),
+    for (final spec in _referencePlaceSpecs)
+      'node_ref_${spec.id}': WalkNode(
+        id: 'node_ref_${spec.id}',
+        x: spec.mapPosition.dx * 1000 / 1179,
+        y: spec.mapPosition.dy * 1000 / 768,
+        approxLat: referencePlaces
+            .firstWhere((place) => place.id == spec.id)
+            .approxLat,
+        approxLng: referencePlaces
+            .firstWhere((place) => place.id == spec.id)
+            .approxLng,
+        name: spec.name,
+      ),
   };
 
   // ===========================================================================
@@ -867,5 +1186,12 @@ class CampusData {
       distanceMeters: 65,
       pathName: 'Men\'s Hostel Drive',
     ),
+    for (final spec in _referencePlaceSpecs)
+      WalkEdge(
+        fromId: 'node_ref_${spec.id}',
+        toId: spec.anchorNodeId,
+        distanceMeters: spec.connectorDistanceMeters,
+        pathName: 'Campus Walkway',
+      ),
   ];
 }

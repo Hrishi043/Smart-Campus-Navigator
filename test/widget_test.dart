@@ -4,8 +4,9 @@ import 'package:smart_campus_navigator/main.dart';
 import 'package:smart_campus_navigator/services/pathfinding_service.dart';
 
 void main() {
-  testWidgets('App loads campus navigator and displays search bar',
-      (WidgetTester tester) async {
+  testWidgets('App loads campus navigator and displays search bar', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(const SmartCampusNavigatorApp());
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
@@ -16,7 +17,9 @@ void main() {
   });
 
   test('Pathfinding calculates valid walking route across campus', () {
-    final start = CampusData.campusPlaces.firstWhere((p) => p.id == 'main_gate');
+    final start = CampusData.campusPlaces.firstWhere(
+      (p) => p.id == 'main_gate',
+    );
     final dest = CampusData.campusPlaces.firstWhere((p) => p.id == 'ec_block');
 
     final route = PathfindingService.instance.findRoute(
@@ -30,6 +33,39 @@ void main() {
     expect(route.steps.length, greaterThan(2));
     expect(route.pathNodes.first.id, equals('node_gate'));
     expect(route.pathNodes.last.id, equals('node_ec_block'));
+  });
+
+  test('Reference-map buildings can route to other labeled buildings', () {
+    final mainGate = CampusData.allPlaces.firstWhere(
+      (place) => place.id == 'main_gate',
+    );
+    final chapel = CampusData.allPlaces.firstWhere(
+      (place) => place.id == 'chapel',
+    );
+    final mcaBlock = CampusData.allPlaces.firstWhere(
+      (place) => place.id == 'mca_block',
+    );
+
+    final route = PathfindingService.instance.findRoute(
+      startPlace: chapel,
+      destPlace: mcaBlock,
+    );
+
+    expect(route, isNotNull);
+    expect(route!.totalDistanceMeters, greaterThan(0));
+    expect(route.pathNodes.first.id, equals(chapel.walkwayNodeId));
+    expect(route.pathNodes.last.id, equals(mcaBlock.walkwayNodeId));
+
+    for (final place in CampusData.allPlaces) {
+      expect(
+        PathfindingService.instance.findRoute(
+          startPlace: mainGate,
+          destPlace: place,
+        ),
+        isNotNull,
+        reason: 'Expected a walking route to ${place.name}',
+      );
+    }
   });
 
   test('Place keyword matching finds classrooms and departments', () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../data/campus_data.dart';
 import '../models/navigation.dart';
 import '../models/place.dart';
@@ -19,7 +20,7 @@ class CampusHomeScreen extends StatefulWidget {
 
 class _CampusHomeScreenState extends State<CampusHomeScreen> {
   final GlobalKey<Campus3DMapState> _mapKey = GlobalKey<Campus3DMapState>();
-  final List<CampusPlace> _places = CampusData.campusPlaces;
+  final List<CampusPlace> _places = CampusData.allPlaces;
 
   CampusPlace? _selectedPlace;
   CampusRoute? _activeRoute;
@@ -149,7 +150,8 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
       );
     } else {
       // Graceful fallback for permission denial or classroom demo
-      final error = LocationService.instance.errorMessage ??
+      final error =
+          LocationService.instance.errorMessage ??
           'Location not available. Placing at Main Entrance for demo.';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -259,7 +261,8 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
                                         'Search buildings, labs, landmarks...',
                                         style: TextStyle(
                                           color: theme
-                                              .colorScheme.onSurfaceVariant,
+                                              .colorScheme
+                                              .onSurfaceVariant,
                                           fontSize: 12,
                                         ),
                                       ),
@@ -306,8 +309,11 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
                                 label: Text(cat.label),
                                 selected: _activeCategoryFilter == cat,
                                 onSelected: (sel) {
-                                  setState(() => _activeCategoryFilter =
-                                      sel ? cat : null);
+                                  setState(
+                                    () => _activeCategoryFilter = sel
+                                        ? cat
+                                        : null,
+                                  );
                                 },
                               ),
                             );
@@ -430,7 +436,8 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF16A34A).withValues(alpha: 0.15),
+                          color: const Color(0xFF16A34A)
+                              .withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -546,7 +553,11 @@ class _CampusHomeScreenState extends State<CampusHomeScreen> {
         ],
       ),
       child: IconButton(
-        icon: Icon(icon, color: iconColor ?? theme.colorScheme.onSurface, size: 20),
+        icon: Icon(
+          icon,
+          color: iconColor ?? theme.colorScheme.onSurface,
+          size: 20,
+        ),
         tooltip: tooltip,
         padding: EdgeInsets.zero,
         visualDensity: VisualDensity.compact,
